@@ -46,7 +46,6 @@ const App = () => {
 			<StoreHeader />
 			<Layout>
 				<Nav />
-
 				<Layout style={{ padding: '0 24px 24px' }}>
 					<Content
 						style={{

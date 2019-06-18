@@ -34,4 +34,4 @@ const StoreHeader = () => {
 	);
 }
 
-export default Header;
+export default StoreHeader;
