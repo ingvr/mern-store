@@ -6,10 +6,11 @@ import "antd/dist/antd.css";
 import StoreHeader from '../store-header';
 import Nav from '../nav';
 import ProductList from '../product-list';
+import StoreFooter from '../store-footer';
 
 import './app.scss';
 
-const { Footer, Sider, Content } = Layout;
+const { Content } = Layout;
 
 const App = () => {
  return (
@@ -30,9 +31,7 @@ const App = () => {
 					</Content>
 				</Layout>
 			</Layout>
-			<Footer style={{ textAlign: 'center' }}>
-				&copy; Copyright 2322 by Igor Leontev
-			</Footer>
+			<StoreFooter />
 		</div>
 	);
 }
