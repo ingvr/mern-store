@@ -9,6 +9,8 @@ import ProductList from '../product-list';
 import StoreFooter from '../store-footer';
 import { CreateProductModal } from '../modals';
 
+import './index.scss';
+
 const { Content } = Layout;
 
 const App = () => {
@@ -17,15 +19,8 @@ const App = () => {
 			<StoreHeader />
 			<Layout>
 				<Nav />
-				<Layout style={{ padding: '0 24px 24px' }}>
-					<Content
-						style={{
-							background: '#fff',
-							padding: 24,
-							margin: 0,
-							minHeight: 280,
-						}}
-					>
+				<Layout className="app__layout">
+					<Content className="app__content">
 						<ProductList />
 						<CreateProductModal />
 					</Content>

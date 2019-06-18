@@ -2,16 +2,18 @@ import React from 'react';
 
 import { Layout, Menu, Icon } from 'antd';
 
+import './index.scss';
+
 const { Sider } = Layout;
 
 const Nav = () => {
 	return (
-		<Sider width={200} style={{ background: '#fff' }}>
+		<Sider width={200} className="nav">
 			<Menu
 				mode="inline"
 				defaultSelectedKeys={['1']}
 				defaultOpenKeys={['sub1']}
-				style={{ height: '100%', borderRight: 0 }}
+				className="nav__menu"
 			>
 					<Menu.Item key="1">
 						<Icon type="close-circle" />
