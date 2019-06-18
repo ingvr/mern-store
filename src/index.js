@@ -1,16 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.scss';
-import App from './components/app/';
-import * as serviceWorker from './services/service-worker/serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.scss";
+import App from "./components/app/";
+import * as serviceWorker from "./services/service-worker/serviceWorker";
 
-import ErrorBoundary from './components/error-boundary';
+import ErrorBoundary from "./components/error-boundary";
 
 ReactDOM.render(
-	<ErrorBoundary>
-		<App />
-	</ErrorBoundary>,
-	document.getElementById('root')
+  <ErrorBoundary>
+    <App />
+  </ErrorBoundary>,
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

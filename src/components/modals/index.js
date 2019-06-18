@@ -1,5 +1,3 @@
-import CreateProductModal from './create-product-modal';
+import CreateProductModal from "./create-product-modal";
 
-export {
-	CreateProductModal
-}
+export { CreateProductModal };
