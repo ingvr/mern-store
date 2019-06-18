@@ -7,6 +7,10 @@ import './store-header.scss';
 const { Header } = Layout;
 
 const StoreHeader = () => {
+	const createProduct = (e) => {
+		console.log("Create Product show modal");
+	};
+
 	return (
 		<Header className="Header">
 			<Row gutter={16}>
@@ -19,7 +23,7 @@ const StoreHeader = () => {
 						mode="horizontal"
 						style={{ lineHeight: '64px', textAlign: 'right' }}
 					>
-						<Menu.Item key="1">
+						<Menu.Item key="1" onClick={createProduct}>
 							<Icon type="plus-circle" />
 							Добавить товар
 						</Menu.Item>
