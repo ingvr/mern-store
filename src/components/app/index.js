@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Layout, Icon } from 'antd';
+import { Layout } from 'antd';
 import "antd/dist/antd.css";
 
 import StoreHeader from '../store-header';
