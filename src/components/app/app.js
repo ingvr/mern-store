@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Layout, Icon, Typography, Table,
-						Divider, Button } from 'antd';
+import { Layout, Icon, Table, Divider, Button } from 'antd';
 import "antd/dist/antd.css";
 
 import StoreHeader from '../store-header';
@@ -10,7 +9,6 @@ import Nav from '../nav';
 import './app.scss';
 
 const { Footer, Sider, Content } = Layout;
-const { Title } = Typography;
 const { Column } = Table;
 
 const App = () => {
@@ -55,7 +53,6 @@ const App = () => {
 							minHeight: 280,
 						}}
 					>
-						<Title>Title</Title>
 						<Table dataSource={dataSource}>
 							<Column
 								title="ID"
@@ -82,12 +79,12 @@ const App = () => {
 								render={() => (
 									<span>
 										<Button type="primary" icon="edit">
-      								Изменить
-    								</Button>
+											Изменить
+										</Button>
 										<Divider type="vertical" />
 										<Button type="danger" icon="delete">
-      								Удалить
-    								</Button>
+											Удалить
+										</Button>
 									</span>
 								)}
 							/>
