@@ -13,6 +13,7 @@ export const productsLoad = newProducts => {
 };
 
 export const categoryAdd = newCategory => {
+	console.log('action');
 	return {
 		type: "CATEGORY_ADD",
 		payload: newCategory

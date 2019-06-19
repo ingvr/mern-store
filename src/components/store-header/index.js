@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import { categoryAdd } from '../../actions';
+
 import { Layout, Menu, Row, Col, Icon } from "antd";
 
 const { Header } = Layout;
@@ -44,9 +46,7 @@ class StoreHeader extends Component {
 
 function mapDispatchToProps(dispatch) {
   return ({
-  	addItem: () => { dispatch({
-  		type: 'CATEGORY_ADD'
-  	})}
+  	addItem: () => dispatch(categoryAdd())
   })
 }
 
