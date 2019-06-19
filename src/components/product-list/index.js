@@ -1,59 +1,42 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import { Table, Divider, Button } from "antd";
 
 const { Column } = Table;
 
-const ProductList = () => {
-  const dataSource = [
-    {
-      key: "1",
-      product: "Товар 1",
-      rowPrice: "2000",
-      fullPrice: "2500"
-    },
-    {
-      key: "2",
-      product: "Товар 2",
-      rowPrice: "2200",
-      fullPrice: "2700"
-    },
-    {
-      key: "3",
-      product: "Товар 3",
-      rowPrice: "2200",
-      fullPrice: "2700"
-    },
-    {
-      key: "4",
-      product: "Товар 4",
-      rowPrice: "2200",
-      fullPrice: "2700"
-    }
-  ];
+class ProductList extends Component {
+	render() {
+		const { products } = this.props;
+		return (
+			<Table dataSource={products}>
+				<Column title="ID" key="key" dataIndex="key" />
+				<Column title="Название товара" key="product" dataIndex="product" />
+				<Column title="Цена закуп" key="rowPrice" dataIndex="rowPrice" />
+				<Column title="Цена" key="fullPrice" dataIndex="fullPrice" />
+				<Column
+					key="action"
+					render={() => (
+						<span>
+							<Button type="primary" icon="edit">
+								Изменить
+							</Button>
+							<Divider type="vertical" />
+							<Button type="danger" icon="delete">
+								Удалить
+							</Button>
+						</span>
+					)}
+				/>
+			</Table>
+		);
+	}
+}
 
-  return (
-    <Table dataSource={dataSource}>
-      <Column title="ID" key="key" dataIndex="key" />
-      <Column title="Название товара" key="product" dataIndex="product" />
-      <Column title="Цена закуп" key="rowPrice" dataIndex="rowPrice" />
-      <Column title="Цена" key="fullPrice" dataIndex="fullPrice" />
-      <Column
-        key="action"
-        render={() => (
-          <span>
-            <Button type="primary" icon="edit">
-              Изменить
-            </Button>
-            <Divider type="vertical" />
-            <Button type="danger" icon="delete">
-              Удалить
-            </Button>
-          </span>
-        )}
-      />
-    </Table>
-  );
+const mapStateToProps = state => {
+	return {
+		products: state.products
+	};
 };
 
-export default ProductList;
+export default connect(mapStateToProps)(ProductList);
