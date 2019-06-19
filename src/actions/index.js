@@ -1,15 +1,20 @@
-const categoriesLoad = newCategories => {
+export const categoriesLoad = newCategories => {
   return {
     type: "CATEGORIES_LOADED",
     payload: newCategories
   };
 };
 
-const productsLoad = newProducts => {
+export const productsLoad = newProducts => {
   return {
     type: "PRODUCTS_LOADED",
     payload: newProducts
   };
 };
 
-export { categoriesLoad };
+export const categoryAdd = newCategory => {
+	return {
+		type: "CATEGORY_ADD",
+		payload: newCategory
+	}
+}

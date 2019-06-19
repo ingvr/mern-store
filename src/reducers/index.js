@@ -56,6 +56,9 @@ const reducer = (state = initialState, action) => {
         products: action.payload
       };
 
+    case "CATEGORY_ADD":
+     	console.log('category add');
+
     default:
       return state;
   }
