@@ -3,7 +3,15 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-	return state;
+	switch (action.type) {
+		case "CATEGORIES_LOADED":
+			return {
+				categories: action.payload
+			};
+
+		default:
+			return state;
+	}
 };
 
 export default reducer;
