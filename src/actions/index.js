@@ -6,10 +6,10 @@ const categoriesLoad = newCategories => {
 };
 
 const productsLoad = newProducts => {
-	return {
-		type: "PRODUCTS_LOADED",
-		payload: newProducts
-	};
+  return {
+    type: "PRODUCTS_LOADED",
+    payload: newProducts
+  };
 };
 
 export { categoriesLoad };
