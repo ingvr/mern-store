@@ -9,7 +9,7 @@ const StoreFooter = () => {
     <Footer style={{ textAlign: "center" }}>
       &copy; Copyright 2322 by Igor Leontev<br/>
       source:&nbsp;
-      <a href="https://github.com/nzmi/test-store" target="_blank">
+      <a href="https://github.com/nzmi/test-store" target="_blank" rel="noopener noreferrer">
       	github.com/nzmi/test-store
       </a>
     </Footer>
