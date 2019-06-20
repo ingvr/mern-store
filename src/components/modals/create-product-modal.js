@@ -30,9 +30,6 @@ export default class CreateProductModal extends Component {
 
     return (
       <div>
-        <Button type="primary" onClick={this.showModal}>
-          Добавить товар
-        </Button>
         <Modal
           title="Title"
           visible={visible}
