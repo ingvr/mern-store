@@ -45,7 +45,8 @@ const initialState = {
 			fullPrice: "2700",
 			categoryId: null
 		}
-	]
+	],
+	nextCategoryId: 5
 };
 
 const reducer = (state = initialState, action) => {
@@ -61,17 +62,18 @@ const reducer = (state = initialState, action) => {
 			};
 
 		case "CATEGORY_ADD":
-			const newId = state.categories[state.categories.length - 1].id + 1;
-
+			console.log(state.nextCategoryId);
 			return {
+				...state,
 				categories: [
 					...state.categories,
 					{
-						id: newId,
+						id: state.nextCategoryId,
 						title: action.payload,
 						active: false
 					}
-				]
+				],
+				nextCategoryId: state.nextCategoryId+1
 			};
 		//console.log('category added (reducer):', action.payload);
 
