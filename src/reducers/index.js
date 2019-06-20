@@ -58,7 +58,6 @@ const reducer = (state = initialState, action) => {
 
     case "CATEGORY_ADD":
      	console.log('category added (reducer):', action.payload);
-     	break;
 
     default:
       return state;
