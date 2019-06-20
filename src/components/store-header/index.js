@@ -4,12 +4,10 @@ import { connect } from "react-redux";
 import { Layout, Menu, Row, Col, Icon, Modal, Button, Form, Input } from "antd";
 
 import { categoryAdd } from "../../actions";
-import { CreateProductModal } from "../modals";
 
 import "./index.scss";
 
 const { Header } = Layout;
-const { showModal } = CreateProductModal;
 
 class StoreHeader extends Component {
 	constructor(props) {
@@ -59,8 +57,7 @@ class StoreHeader extends Component {
 
 	handleCategorySubmit(e) {
 		e.preventDefault();
-		console.log(this.state.category);
-		//this.props.createCategory();
+		this.props.createCategory(this.state.category);
 	}
 
 	render() {
@@ -86,7 +83,7 @@ class StoreHeader extends Component {
 								mode="horizontal"
 								className="store-header__menu"
 							>
-								<Menu.Item key="1" onClick={showModal}>
+								<Menu.Item key="1">
 									<Icon type="plus-circle" />
 									Добавить товар
 								</Menu.Item>
@@ -171,7 +168,7 @@ class StoreHeader extends Component {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		createCategory: () => dispatch(categoryAdd())
+		createCategory: (category) => dispatch(categoryAdd(category))
 	};
 }
 

@@ -7,7 +7,6 @@ import StoreHeader from "../store-header";
 import Nav from "../nav";
 import ProductList from "../product-list";
 import StoreFooter from "../store-footer";
-import { CreateProductModal } from "../modals";
 
 import "./index.scss";
 
@@ -22,7 +21,6 @@ const App = () => {
         <Layout className="app__layout">
           <Content className="app__content">
             <ProductList />
-            <CreateProductModal />
           </Content>
         </Layout>
       </Layout>
