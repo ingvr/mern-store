@@ -8,33 +8,33 @@ import "./index.scss";
 const { Sider } = Layout;
 
 class Nav extends Component {
-  render() {
-    const { categories } = this.props;
-    return (
-      <Sider width={200} className="nav">
-        <Menu
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["sub1"]}
-          className="nav__menu"
-        >
-          {categories.map(category => (
-            <Menu.Item key={category.id}>
-              <Icon type="close-circle" />
-              {category.title}
-            </Menu.Item>
-          ))}
-          <Menu.Item key="4">Без категории</Menu.Item>
-        </Menu>
-      </Sider>
-    );
-  }
+	render() {
+		const { categories } = this.props;
+		return (
+			<Sider width={200} className="nav">
+				<Menu
+					mode="inline"
+					defaultSelectedKeys={["1"]}
+					defaultOpenKeys={["sub1"]}
+					className="nav__menu"
+				>
+					{categories.map(category => (
+						<Menu.Item key={category.id}>
+							<Icon type="close-circle" />
+							{category.title}
+						</Menu.Item>
+					))}
+					<Menu.Item key="4">Без категории</Menu.Item>
+				</Menu>
+			</Sider>
+		);
+	}
 }
 
 const mapStateToProps = state => {
-  return {
-    categories: state.categories
-  };
+	return {
+		categories: state.categories
+	};
 };
 
 export default connect(mapStateToProps)(Nav);

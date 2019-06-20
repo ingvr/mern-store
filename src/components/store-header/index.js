@@ -58,6 +58,7 @@ class StoreHeader extends Component {
 	handleCategorySubmit(e) {
 		e.preventDefault();
 		this.props.createCategory(this.state.category);
+		this.hideCategoryModal();
 	}
 
 	render() {
@@ -168,7 +169,7 @@ class StoreHeader extends Component {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		createCategory: (category) => dispatch(categoryAdd(category))
+		createCategory: category => dispatch(categoryAdd(category))
 	};
 }
 

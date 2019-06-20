@@ -13,20 +13,20 @@ import "./index.scss";
 const { Content } = Layout;
 
 const App = () => {
-  return (
-    <div className="App">
-      <StoreHeader />
-      <Layout>
-        <Nav />
-        <Layout className="app__layout">
-          <Content className="app__content">
-            <ProductList />
-          </Content>
-        </Layout>
-      </Layout>
-      <StoreFooter />
-    </div>
-  );
+	return (
+		<div className="App">
+			<StoreHeader />
+			<Layout>
+				<Nav />
+				<Layout className="app__layout">
+					<Content className="app__content">
+						<ProductList />
+					</Content>
+				</Layout>
+			</Layout>
+			<StoreFooter />
+		</div>
+	);
 };
 
 export default App;
