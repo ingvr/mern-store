@@ -7,7 +7,11 @@ const { Footer } = Layout;
 const StoreFooter = () => {
   return (
     <Footer style={{ textAlign: "center" }}>
-      &copy; Copyright 2322 by Igor Leontev
+      &copy; Copyright 2322 by Igor Leontev<br/>
+      source:&nbsp;
+      <a href="https://github.com/nzmi/test-store" target="_blank">
+      	github.com/nzmi/test-store
+      </a>
     </Footer>
   );
 };
