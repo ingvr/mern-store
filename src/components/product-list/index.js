@@ -11,7 +11,7 @@ class ProductList extends Component {
     return (
       <Table dataSource={products}>
         <Column title="ID" key="key" dataIndex="key" />
-        <Column title="Название товара" key="product" dataIndex="product" />
+        <Column title="Название товара" key="name" dataIndex="name" />
         <Column title="Цена закуп" key="rowPrice" dataIndex="rowPrice" />
         <Column title="Цена" key="fullPrice" dataIndex="fullPrice" />
         <Column
