@@ -5,7 +5,7 @@ import { ModalWrapper } from "../hoc";
 
 const DemoModal = ({ visible, showModal, hideModal }) => {
   return (
-    <div>
+    <>
       <Modal
         title="Пример модалки"
         visible={visible}
@@ -15,7 +15,7 @@ const DemoModal = ({ visible, showModal, hideModal }) => {
         text
       </Modal>
       <Button onClick={showModal}>Показать модалку</Button>
-    </div>
+    </>
   );
 };
 

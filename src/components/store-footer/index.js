@@ -19,7 +19,6 @@ const StoreFooter = () => {
       >
         github.com/nzmi/test-store
       </a>
-      <DemoModal />
     </Footer>
   );
 };

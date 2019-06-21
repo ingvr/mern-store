@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Layout, Menu, Row, Col, Icon, Modal, Button, Form, Input } from "antd";
 
 import { categoryAdd, productAdd } from "../../actions";
+import { CreateCategoryModal } from "../modals";
 
 import "./index.scss";
 
@@ -13,9 +14,7 @@ class StoreHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categoryModalVisible: false,
       productModalVisible: false,
-      category: "",
       categoryInProduct: "1",
       name: "",
       rowPrice: "",
@@ -23,20 +22,7 @@ class StoreHeader extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleProductSubmit = this.handleProductSubmit.bind(this);
-    this.handleCategorySubmit = this.handleCategorySubmit.bind(this);
   }
-
-  showCategoryModal = () => {
-    this.setState({
-      categoryModalVisible: true
-    });
-  };
-
-  hideCategoryModal = () => {
-    this.setState({
-      categoryModalVisible: false
-    });
-  };
 
   showProductModal = () => {
     this.setState({
@@ -73,15 +59,6 @@ class StoreHeader extends Component {
     });
   }
 
-  handleCategorySubmit(e) {
-    e.preventDefault();
-    this.props.createCategory(this.state.category);
-    this.setState({
-      categoryModalVisible: false,
-      category: ""
-    });
-  }
-
   render() {
     const {
       categoryModalVisible,
@@ -102,47 +79,19 @@ class StoreHeader extends Component {
             <Col span={4} className="store-header__logo">
               <Icon type="fire" theme="filled" /> SuperStore
             </Col>
-            <Col span={20}>
-              <Menu
-                theme="dark"
-                mode="horizontal"
-                className="store-header__menu"
+            <Col span={20} style={{ textAlign: "right" }}>
+              <Button
+                type="primary"
+                onClick={this.showProductModal}
+                style={{ marginRight: "10px" }}
               >
-                <Menu.Item key="1" onClick={this.showProductModal}>
-                  <Icon type="plus-circle" />
-                  Добавить товар
-                </Menu.Item>
-                <Menu.Item key="2" onClick={this.showCategoryModal}>
-                  <Icon type="folder-add" />
-                  Добавить категорию
-                </Menu.Item>
-              </Menu>
+                <Icon type="plus-circle" />
+                Добавить товар
+              </Button>
+              <CreateCategoryModal />
             </Col>
           </Row>
         </Header>
-
-        <Modal
-          title="Добавить категорию"
-          visible={categoryModalVisible}
-          onCancel={this.hideCategoryModal}
-          footer={[]}
-        >
-          <Form onSubmit={this.handleCategorySubmit}>
-            <Form.Item>
-              <Input
-                name="category"
-                prefix={<Icon type="unordered-list" />}
-                placeholder="Категория"
-                value={category}
-                onChange={this.handleChange}
-                required
-              />
-            </Form.Item>
-            <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
-              Создать
-            </Button>
-          </Form>
-        </Modal>
 
         <Modal
           title="Добавить товар"

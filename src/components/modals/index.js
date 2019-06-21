@@ -1,3 +1,3 @@
-import DemoModal from "./demo-modal";
+import CreateCategoryModal from "./create-category-modal";
 
-export { DemoModal };
+export { CreateCategoryModal };
