@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { Layout, Menu, Row, Col, Icon, Modal,
-          Button, Form, Input } from "antd";
+import { Layout, Menu, Row, Col, Icon, Modal, Button, Form, Input } from "antd";
 
-import { categoryAdd } from "../../actions";
+import { categoryAdd, productAdd } from "../../actions";
 
 import "./index.scss";
 
@@ -17,8 +16,8 @@ class StoreHeader extends Component {
       categoryModalVisible: false,
       productModalVisible: false,
       category: "",
-      categoryInProduct: "",
-      title: "",
+      categoryInProduct: "1",
+      name: "",
       rowPrice: "",
       fullPrice: ""
     };
@@ -62,11 +61,10 @@ class StoreHeader extends Component {
 
   handleProductSubmit(e) {
     e.preventDefault();
-    console.log(this.state.categoryInProduct);
-    console.log(this.state.title);
-    console.log(this.state.rowPrice);
-    console.log(this.state.fullPrice);
-    //this.props.createCategory();
+    const { categoryInProduct, name, rowPrice, fullPrice } = this.state;
+    const product = { categoryInProduct, name, rowPrice, fullPrice };
+    this.props.createProduct(product);
+    this.hideProductModal();
   }
 
   handleCategorySubmit(e) {
@@ -81,7 +79,7 @@ class StoreHeader extends Component {
       productModalVisible,
       category,
       categoryInProduct,
-      title,
+      name,
       rowPrice,
       fullPrice
     } = this.state;
@@ -151,21 +149,21 @@ class StoreHeader extends Component {
                 value={categoryInProduct}
                 onChange={this.handleChange}
                 required
-                style={{ width: '100%', lineHeight: '32px' }}
+                style={{ width: "100%", lineHeight: "32px" }}
               >
                 {categories.map(category => (
                   <option key={category.id} value={category.id}>
                     {category.title}
                   </option>
-                 ))}
+                ))}
               </select>
             </Form.Item>
             <Form.Item>
               <Input
-                name="title"
-                prefix={<Icon type="user" />}
+                name="name"
+                prefix={<Icon type="font-colors" />}
                 placeholder="Название"
-                value={title}
+                value={name}
                 onChange={this.handleChange}
                 required
               />
@@ -173,7 +171,7 @@ class StoreHeader extends Component {
             <Form.Item>
               <Input
                 name="rowPrice"
-                prefix={<Icon type="user" />}
+                prefix={<Icon type="dollar" />}
                 placeholder="Закупочная цена"
                 value={rowPrice}
                 onChange={this.handleChange}
@@ -183,7 +181,7 @@ class StoreHeader extends Component {
             <Form.Item>
               <Input
                 name="fullPrice"
-                prefix={<Icon type="user" />}
+                prefix={<Icon type="dollar" />}
                 placeholder="Цена"
                 value={fullPrice}
                 onChange={this.handleChange}
@@ -204,11 +202,12 @@ const mapStateToProps = state => {
   return {
     categories: state.categories
   };
-}
+};
 
 function mapDispatchToProps(dispatch) {
   return {
-    createCategory: category => dispatch(categoryAdd(category))
+    createCategory: category => dispatch(categoryAdd(category)),
+    createProduct: product => dispatch(productAdd(product))
   };
 }
 
