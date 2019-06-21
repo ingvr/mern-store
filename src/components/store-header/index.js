@@ -64,13 +64,22 @@ class StoreHeader extends Component {
     const { categoryInProduct, name, rowPrice, fullPrice } = this.state;
     const product = { categoryInProduct, name, rowPrice, fullPrice };
     this.props.createProduct(product);
-    this.hideProductModal();
+    this.setState({
+      productModalVisible: false,
+      categoryInProduct: "1",
+      name: "",
+      rowPrice: "",
+      fullPrice: ""
+    });
   }
 
   handleCategorySubmit(e) {
     e.preventDefault();
     this.props.createCategory(this.state.category);
-    this.hideCategoryModal();
+    this.setState({
+      categoryModalVisible: false,
+      category: ""
+    });
   }
 
   render() {
