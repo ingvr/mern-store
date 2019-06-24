@@ -20,9 +20,15 @@ export const categoryAdd = newCategory => {
 };
 
 export const productAdd = newProduct => {
-  console.log("adding product (action)", newProduct);
   return {
     type: "PRODUCT_ADD",
     payload: newProduct
+  };
+};
+
+export const productDelete = productId => {
+  return {
+    type: "PRODUCT_DELETE",
+    payload: productId
   };
 };
