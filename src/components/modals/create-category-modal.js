@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Modal, Menu, Form, Input, Icon, Button } from "antd";
+import { Modal, Form, Input, Icon, Button } from "antd";
 
 import { categoryAdd } from "../../actions";
 import { ModalWrapper } from "../hoc";

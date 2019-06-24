@@ -19,6 +19,7 @@ const ModalWrapper = WrappedModal => {
           visible: false
         });
       };
+
       return (
         <WrappedModal
           visible={this.state.visible}
