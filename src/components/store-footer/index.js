@@ -2,11 +2,13 @@ import React from "react";
 
 import { Layout } from "antd";
 
+import "./index.scss";
+
 const { Footer } = Layout;
 
 const StoreFooter = () => {
   return (
-    <Footer style={{ textAlign: "center" }}>
+    <Footer className="footer">
       &copy; Copyright 2322 by Igor Leontev
       <br />
       source:&nbsp;
