@@ -1,5 +1,5 @@
 const initialState = {
-  categories: [
+  items: [
     {
       id: 1,
       title: "Категория 1",
@@ -23,14 +23,14 @@ const categories = (state = initialState, action) => {
   switch (action.type) {
     case "CATEGORIES_LOADED":
       return {
-        categories: action.payload
+        items: action.payload
       };
 
     case "CATEGORY_ADD":
       return {
         ...state,
-        categories: [
-          ...state.categories,
+        items: [
+          ...state.items,
           {
             id: state.nextCategoryId,
             title: action.payload,

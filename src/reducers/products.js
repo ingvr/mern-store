@@ -1,5 +1,5 @@
 const initialState = {
-  products: [
+  items: [
     {
       key: "1",
       name: "Товар 1",
@@ -36,7 +36,7 @@ const products = (state = initialState, action) => {
   switch (action.type) {
     case "PRODUCTS_LOADED":
       return {
-        products: action.payload
+        items: action.payload
       };
     case "PRODUCT_ADD":
       const { nextProductId: key } = state;
@@ -44,12 +44,12 @@ const products = (state = initialState, action) => {
         name,
         rowPrice,
         fullPrice,
-        categoryInProduct: categoryId
+        cateogory: categoryId
       } = action.payload;
       return {
         ...state,
-        products: [
-          ...state.products,
+        items: [
+          ...state.items,
           {
             key,
             name,

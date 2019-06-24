@@ -121,7 +121,7 @@ class CreateProductModal extends Component {
 
 const mapStateToProps = state => {
   return {
-    categories: state.categories
+    categories: state.categories.items
   };
 };
 

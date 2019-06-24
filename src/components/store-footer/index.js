@@ -2,8 +2,6 @@ import React from "react";
 
 import { Layout } from "antd";
 
-import { DemoModal } from "../modals";
-
 const { Footer } = Layout;
 
 const StoreFooter = () => {
