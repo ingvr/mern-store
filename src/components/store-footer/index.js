@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Layout } from "antd";
+import { Layout, Icon } from "antd";
 
 import "./index.scss";
 
@@ -11,13 +11,13 @@ const StoreFooter = () => {
     <Footer className="footer">
       &copy; Copyright 2322 by Igor Leontev
       <br />
-      source:&nbsp;
       <a
         href="https://github.com/nzmi/test-store"
         target="_blank"
         rel="noopener noreferrer"
+        className="footer__link"
       >
-        github.com/nzmi/test-store
+        <Icon type="github" /> GitHub
       </a>
     </Footer>
   );
