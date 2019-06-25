@@ -14,8 +14,6 @@ class CreateProductModal extends Component {
       rowPrice: "",
       fullPrice: ""
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit = e => {
@@ -43,7 +41,6 @@ class CreateProductModal extends Component {
 
   render() {
     const { visible, showModal, hideModal, categories } = this.props;
-
     const { category, name, rowPrice, fullPrice } = this.state;
 
     return (

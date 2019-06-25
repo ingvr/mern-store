@@ -11,8 +11,6 @@ class CreateCategoryModal extends Component {
     this.state = {
       category: ""
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit = e => {
