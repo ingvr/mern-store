@@ -6,14 +6,16 @@ import { productAdd } from "../../actions";
 import { ModalWrapper } from "../hoc";
 
 class CreateProductModal extends Component {
+  initialState = {
+    category: "1",
+    name: "",
+    rowPrice: "",
+    fullPrice: ""
+  };
+
   constructor(props) {
     super(props);
-    this.state = {
-      category: "1",
-      name: "",
-      rowPrice: "",
-      fullPrice: ""
-    };
+    this.state = inintialState;
   }
 
   handleSubmit = e => {
@@ -21,12 +23,7 @@ class CreateProductModal extends Component {
     const { category, name, rowPrice, fullPrice } = this.state;
     const product = { category, name, rowPrice, fullPrice };
     this.props.createProduct(product);
-    this.setState({
-      category: "1",
-      name: "",
-      rowPrice: "",
-      fullPrice: ""
-    });
+    this.setState(inintialState);
     this.props.hideModal();
   };
 

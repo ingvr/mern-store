@@ -8,17 +8,13 @@ import { ModalWrapper } from "../hoc";
 class CreateCategoryModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      category: ""
-    };
+    this.state = { category: "" };
   }
 
   handleSubmit = e => {
     e.preventDefault();
     this.props.createCategory(this.state.category);
-    this.setState({
-      category: ""
-    });
+    this.setState({ category: "" });
     this.props.hideModal();
   };
 
