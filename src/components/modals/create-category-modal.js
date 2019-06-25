@@ -4,6 +4,7 @@ import { Modal, Form, Input, Icon, Button } from "antd";
 
 import { categoryAdd } from "../../actions";
 import { ModalWrapper } from "../hoc";
+import { handleChange } from "./utils";
 
 class CreateCategoryModal extends Component {
   state = { category: "" };
@@ -15,14 +16,7 @@ class CreateCategoryModal extends Component {
     this.props.hideModal();
   };
 
-  handleChange = e => {
-    const target = e.target;
-    const value = target.value;
-    const name = target.name;
-    this.setState({
-      [name]: value
-    });
-  };
+  handleChange = e => handleChange.call(this, e);
 
   render() {
     const { visible, showModal, hideModal } = this.props;
