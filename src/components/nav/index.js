@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { Layout, Menu, Icon, Button, Popconfirm } from "antd";
 
-import { categoryDelete } from "../../actions";
+import { categoryDelete, productsFilter } from "../../actions";
 
 import "./index.scss";
 
@@ -16,12 +16,15 @@ class Nav extends Component {
       <Sider width={200} className="nav">
         <Menu
           mode="inline"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={["5"]}
           defaultOpenKeys={["sub1"]}
           className="nav__menu"
         >
           {categories.map(category => (
-            <Menu.Item key={category.id}>
+            <Menu.Item
+              key={category.key}
+              onClick={() => this.props.filterProducts(category.key)}
+            >
               <Popconfirm
                 title="Вы уверены, что хотите удалить эту категорию?"
                 onConfirm={() => {
@@ -40,7 +43,14 @@ class Nav extends Component {
               {category.title}
             </Menu.Item>
           ))}
-          <Menu.Item key="4">Без категории</Menu.Item>
+          <Menu.Item key="4" onClick={() => this.props.filterProducts(null)}>
+            <Icon type="stop" />
+            Без категории
+          </Menu.Item>
+          <Menu.Item key="5" onClick={() => this.props.filterProducts(0)}>
+            <Icon type="appstore" />
+            Все
+          </Menu.Item>
         </Menu>
       </Sider>
     );
@@ -55,7 +65,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteCategory: category => dispatch(categoryDelete(category))
+    deleteCategory: category => dispatch(categoryDelete(category)),
+    filterProducts: category => dispatch(productsFilter(category))
   };
 };
 

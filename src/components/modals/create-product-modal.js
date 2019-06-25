@@ -58,7 +58,7 @@ class CreateProductModal extends Component {
                 style={{ width: "100%", lineHeight: "32px" }}
               >
                 {categories.map(category => (
-                  <option key={category.id} value={category.id}>
+                  <option key={category.key} value={category.key}>
                     {category.title}
                   </option>
                 ))}

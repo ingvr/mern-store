@@ -10,8 +10,11 @@ const { Column } = Table;
 class ProductList extends Component {
   render() {
     const { products } = this.props;
+    const visibleProducts = products.filter(
+      product => product.visible === true
+    );
     return (
-      <Table dataSource={products}>
+      <Table dataSource={visibleProducts}>
         <Column title="ID" key="key" dataIndex="key" />
         <Column title="Название товара" key="name" dataIndex="name" />
         <Column title="Цена закуп" key="rowPrice" dataIndex="rowPrice" />

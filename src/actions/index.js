@@ -39,3 +39,10 @@ export const productDelete = productId => {
     payload: productId
   };
 };
+
+export const productsFilter = categorytId => {
+  return {
+    type: "PRODUCTS_FILTER",
+    payload: categorytId
+  };
+};

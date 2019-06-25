@@ -1,25 +1,27 @@
 const initialState = {
   items: [
     {
-      id: 1,
+      key: 1,
       title: "Категория 1",
       active: false
     },
     {
-      id: 2,
+      key: 2,
       title: "Категория 2",
       active: false
     },
     {
-      id: 3,
+      key: 3,
       title: "Категория 3",
       active: false
     }
   ],
-  nextCategoryId: 5
+  nextCategoryId: 6
 };
 
 const categories = (state = initialState, action) => {
+  const { items } = state;
+
   switch (action.type) {
     case "CATEGORIES_LOADED":
       return {
@@ -30,7 +32,7 @@ const categories = (state = initialState, action) => {
       return {
         ...state,
         items: [
-          ...state.items,
+          ...items,
           {
             id: state.nextCategoryId,
             title: action.payload,
@@ -41,7 +43,6 @@ const categories = (state = initialState, action) => {
       };
 
     case "CATEGORY_DELETE":
-      const { items } = state;
       const idx = items.findIndex(item => item.key === action.payload);
 
       const newArray = [...items.slice(0, idx), ...items.slice(idx + 1)];
