@@ -1,8 +1,24 @@
 .nav {
-	background: #fff;
+  background: #fff;
 }
 
 .nav__menu {
-	height: '100%';
-	border-right: 0;
+  height: "100%";
+
+  border-right: 0;
+}
+
+.nav__close-button {
+  display: inline-block;
+
+  width: 30px;
+  height: 30px;
+  margin: 0 10px 0 0;
+  padding: 0;
+
+  text-align: center;
+
+  border-radius: 100%;
+
+  line-height: 30px;
 }

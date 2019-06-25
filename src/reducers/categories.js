@@ -40,6 +40,17 @@ const categories = (state = initialState, action) => {
         nextCategoryId: state.nextCategoryId + 1
       };
 
+    case "CATEGORY_DELETE":
+      const { items } = state;
+      const idx = items.findIndex(item => item.key === action.payload);
+
+      const newArray = [...items.slice(0, idx), ...items.slice(idx + 1)];
+
+      return {
+        ...state,
+        items: newArray
+      };
+
     default:
       return state;
   }

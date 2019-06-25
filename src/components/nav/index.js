@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { Layout, Menu, Icon } from "antd";
+import { Layout, Menu, Icon, Button, Popconfirm } from "antd";
+
+import { categoryDelete } from "../../actions";
 
 import "./index.scss";
 
@@ -20,7 +22,21 @@ class Nav extends Component {
         >
           {categories.map(category => (
             <Menu.Item key={category.id}>
-              <Icon type="close-circle" />
+              <Popconfirm
+                title="Вы уверены, что хотите удалить эту категорию?"
+                onConfirm={() => {
+                  this.props.deleteCategory(category.key);
+                }}
+                onCancel={() => {
+                  return false;
+                }}
+                okText="Да"
+                cancelText="Нет"
+              >
+                <Button type="danger" className="nav__close-button">
+                  <Icon type="close" style={{ margin: "0px" }} />
+                </Button>
+              </Popconfirm>
               {category.title}
             </Menu.Item>
           ))}
@@ -37,4 +53,13 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Nav);
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteCategory: category => dispatch(categoryDelete(category))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Nav);

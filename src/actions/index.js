@@ -5,17 +5,24 @@ export const categoriesLoad = newCategories => {
   };
 };
 
-export const productsLoad = newProducts => {
-  return {
-    type: "PRODUCTS_LOADED",
-    payload: newProducts
-  };
-};
-
 export const categoryAdd = newCategory => {
   return {
     type: "CATEGORY_ADD",
     payload: newCategory
+  };
+};
+
+export const categoryDelete = categorytId => {
+  return {
+    type: "CATEGORY_DELETE",
+    payload: categorytId
+  };
+};
+
+export const productsLoad = newProducts => {
+  return {
+    type: "PRODUCTS_LOADED",
+    payload: newProducts
   };
 };
 
