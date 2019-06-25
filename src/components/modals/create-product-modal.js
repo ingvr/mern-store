@@ -13,17 +13,14 @@ class CreateProductModal extends Component {
     fullPrice: ""
   };
 
-  constructor(props) {
-    super(props);
-    this.state = inintialState;
-  }
+  state = this.initialState;
 
   handleSubmit = e => {
     e.preventDefault();
     const { category, name, rowPrice, fullPrice } = this.state;
     const product = { category, name, rowPrice, fullPrice };
     this.props.createProduct(product);
-    this.setState(inintialState);
+    this.setState(this.inintialState);
     this.props.hideModal();
   };
 

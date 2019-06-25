@@ -6,10 +6,7 @@ import { categoryAdd } from "../../actions";
 import { ModalWrapper } from "../hoc";
 
 class CreateCategoryModal extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { category: "" };
-  }
+  state = { category: "" };
 
   handleSubmit = e => {
     e.preventDefault();
