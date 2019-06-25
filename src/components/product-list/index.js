@@ -9,9 +9,10 @@ const { Column } = Table;
 
 class ProductList extends Component {
   render() {
-    const { products } = this.props;
+    const { products, filteredCategory } = this.props;
     const visibleProducts = products.filter(
-      product => product.visible === true
+      product =>
+        filteredCategory === product.categoryId || filteredCategory === 0
     );
     return (
       <Table dataSource={visibleProducts}>
@@ -52,7 +53,8 @@ class ProductList extends Component {
 
 const mapStateToProps = state => {
   return {
-    products: state.products.items
+    products: state.products.items,
+    filteredCategory: state.products.filteredCategory
   };
 };
 

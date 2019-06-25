@@ -33,7 +33,8 @@ const initialState = {
       visible: true
     }
   ],
-  nextProductId: 5
+  nextProductId: 5,
+  filteredCategory: 0
 };
 
 const products = (state = initialState, action) => {
@@ -75,18 +76,9 @@ const products = (state = initialState, action) => {
         items: newArray
       };
     case "PRODUCTS_FILTER":
-      const newItems = items.map(item => {
-        if (item.categoryId === action.payload || action.payload === 0) {
-          item.visible = true;
-        } else {
-          item.visible = false;
-        }
-        return item;
-      });
-
       return {
         ...state,
-        items: newItems
+        filteredCategory: action.payload
       };
     default:
       return state;
