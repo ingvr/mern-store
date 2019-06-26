@@ -22,7 +22,7 @@ class CreateProductModal extends Component {
     const { createProduct, hideModal } = this.props;
     const product = { category, name, rowPrice, fullPrice };
     createProduct(product);
-    this.setState(this.inintialState);
+    this.setState(this.initialState);
     hideModal();
   };
 
