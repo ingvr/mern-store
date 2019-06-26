@@ -40,6 +40,13 @@ export const productDelete = productId => {
   };
 };
 
+export const productEdit = product => {
+  return {
+    type: "PRODUCT_EDIT",
+    payload: product
+  };
+};
+
 export const productsFilter = categorytId => {
   return {
     type: "PRODUCTS_FILTER",

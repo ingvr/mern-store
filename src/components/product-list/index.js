@@ -5,6 +5,8 @@ import { Table, Divider, Button, Popconfirm } from "antd";
 
 import { productDelete } from "../../actions";
 
+import { EditProductModal } from "../modals";
+
 const { Column } = Table;
 
 class ProductList extends Component {
@@ -24,9 +26,7 @@ class ProductList extends Component {
           key="action"
           render={product => (
             <span>
-              <Button type="primary" icon="edit">
-                Изменить
-              </Button>
+              <EditProductModal productKey={product.key} />
               <Divider type="vertical" />
               <Popconfirm
                 title="Вы уверены, что хотите удалить этот товар?"
