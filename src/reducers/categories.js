@@ -34,7 +34,7 @@ const categories = (state = initialState, action) => {
         items: [
           ...items,
           {
-            id: state.nextCategoryId,
+            key: state.nextCategoryId,
             title: action.payload,
             active: false
           }

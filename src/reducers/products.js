@@ -1,28 +1,28 @@
 const initialState = {
   items: [
     {
-      key: "1",
+      key: 1,
       name: "Товар 1",
       rowPrice: "2000",
       fullPrice: "2500",
       categoryId: 1
     },
     {
-      key: "2",
+      key: 2,
       name: "Товар 2",
       rowPrice: "2200",
       fullPrice: "2700",
       categoryId: 2
     },
     {
-      key: "3",
+      key: 3,
       name: "Товар 3",
       rowPrice: "2200",
       fullPrice: "2700",
       categoryId: 3
     },
     {
-      key: "4",
+      key: 4,
       name: "Товар 4",
       rowPrice: "2200",
       fullPrice: "2700",
@@ -47,7 +47,7 @@ const products = (state = initialState, action) => {
         name,
         rowPrice,
         fullPrice,
-        cateogory: categoryId
+        category: categoryId
       } = action.payload;
       return {
         ...state,
@@ -58,7 +58,7 @@ const products = (state = initialState, action) => {
             name,
             rowPrice,
             fullPrice,
-            categoryId
+            categoryId: parseInt(categoryId)
           }
         ],
         nextProductId: state.nextProductId + 1
@@ -78,14 +78,14 @@ const products = (state = initialState, action) => {
       const {
         key,
         name,
-        cateogory: categoryId,
+        category: categoryId,
         rowPrice,
         fullPrice
       } = action.payload;
       const idx = items.findIndex(item => item.key === key);
       const newArray = [
         ...items.slice(0, idx),
-        { key, name, categoryId, rowPrice, fullPrice },
+        { key, name, categoryId: parseInt(categoryId), rowPrice, fullPrice },
         ...items.slice(idx + 1)
       ];
       return {

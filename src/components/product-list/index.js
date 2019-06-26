@@ -20,6 +20,7 @@ class ProductList extends Component {
       <Table dataSource={visibleProducts}>
         <Column title="ID" key="key" dataIndex="key" />
         <Column title="Название товара" key="name" dataIndex="name" />
+        <Column title="категория" key="categoryId" dataIndex="categoryId" />
         <Column title="Цена закуп" key="rowPrice" dataIndex="rowPrice" />
         <Column title="Цена" key="fullPrice" dataIndex="fullPrice" />
         <Column
