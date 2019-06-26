@@ -19,10 +19,11 @@ class CreateProductModal extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { category, name, rowPrice, fullPrice } = this.state;
+    const { createProduct, hideModal } = this.props;
     const product = { category, name, rowPrice, fullPrice };
-    this.props.createProduct(product);
+    createProduct(product);
     this.setState(this.inintialState);
-    this.props.hideModal();
+    hideModal();
   };
 
   handleChange = e => handleChange.call(this, e);

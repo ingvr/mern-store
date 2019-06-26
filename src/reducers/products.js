@@ -61,7 +61,7 @@ const products = (state = initialState, action) => {
             categoryId: parseInt(categoryId)
           }
         ],
-        nextProductId: state.nextProductId + 1
+        nextProductId: key + 1
       };
     }
     case "PRODUCT_DELETE": {

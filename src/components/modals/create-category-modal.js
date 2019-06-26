@@ -11,9 +11,10 @@ class CreateCategoryModal extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.createCategory(this.state.category);
+    const { createCategory, hideModal } = this.props;
+    createCategory(this.state.category);
     this.setState({ category: "" });
-    this.props.hideModal();
+    hideModal();
   };
 
   handleChange = e => handleChange.call(this, e);

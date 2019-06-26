@@ -29,10 +29,10 @@ class EditProductModal extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { category, name, rowPrice, fullPrice } = this.state;
-    const { productKey: key } = this.props;
+    const { productKey: key, editProduct, hideModal } = this.props;
     const product = { key, category, name, rowPrice, fullPrice };
-    this.props.editProduct(product);
-    this.props.hideModal();
+    editProduct(product);
+    hideModal();
   };
 
   handleChange = e => handleChange.call(this, e);
@@ -40,6 +40,7 @@ class EditProductModal extends Component {
   render() {
     const { visible, showModal, hideModal, categories } = this.props;
     const { category, name, rowPrice, fullPrice } = this.state;
+    const { handleChange, handleSubmit } = this;
 
     return (
       <>
@@ -52,13 +53,13 @@ class EditProductModal extends Component {
           onCancel={hideModal}
           footer={[]}
         >
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={handleSubmit}>
             <Form.Item>
               <select
                 name="category"
                 placeholder="Выберите категорию"
                 defaultValue={category}
-                onChange={this.handleChange}
+                onChange={handleChange}
                 required
                 style={{ width: "100%", lineHeight: "32px" }}
               >
@@ -75,7 +76,7 @@ class EditProductModal extends Component {
                 prefix={<Icon type="font-colors" />}
                 placeholder="Название"
                 value={name}
-                onChange={this.handleChange}
+                onChange={handleChange}
                 required
               />
             </Form.Item>
@@ -85,7 +86,7 @@ class EditProductModal extends Component {
                 prefix={<Icon type="dollar" />}
                 placeholder="Закупочная цена"
                 value={rowPrice}
-                onChange={this.handleChange}
+                onChange={handleChange}
                 required
               />
             </Form.Item>
@@ -95,7 +96,7 @@ class EditProductModal extends Component {
                 prefix={<Icon type="dollar" />}
                 placeholder="Цена"
                 value={fullPrice}
-                onChange={this.handleChange}
+                onChange={handleChange}
                 required
               />
             </Form.Item>
