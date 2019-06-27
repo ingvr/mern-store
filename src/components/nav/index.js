@@ -15,7 +15,12 @@ const { Sider } = Layout;
 
 class Nav extends Component {
   render() {
-    const { categories, deleteCategory, resetProductsCategory } = this.props;
+    const {
+      categories,
+      deleteCategory,
+      resetProductsCategory,
+      filterProducts
+    } = this.props;
     return (
       <Sider width={200} className="nav">
         <Menu
@@ -27,7 +32,7 @@ class Nav extends Component {
           {categories.map(category => (
             <Menu.Item
               key={category.key}
-              onClick={() => this.props.filterProducts(category.key)}
+              onClick={() => filterProducts(category.key)}
             >
               <Popconfirm
                 title="Вы уверены, что хотите удалить эту категорию?"
@@ -48,14 +53,11 @@ class Nav extends Component {
               {category.title}
             </Menu.Item>
           ))}
-          <Menu.Item key="4" onClick={() => this.props.filterProducts(0)}>
+          <Menu.Item key="4" onClick={() => filterProducts(0)}>
             <Icon type="stop" />
             Без категории
           </Menu.Item>
-          <Menu.Item
-            key="5"
-            onClick={() => this.props.filterProducts("ALL_CATEGORIES")}
-          >
+          <Menu.Item key="5" onClick={() => filterProducts("ALL_CATEGORIES")}>
             <Icon type="appstore" />
             Все
           </Menu.Item>
