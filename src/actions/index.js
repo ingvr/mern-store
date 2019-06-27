@@ -53,3 +53,10 @@ export const productsFilter = categorytId => {
     payload: categorytId
   };
 };
+
+export const productsResetCategory = category => {
+  return {
+    type: "PRODUCTS_RESET_CATEGORY",
+    payload: category
+  };
+}

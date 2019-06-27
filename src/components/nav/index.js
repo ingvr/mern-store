@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { Layout, Menu, Icon, Button, Popconfirm } from "antd";
 
-import { categoryDelete, productsFilter } from "../../actions";
+import { categoryDelete, productsFilter, productsResetCategory } from "../../actions";
 
 import "./index.scss";
 
@@ -11,7 +11,7 @@ const { Sider } = Layout;
 
 class Nav extends Component {
   render() {
-    const { categories } = this.props;
+    const { categories, deleteCategory, resetProductsCategory } = this.props;
     return (
       <Sider width={200} className="nav">
         <Menu
@@ -28,7 +28,8 @@ class Nav extends Component {
               <Popconfirm
                 title="Вы уверены, что хотите удалить эту категорию?"
                 onConfirm={() => {
-                  this.props.deleteCategory(category.key);
+                  deleteCategory(category.key);
+                  resetProductsCategory(category.key);
                 }}
                 onCancel={() => {
                   return false;
@@ -66,6 +67,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     deleteCategory: category => dispatch(categoryDelete(category)),
+    resetProductsCategory: category => dispatch(productsResetCategory(category)),
     filterProducts: category => dispatch(productsFilter(category))
   };
 };

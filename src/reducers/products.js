@@ -99,6 +99,18 @@ const products = (state = initialState, action) => {
         filteredCategory: action.payload
       };
     }
+    case "PRODUCTS_RESET_CATEGORY": {
+      let newArray = items;
+      newArray.forEach((element, index) => {
+        if(element.key === action.payload) {
+            newArray[index].categoryId = null;
+        }
+      });
+      return {
+        ...state,
+        items: newArray
+      };
+    }
     default: {
       return state;
     }

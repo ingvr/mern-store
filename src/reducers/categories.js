@@ -43,6 +43,7 @@ const categories = (state = initialState, action) => {
       };
 
     case "CATEGORY_DELETE":
+      console.log('cat state', state);
       const idx = items.findIndex(item => item.key === action.payload);
 
       const newArray = [...items.slice(0, idx), ...items.slice(idx + 1)];
