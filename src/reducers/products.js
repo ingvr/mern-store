@@ -100,16 +100,15 @@ const products = (state = initialState, action) => {
       };
     }
     case "PRODUCTS_RESET_CATEGORY": {
-      let newArray = items;
-      newArray = newArray.map(item => {
-        if (item.key === action.payload) {
-          item.categoryId = null;
-        }
-        return item;
-      });
       return {
         ...state,
-        items: newArray
+        items: items.map(item => {
+          return {
+            ...item,
+            categoryId:
+              item.categoryId === action.payload ? null : item.categoryId
+          };
+        })
       };
     }
     default: {
