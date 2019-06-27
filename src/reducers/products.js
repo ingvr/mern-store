@@ -101,11 +101,11 @@ const products = (state = initialState, action) => {
     }
     case "PRODUCTS_RESET_CATEGORY": {
       let newArray = items;
-      newArray.forEach((element, index) => {
-        if(element.key === action.payload) {
-            newArray[index].categoryId = null;
+      for (let i = 0; i < newArray.length; i++) {
+        if (newArray[i].key === action.payload) {
+          newArray[i].categoryId = null;
         }
-      });
+      };
       return {
         ...state,
         items: newArray
