@@ -14,7 +14,8 @@ class ProductList extends Component {
     const { products, filteredCategory } = this.props;
     const visibleProducts = products.filter(
       product =>
-        filteredCategory === product.categoryId || filteredCategory === 0
+        filteredCategory === product.categoryId ||
+        filteredCategory === "ALL_CATEGORIES"
     );
     return (
       <Table dataSource={visibleProducts}>

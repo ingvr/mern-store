@@ -26,11 +26,11 @@ const initialState = {
       name: "Товар 4",
       rowPrice: "2200",
       fullPrice: "2700",
-      categoryId: null
+      categoryId: 0
     }
   ],
   nextProductId: 5,
-  filteredCategory: 0
+  filteredCategory: "ALL_CATEGORIES"
 };
 
 const products = (state = initialState, action) => {
@@ -104,8 +104,7 @@ const products = (state = initialState, action) => {
         ...state,
         items: items.map(item => ({
           ...item,
-          categoryId:
-            item.categoryId === action.payload ? null : item.categoryId
+          categoryId: item.categoryId === action.payload ? 0 : item.categoryId
         }))
       };
     }

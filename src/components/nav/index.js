@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 
 import { Layout, Menu, Icon, Button, Popconfirm } from "antd";
 
-import { categoryDelete, productsFilter, productsResetCategory } from "../../actions";
+import {
+  categoryDelete,
+  productsFilter,
+  productsResetCategory
+} from "../../actions";
 
 import "./index.scss";
 
@@ -44,11 +48,14 @@ class Nav extends Component {
               {category.title}
             </Menu.Item>
           ))}
-          <Menu.Item key="4" onClick={() => this.props.filterProducts(null)}>
+          <Menu.Item key="4" onClick={() => this.props.filterProducts(0)}>
             <Icon type="stop" />
             Без категории
           </Menu.Item>
-          <Menu.Item key="5" onClick={() => this.props.filterProducts(0)}>
+          <Menu.Item
+            key="5"
+            onClick={() => this.props.filterProducts("ALL_CATEGORIES")}
+          >
             <Icon type="appstore" />
             Все
           </Menu.Item>
@@ -67,7 +74,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     deleteCategory: category => dispatch(categoryDelete(category)),
-    resetProductsCategory: category => dispatch(productsResetCategory(category)),
+    resetProductsCategory: category =>
+      dispatch(productsResetCategory(category)),
     filterProducts: category => dispatch(productsFilter(category))
   };
 };
