@@ -102,13 +102,11 @@ const products = (state = initialState, action) => {
     case "PRODUCTS_RESET_CATEGORY": {
       return {
         ...state,
-        items: items.map(item => {
-          return {
-            ...item,
-            categoryId:
-              item.categoryId === action.payload ? null : item.categoryId
-          };
-        })
+        items: items.map(item => ({
+          ...item,
+          categoryId:
+            item.categoryId === action.payload ? null : item.categoryId
+        }))
       };
     }
     default: {
