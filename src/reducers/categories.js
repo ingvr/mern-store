@@ -1,3 +1,7 @@
+import Axios from "axios";
+
+const apiUrl = "/api/v1/categories/";
+
 const initialState = {
   items: [
     {
@@ -23,12 +27,18 @@ const categories = (state = initialState, action) => {
   const { items } = state;
 
   switch (action.type) {
-    case "CATEGORIES_LOADED":
-      return {
-        items: action.payload
-      };
+    case "CATEGORIES_LOADED": {
+      Axios.get(apiUrl)
+        .then(response => {
+          console.log("axios items:", response.data.data.items);
+        })
+        .catch(error => {
+          throw error;
+        });
+      return state;
+    }
 
-    case "CATEGORY_ADD":
+    case "CATEGORY_ADD": {
       return {
         ...state,
         items: [
@@ -41,9 +51,10 @@ const categories = (state = initialState, action) => {
         ],
         nextCategoryId: state.nextCategoryId + 1
       };
+    }
 
-    case "CATEGORY_DELETE":
-      console.log('cat state', state);
+    case "CATEGORY_DELETE": {
+      console.log("cat state", state);
       const idx = items.findIndex(item => item.key === action.payload);
 
       const newArray = [...items.slice(0, idx), ...items.slice(idx + 1)];
@@ -52,9 +63,11 @@ const categories = (state = initialState, action) => {
         ...state,
         items: newArray
       };
+    }
 
-    default:
+    default: {
       return state;
+    }
   }
 };
 

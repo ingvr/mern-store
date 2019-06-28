@@ -1,7 +1,6 @@
-export const categoriesLoad = newCategories => {
+export const categoriesLoad = () => {
   return {
-    type: "CATEGORIES_LOADED",
-    payload: newCategories
+    type: "CATEGORIES_LOADED"
   };
 };
 
@@ -59,4 +58,4 @@ export const productsResetCategory = category => {
     type: "PRODUCTS_RESET_CATEGORY",
     payload: category
   };
-}
+};
