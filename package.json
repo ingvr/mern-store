@@ -2,6 +2,7 @@
   "name": "test-store",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "antd": "^3.19.5",
     "node-sass": "^4.12.0",
