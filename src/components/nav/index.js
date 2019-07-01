@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 
 import { Layout, Menu, Icon, Button, Popconfirm } from "antd";
 
+import Spinner from "../spinner";
+
 import {
   fetchCategories,
   categoryDelete,
@@ -15,8 +17,16 @@ import "./index.scss";
 const { Sider } = Layout;
 
 class Nav extends Component {
+  state = {
+    isLoading: true
+  };
+
   componentDidMount() {
-    this.props.loadCategories();
+    this.props.loadCategories().then(
+      this.setState({
+        isLoading: false
+      })
+    );
   }
 
   render() {
@@ -26,6 +36,11 @@ class Nav extends Component {
       filterProducts,
       categories
     } = this.props;
+
+    const { isLoading } = this.state;
+
+    const spinner = isLoading ? <Spinner /> : null;
+
     return (
       <Sider width={200} className="nav">
         <Menu
@@ -34,6 +49,7 @@ class Nav extends Component {
           defaultOpenKeys={["sub1"]}
           className="nav__menu"
         >
+          {spinner}
           {categories.map(category => (
             <Menu.Item
               key={category.key}
