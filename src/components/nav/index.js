@@ -17,16 +17,8 @@ import "./index.scss";
 const { Sider } = Layout;
 
 class Nav extends Component {
-  state = {
-    isLoading: true
-  };
-
   componentDidMount() {
-    this.props.loadCategories().then(
-      this.setState({
-        isLoading: false
-      })
-    );
+    this.props.loadCategories();
   }
 
   render() {
@@ -34,10 +26,9 @@ class Nav extends Component {
       deleteCategory,
       resetProductsCategory,
       filterProducts,
-      categories
+      categories,
+      isLoading
     } = this.props;
-
-    const { isLoading } = this.state;
 
     const spinner = isLoading ? <Spinner /> : null;
 
@@ -90,7 +81,8 @@ class Nav extends Component {
 
 const mapStateToProps = state => {
   return {
-    categories: state.categories.items
+    categories: state.categories.items,
+    isLoading: state.categories.isLoading
   };
 };
 

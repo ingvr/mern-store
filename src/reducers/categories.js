@@ -1,17 +1,25 @@
 const initialState = {
   items: [],
-  nextCategoryId: 0
+  nextCategoryId: 0,
+  isLoading: false
 };
 
 const categories = (state = initialState, action) => {
   const { items } = state;
 
   switch (action.type) {
+    case "CATEGORIES_REQUEST": {
+      return {
+        ...state,
+        isLoading: true
+      };
+    }
+
     case "CATEGORIES_RECEIVE": {
       return {
         ...state,
         ...action.payload,
-        isLoadingCategories: false
+        isLoading: false
       };
     }
 
