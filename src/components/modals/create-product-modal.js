@@ -2,11 +2,17 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal, Form, Input, Icon, Button } from "antd";
 
-import { productAdd } from "../../actions";
+import { productAdd, fetchCategories } from "../../actions";
 import { ModalWrapper } from "../hoc";
 import { handleChange } from "./utils";
 
 class CreateProductModal extends Component {
+  componentDidMount() {
+    if (this.props.isLoadingCategories) {
+      this.props.loadCategories();
+    }
+  }
+
   initialState = {
     category: "1",
     name: "",
@@ -29,6 +35,7 @@ class CreateProductModal extends Component {
   handleChange = e => handleChange.call(this, e);
 
   render() {
+    console.log("props", this.props);
     const { visible, showModal, hideModal, categories } = this.props;
     const { category, name, rowPrice, fullPrice } = this.state;
 
@@ -107,13 +114,15 @@ class CreateProductModal extends Component {
 
 const mapStateToProps = state => {
   return {
-    categories: state.categories.items
+    categories: state.categories.items,
+    isLoadingCategories: state.categories.isLoadingCategories
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    createProduct: product => dispatch(productAdd(product))
+    createProduct: product => dispatch(productAdd(product)),
+    loadCategories: () => dispatch(fetchCategories())
   };
 };
 

@@ -1,4 +1,6 @@
-const initialState = {};
+const initialState = {
+  isLoadingCategories: true
+};
 
 const categories = (state = initialState, action) => {
   const { items } = state;
@@ -7,7 +9,8 @@ const categories = (state = initialState, action) => {
     case "CATEGORIES_RECEIVE": {
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        isLoadingCategories: false
       };
     }
 
