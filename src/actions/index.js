@@ -1,6 +1,17 @@
-export const categoriesLoad = () => {
+import Axios from "axios";
+
+export const categoriesRequest = payload => {
   return {
-    type: "CATEGORIES_LOADED"
+    type: "CATEGORIES_REQUEST",
+    payload
+  };
+};
+
+export const categoriesReceive = payload => {
+  return {
+    type: "CATEGORIES_RECEIVE",
+    payload,
+    receivedAt: Date.now()
   };
 };
 
@@ -57,5 +68,20 @@ export const productsResetCategory = category => {
   return {
     type: "PRODUCTS_RESET_CATEGORY",
     payload: category
+  };
+};
+
+export const fetchCategories = payload => {
+  return function(dispatch) {
+    dispatch(categoriesRequest(payload));
+    const apiUrl = "/api/v1/categories/";
+
+    return Axios.get(apiUrl)
+      .then(response => {
+        dispatch(categoriesReceive(response.data.data));
+      })
+      .catch(error => {
+        throw error;
+      });
   };
 };

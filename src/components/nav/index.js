@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Layout, Menu, Icon, Button, Popconfirm } from "antd";
 
 import {
-  categoriesLoad,
+  categoriesReceive,
   categoryDelete,
   productsFilter,
   productsResetCategory
@@ -15,16 +15,21 @@ import "./index.scss";
 const { Sider } = Layout;
 
 class Nav extends Component {
+  state = { categories: "" };
+
   componentDidMount() {
-    this.props.loadCategories();
+    this.setState({
+      categories: this.props.loadCategories()
+    });
   }
+
   render() {
     const {
-      categories,
       deleteCategory,
       resetProductsCategory,
       filterProducts
     } = this.props;
+    const { categories } = this.state;
     return (
       <Sider width={200} className="nav">
         <Menu
@@ -83,7 +88,7 @@ const mapDispatchToProps = dispatch => {
     resetProductsCategory: category =>
       dispatch(productsResetCategory(category)),
     filterProducts: category => dispatch(productsFilter(category)),
-    loadCategories: () => dispatch(categoriesLoad())
+    loadCategories: () => dispatch(categoriesReceive())
   };
 };
 
