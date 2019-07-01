@@ -1,5 +1,6 @@
 const initialState = {
-  isLoadingCategories: true
+  items: [],
+  nextCategoryId: 0
 };
 
 const categories = (state = initialState, action) => {

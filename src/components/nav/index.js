@@ -16,7 +16,7 @@ const { Sider } = Layout;
 
 class Nav extends Component {
   componentDidMount() {
-    if (this.props.isLoadingCategories) this.props.loadCategories();
+    this.props.loadCategories();
   }
 
   render() {
@@ -74,8 +74,7 @@ class Nav extends Component {
 
 const mapStateToProps = state => {
   return {
-    categories: state.categories.items,
-    isLoadingCategories: state.categories.isLoadingCategories
+    categories: state.categories.items
   };
 };
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Modal, Form, Input, Icon, Button } from "antd";
 
-import { productEdit, fetchCategories } from "../../actions";
+import { productEdit } from "../../actions";
 import { ModalWrapper } from "../hoc";
 import { handleChange } from "./utils";
 
@@ -15,8 +15,6 @@ class EditProductModal extends Component {
   };
 
   componentDidMount() {
-    if (this.props.isLoadingCategories) this.props.loadCategories();
-
     const { products, productKey } = this.props;
     const currentProduct = products.find(product => product.key === productKey);
     const { categoryId: category, name, rowPrice, fullPrice } = currentProduct;
@@ -115,15 +113,13 @@ class EditProductModal extends Component {
 const mapStateToProps = state => {
   return {
     categories: state.categories.items,
-    isLoadingCategories: state.categories.isLoadingCategories,
     products: state.products.items
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    editProduct: product => dispatch(productEdit(product)),
-    loadCategories: () => dispatch(fetchCategories())
+    editProduct: product => dispatch(productEdit(product))
   };
 };
 
