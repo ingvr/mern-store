@@ -7,7 +7,9 @@ import {
 } from "./categories";
 
 import {
-  productsLoad,
+  productsRequest,
+  productsReceive,
+  fetchProducts,
   productAdd,
   productDelete,
   productEdit,
@@ -21,7 +23,9 @@ export {
   fetchCategories,
   categoryAdd,
   categoryDelete,
-  productsLoad,
+  productsRequest,
+  productsReceive,
+  fetchProducts,
   productAdd,
   productDelete,
   productEdit,

@@ -1,7 +1,32 @@
-export const productsLoad = newProducts => {
+import Axios from "axios";
+
+export const productsRequest = payload => {
   return {
-    type: "PRODUCTS_LOADED",
-    payload: newProducts
+    type: "PRODUCTS_REQUEST",
+    payload
+  };
+};
+
+export const productsReceive = payload => {
+  return {
+    type: "PRODUCTS_RECEIVE",
+    payload,
+    receivedAt: Date.now()
+  };
+};
+
+export const fetchProducts = payload => {
+  return function(dispatch) {
+    dispatch(productsRequest(payload));
+    const apiUrl = "/api/v1/products/";
+
+    return Axios.get(apiUrl)
+      .then(response => {
+        dispatch(productsReceive(response.data.data));
+      })
+      .catch(error => {
+        throw error;
+      });
   };
 };
 

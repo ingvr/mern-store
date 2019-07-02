@@ -1,44 +1,25 @@
 const initialState = {
-  items: [
-    {
-      key: 1,
-      name: "Товар 1",
-      rowPrice: "2000",
-      fullPrice: "2500",
-      categoryId: 1
-    },
-    {
-      key: 2,
-      name: "Товар 2",
-      rowPrice: "2200",
-      fullPrice: "2700",
-      categoryId: 2
-    },
-    {
-      key: 3,
-      name: "Товар 3",
-      rowPrice: "2200",
-      fullPrice: "2700",
-      categoryId: 3
-    },
-    {
-      key: 4,
-      name: "Товар 4",
-      rowPrice: "2200",
-      fullPrice: "2700",
-      categoryId: 0
-    }
-  ],
-  nextProductId: 5,
-  filteredCategory: "ALL_CATEGORIES"
+  items: [],
+  nextProductId: 0,
+  filteredCategory: "ALL_CATEGORIES",
+  isLoading: false
 };
 
 const products = (state = initialState, action) => {
   const { items } = state;
+
   switch (action.type) {
-    case "PRODUCTS_LOADED": {
+    case "PRODUCTS_REQUEST": {
       return {
-        items: action.payload
+        ...state,
+        isLoading: true
+      };
+    }
+    case "PRODUCTS_RECEIVE": {
+      return {
+        ...state,
+        ...action.payload,
+        isLoading: false
       };
     }
     case "PRODUCT_ADD": {
