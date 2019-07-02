@@ -50,6 +50,26 @@ app.post("/api/v1/category/add", (req, res) => {
   });
 });
 
+app.delete("/api/v1/category/delete/:key", (req, res) => {
+  const key = parseInt(req.params.key, 10);
+
+  categories.items.map((category, index) => {
+    if (category.key === key) {
+      categories.items.splice(index, 1);
+      return res.status(200).send({
+        success: "true",
+        message: "Category deleted successfuly",
+        categories
+      });
+    }
+  });
+
+  return res.status(404).send({
+    success: "false",
+    message: "Category not found"
+  });
+});
+
 app.get("/api/v1/categories/:id", (req, res) => {
   const id = parseInt(req.params.id, 10);
 

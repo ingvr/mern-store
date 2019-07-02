@@ -25,19 +25,14 @@ const categories = (state = initialState, action) => {
 
     case "CATEGORY_ADD_SUCCESS": {
       return {
-        ...action.payload.categories
+        ...action.payload
       };
     }
 
-    case "CATEGORY_DELETE": {
-      console.log("cat state", state);
-      const idx = items.findIndex(item => item.key === action.payload);
-
-      const newArray = [...items.slice(0, idx), ...items.slice(idx + 1)];
-
+    case "CATEGORY_DELETE_SUCCESS": {
+      console.log("cat delete success", action.payload);
       return {
-        ...state,
-        items: newArray
+        ...action.payload
       };
     }
 
