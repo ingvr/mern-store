@@ -30,8 +30,6 @@ class Nav extends Component {
       isLoading
     } = this.props;
 
-    const spinner = isLoading ? <Spinner /> : null;
-
     return (
       <Sider width={200} className="nav">
         <Menu
@@ -40,7 +38,7 @@ class Nav extends Component {
           defaultOpenKeys={["sub1"]}
           className="nav__menu"
         >
-          {spinner}
+          {isLoading && <Spinner />}
           {categories.map(category => (
             <Menu.Item
               key={category.key}
