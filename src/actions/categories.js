@@ -30,15 +30,19 @@ export const fetchCategories = payload => {
   };
 };
 
-export const categoryAdd = newCategory => {
-  console.log(newCategory);
+export const categoryAdd = title => {
   return dispatch => {
     const apiUrl = "/api/v1/category/add";
-    return Axios.post(apiUrl, { title: newCategory, active: false })
+    return Axios.post(apiUrl, { title })
       .then(response => {
         dispatch(categoryAddSuccess(response.data));
       })
       .catch(error => {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
         throw error;
       });
   };

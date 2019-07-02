@@ -1,4 +1,4 @@
-const categories = {
+let categories = {
   items: [
     {
       key: 1,
@@ -16,7 +16,7 @@ const categories = {
       active: false
     }
   ],
-  nextCategoryId: 6
+  nextCategoryId: 4
 };
 
 export default categories;

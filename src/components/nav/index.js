@@ -63,11 +63,11 @@ class Nav extends Component {
               {category.title}
             </Menu.Item>
           ))}
-          <Menu.Item key="4" onClick={() => filterProducts(0)}>
+          <Menu.Item key="0" onClick={() => filterProducts(0)}>
             <Icon type="stop" />
             Без категории
           </Menu.Item>
-          <Menu.Item key="5" onClick={() => filterProducts("ALL_CATEGORIES")}>
+          <Menu.Item key="-1" onClick={() => filterProducts("ALL_CATEGORIES")}>
             <Icon type="appstore" />
             Все
           </Menu.Item>

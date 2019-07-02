@@ -30,22 +30,23 @@ app.post("/api/v1/category/add", (req, res) => {
       success: "false",
       message: "title is required"
     });
-  } else if (!req.body.active) {
-    return res.status(400).send({
-      success: "false",
-      message: "active is required"
-    });
   }
-  const category = {
-    key: categories.length + 1,
+
+  const { nextCategoryId } = categories;
+
+  const newCategory = {
+    key: nextCategoryId,
     title: req.body.title,
-    active: req.body.active
+    active: false
   };
-  db.push(category);
+
+  categories.items.push(newCategory);
+  categories["nextCategoryId"] = nextCategoryId + 1;
+
   return res.status(201).send({
     success: "true",
     message: "category added successfully",
-    todo
+    categories
   });
 });
 

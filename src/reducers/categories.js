@@ -24,22 +24,9 @@ const categories = (state = initialState, action) => {
     }
 
     case "CATEGORY_ADD_SUCCESS": {
-      console.log("CATEGORY_ADD_SUCCESS payload", action.payload);
-      return state;
-      /*
       return {
-        ...state,
-        items: [
-          ...items,
-          {
-            key: state.nextCategoryId,
-            title: action.payload,
-            active: false
-          }
-        ],
-        nextCategoryId: state.nextCategoryId + 1
+        ...action.payload.categories
       };
-      */
     }
 
     case "CATEGORY_DELETE": {
