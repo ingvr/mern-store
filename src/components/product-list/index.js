@@ -22,38 +22,36 @@ class ProductList extends Component {
         filteredCategory === "ALL_CATEGORIES"
     );
     return (
-      <>
-        <Table dataSource={visibleProducts} loading={isLoading}>
-          <Column title="ID" key="key" dataIndex="key" />
-          <Column title="Название товара" key="name" dataIndex="name" />
-          <Column title="Цена закуп" key="rowPrice" dataIndex="rowPrice" />
-          <Column title="Цена" key="fullPrice" dataIndex="fullPrice" />
-          <Column
-            key="action"
-            render={product => (
-              <span>
-                <EditProductModal productKey={product.key} />
-                <Divider type="vertical" />
-                <Popconfirm
-                  title="Вы уверены, что хотите удалить этот товар?"
-                  onConfirm={() => {
-                    this.props.deleteProduct(product.key);
-                  }}
-                  onCancel={() => {
-                    return false;
-                  }}
-                  okText="Да"
-                  cancelText="Нет"
-                >
-                  <Button type="danger" icon="delete">
-                    Удалить
-                  </Button>
-                </Popconfirm>
-              </span>
-            )}
-          />
-        </Table>
-      </>
+      <Table dataSource={visibleProducts} loading={isLoading}>
+        <Column title="ID" key="key" dataIndex="key" />
+        <Column title="Название товара" key="name" dataIndex="name" />
+        <Column title="Цена закуп" key="rowPrice" dataIndex="rowPrice" />
+        <Column title="Цена" key="fullPrice" dataIndex="fullPrice" />
+        <Column
+          key="action"
+          render={product => (
+            <span>
+              <EditProductModal productKey={product.key} />
+              <Divider type="vertical" />
+              <Popconfirm
+                title="Вы уверены, что хотите удалить этот товар?"
+                onConfirm={() => {
+                  this.props.deleteProduct(product.key);
+                }}
+                onCancel={() => {
+                  return false;
+                }}
+                okText="Да"
+                cancelText="Нет"
+              >
+                <Button type="danger" icon="delete">
+                  Удалить
+                </Button>
+              </Popconfirm>
+            </span>
+          )}
+        />
+      </Table>
     );
   }
 }
