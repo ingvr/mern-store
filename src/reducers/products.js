@@ -9,13 +9,13 @@ const products = (state = initialState, action) => {
   const { items } = state;
 
   switch (action.type) {
-    case "PRODUCTS_REQUEST": {
+    case "PRODUCTS_REQUESTED": {
       return {
         ...state,
         isLoading: true
       };
     }
-    case "PRODUCTS_RECEIVE": {
+    case "PRODUCTS_RECEIVED": {
       return {
         ...state,
         ...action.payload,

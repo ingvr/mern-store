@@ -1,14 +1,14 @@
 import {
-  categoriesRequest,
-  categoriesReceive,
+  categoriesRequested,
+  categoriesReceived,
   fetchCategories,
   categoryAdd,
   categoryDelete
 } from "./categories";
 
 import {
-  productsRequest,
-  productsReceive,
+  productsRequested,
+  productsReceived,
   fetchProducts,
   productAdd,
   productDelete,
@@ -18,13 +18,13 @@ import {
 } from "./products";
 
 export {
-  categoriesRequest,
-  categoriesReceive,
+  categoriesRequested,
+  categoriesReceived,
   fetchCategories,
   categoryAdd,
   categoryDelete,
-  productsRequest,
-  productsReceive,
+  productsRequested,
+  productsReceived,
   fetchProducts,
   productAdd,
   productDelete,

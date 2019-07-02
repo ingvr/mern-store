@@ -8,14 +8,14 @@ const categories = (state = initialState, action) => {
   const { items } = state;
 
   switch (action.type) {
-    case "CATEGORIES_REQUEST": {
+    case "CATEGORIES_REQUESTED": {
       return {
         ...state,
         isLoading: true
       };
     }
 
-    case "CATEGORIES_RECEIVE": {
+    case "CATEGORIES_RECEIVED": {
       return {
         ...state,
         ...action.payload,

@@ -1,15 +1,15 @@
 import Axios from "axios";
 
-export const productsRequest = payload => {
+export const productsRequested = payload => {
   return {
-    type: "PRODUCTS_REQUEST",
+    type: "PRODUCTS_REQUESTED",
     payload
   };
 };
 
-export const productsReceive = payload => {
+export const productsReceived = payload => {
   return {
-    type: "PRODUCTS_RECEIVE",
+    type: "PRODUCTS_RECEIVED",
     payload,
     receivedAt: Date.now()
   };
@@ -17,12 +17,12 @@ export const productsReceive = payload => {
 
 export const fetchProducts = payload => {
   return dispatch => {
-    dispatch(productsRequest(payload));
+    dispatch(productsRequested(payload));
     const apiUrl = "/api/v1/products/";
 
     return Axios.get(apiUrl)
       .then(response => {
-        dispatch(productsReceive(response.data.data));
+        dispatch(productsReceived(response.data.data));
       })
       .catch(error => {
         throw error;

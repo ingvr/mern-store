@@ -1,4 +1,4 @@
-const products = {
+let products = {
   items: [
     {
       key: 1,
