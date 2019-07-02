@@ -23,7 +23,10 @@ const categories = (state = initialState, action) => {
       };
     }
 
-    case "CATEGORY_ADD": {
+    case "CATEGORY_ADD_SUCCESS": {
+      console.log("CATEGORY_ADD_SUCCESS payload", action.payload);
+      return state;
+      /*
       return {
         ...state,
         items: [
@@ -36,6 +39,7 @@ const categories = (state = initialState, action) => {
         ],
         nextCategoryId: state.nextCategoryId + 1
       };
+      */
     }
 
     case "CATEGORY_DELETE": {

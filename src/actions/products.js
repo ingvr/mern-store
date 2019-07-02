@@ -16,7 +16,7 @@ export const productsReceive = payload => {
 };
 
 export const fetchProducts = payload => {
-  return function(dispatch) {
+  return dispatch => {
     dispatch(productsRequest(payload));
     const apiUrl = "/api/v1/products/";
 

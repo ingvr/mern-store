@@ -16,10 +16,10 @@ export const categoriesReceive = payload => {
 };
 
 export const fetchCategories = payload => {
-  return function(dispatch) {
+  return dispatch => {
     dispatch(categoriesRequest(payload));
-    const apiUrl = "/api/v1/categories/";
 
+    const apiUrl = "/api/v1/categories/";
     return Axios.get(apiUrl)
       .then(response => {
         dispatch(categoriesReceive(response.data.data));
@@ -31,9 +31,23 @@ export const fetchCategories = payload => {
 };
 
 export const categoryAdd = newCategory => {
+  console.log(newCategory);
+  return dispatch => {
+    const apiUrl = "/api/v1/category/add";
+    return Axios.post(apiUrl, { title: newCategory, active: false })
+      .then(response => {
+        dispatch(categoryAddSuccess(response.data));
+      })
+      .catch(error => {
+        throw error;
+      });
+  };
+};
+
+export const categoryAddSuccess = data => {
   return {
-    type: "CATEGORY_ADD",
-    payload: newCategory
+    type: "CATEGORY_ADD_SUCCESS",
+    payload: data
   };
 };
 

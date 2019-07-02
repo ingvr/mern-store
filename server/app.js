@@ -3,10 +3,8 @@ import bodyParser from "body-parser";
 
 import { categories, products } from "./db";
 
-// Set up the express app
 const app = express();
 
-// Parse incoming requests data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -26,7 +24,7 @@ app.get("/api/v1/products", (req, res) => {
   });
 });
 
-app.post("/api/v1/categories", (req, res) => {
+app.post("/api/v1/category/add", (req, res) => {
   if (!req.body.title) {
     return res.status(400).send({
       success: "false",
