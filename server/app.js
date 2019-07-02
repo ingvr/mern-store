@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/api/v1/categories", (req, res) => {
+app.get("/api/v1/category/get/all", (req, res) => {
   res.status(200).send({
     success: "true",
     message: "categories retrieved successfully",
@@ -16,7 +16,7 @@ app.get("/api/v1/categories", (req, res) => {
   });
 });
 
-app.get("/api/v1/products", (req, res) => {
+app.get("/api/v1/product/get/all", (req, res) => {
   res.status(200).send({
     success: "true",
     message: "products retrieved successfully",
@@ -70,7 +70,7 @@ app.delete("/api/v1/category/delete/:key", (req, res) => {
   });
 });
 
-app.get("/api/v1/categories/:id", (req, res) => {
+app.get("/api/v1/category/get/:id", (req, res) => {
   const id = parseInt(req.params.id, 10);
 
   categories.items.map(category => {

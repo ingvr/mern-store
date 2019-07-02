@@ -18,7 +18,7 @@ export const productsReceived = payload => {
 export const fetchProducts = payload => {
   return dispatch => {
     dispatch(productsRequested(payload));
-    const apiUrl = "/api/v1/products/";
+    const apiUrl = "/api/v1/product/get/all";
 
     return Axios.get(apiUrl)
       .then(response => {

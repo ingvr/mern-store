@@ -19,7 +19,7 @@ export const fetchCategories = payload => {
   return dispatch => {
     dispatch(categoriesRequested(payload));
 
-    const apiUrl = "/api/v1/categories/";
+    const apiUrl = "/api/v1/category/get/all";
     return Axios.get(apiUrl)
       .then(response => {
         dispatch(categoriesReceived(response.data.data));
