@@ -63,6 +63,57 @@ app.post("/api/v1/category/add", (req, res) => {
   });
 });
 
+app.post("/api/v1/product/add", (req, res) => {
+  const { name, rowPrice, fullPrice, categoryId } = req.body;
+
+  if (!name) {
+    return res.status(400).send({
+      success: "false",
+      message: "product name is required"
+    });
+  }
+
+  if (!rowPrice) {
+    return res.status(400).send({
+      success: "false",
+      message: "row price is required"
+    });
+  }
+
+  if (!fullPrice) {
+    return res.status(400).send({
+      success: "false",
+      message: "full price is required"
+    });
+  }
+
+  if (!categoryId) {
+    return res.status(400).send({
+      success: "false",
+      message: "category id is required"
+    });
+  }
+
+  const { nextProductId } = products;
+
+  const newProduct = {
+    key: nextProductId,
+    name,
+    rowPrice,
+    fullPrice,
+    categoryId
+  };
+
+  products.items.push(newProduct);
+  products["nextProductId"] = nextProductId + 1;
+
+  return res.status(201).send({
+    success: "true",
+    message: "product added successfully",
+    products
+  });
+});
+
 app.delete("/api/v1/category/delete/:key", (req, res) => {
   const key = parseInt(req.params.key, 10);
 

@@ -31,9 +31,28 @@ export const fetchProducts = payload => {
 };
 
 export const productAdd = newProduct => {
+  return dispatch => {
+    const apiUrl = "/api/v1/product/add";
+    console.log("np", newProduct);
+    return Axios.post(apiUrl, { ...newProduct })
+      .then(response => {
+        dispatch(productAddSuccess(response.data.products));
+      })
+      .catch(error => {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+        throw error;
+      });
+  };
+};
+
+export const productAddSuccess = payload => {
   return {
-    type: "PRODUCT_ADD",
-    payload: newProduct
+    type: "PRODUCT_ADD_SUCCESS",
+    payload
   };
 };
 

@@ -8,7 +8,7 @@ import { handleChange } from "./utils";
 
 class CreateProductModal extends Component {
   initialState = {
-    category: "1",
+    categoryId: "1",
     name: "",
     rowPrice: "",
     fullPrice: ""
@@ -18,9 +18,9 @@ class CreateProductModal extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { category, name, rowPrice, fullPrice } = this.state;
+    const { categoryId, name, rowPrice, fullPrice } = this.state;
     const { createProduct, hideModal } = this.props;
-    const product = { category, name, rowPrice, fullPrice };
+    const product = { categoryId, name, rowPrice, fullPrice };
     createProduct(product);
     this.setState(this.initialState);
     hideModal();
@@ -30,7 +30,7 @@ class CreateProductModal extends Component {
 
   render() {
     const { visible, showModal, hideModal, categories } = this.props;
-    const { category, name, rowPrice, fullPrice } = this.state;
+    const { categoryId, name, rowPrice, fullPrice } = this.state;
 
     return (
       <>
@@ -53,7 +53,7 @@ class CreateProductModal extends Component {
               <select
                 name="category"
                 placeholder="Выберите категорию"
-                value={category}
+                value={categoryId}
                 onChange={this.handleChange}
                 required
                 style={{ width: "100%", lineHeight: "32px" }}

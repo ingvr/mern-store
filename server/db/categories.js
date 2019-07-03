@@ -2,17 +2,17 @@ let categories = {
   items: [
     {
       key: 1,
-      title: "Категория 1s",
+      title: "Категория 1",
       active: false
     },
     {
       key: 2,
-      title: "Категория 2s",
+      title: "Категория 2",
       active: false
     },
     {
       key: 3,
-      title: "Категория 3s",
+      title: "Категория 3",
       active: false
     }
   ],

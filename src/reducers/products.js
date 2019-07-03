@@ -22,27 +22,9 @@ const products = (state = initialState, action) => {
         isLoading: false
       };
     }
-    case "PRODUCT_ADD": {
-      const { nextProductId: key } = state;
-      const {
-        name,
-        rowPrice,
-        fullPrice,
-        category: categoryId
-      } = action.payload;
+    case "PRODUCT_ADD_SUCCESS": {
       return {
-        ...state,
-        items: [
-          ...state.items,
-          {
-            key,
-            name,
-            rowPrice,
-            fullPrice,
-            categoryId: parseInt(categoryId)
-          }
-        ],
-        nextProductId: key + 1
+        ...action.payload
       };
     }
     case "PRODUCT_DELETE": {
