@@ -33,8 +33,7 @@ export const fetchProducts = payload => {
 export const productAdd = newProduct => {
   return dispatch => {
     const apiUrl = "/api/v1/product/add";
-    console.log("np", newProduct);
-    return Axios.post(apiUrl, { ...newProduct })
+    return Axios.post(apiUrl, newProduct)
       .then(response => {
         dispatch(productAddSuccess(response.data.products));
       })
@@ -72,9 +71,27 @@ export const productDeleteSuccess = payload => {
 };
 
 export const productEdit = product => {
+  return dispatch => {
+    const apiUrl = "/api/v1/product/update";
+    return Axios.put(apiUrl, product)
+      .then(response => {
+        dispatch(productEditSuccess(response.data.products));
+      })
+      .catch(error => {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+        throw error;
+      });
+  };
+};
+
+export const productEditSuccess = payload => {
   return {
-    type: "PRODUCT_EDIT",
-    payload: product
+    type: "PRODUCT_EDIT_SUCCESS",
+    payload
   };
 };
 

@@ -32,23 +32,9 @@ const products = (state = initialState, action) => {
         ...action.payload
       };
     }
-    case "PRODUCT_EDIT": {
-      const {
-        key,
-        name,
-        category: categoryId,
-        rowPrice,
-        fullPrice
-      } = action.payload;
-      const idx = items.findIndex(item => item.key === key);
-      const newArray = [
-        ...items.slice(0, idx),
-        { key, name, categoryId: parseInt(categoryId), rowPrice, fullPrice },
-        ...items.slice(idx + 1)
-      ];
+    case "PRODUCT_EDIT_SUCCESS": {
       return {
-        ...state,
-        items: newArray
+        ...action.payload
       };
     }
     case "PRODUCTS_FILTER": {

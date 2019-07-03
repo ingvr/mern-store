@@ -8,7 +8,7 @@ import { handleChange } from "./utils";
 
 class EditProductModal extends Component {
   state = {
-    category: "1",
+    categoryId: "1",
     name: "",
     rowPrice: "",
     fullPrice: ""
@@ -17,9 +17,9 @@ class EditProductModal extends Component {
   componentDidMount() {
     const { products, productKey } = this.props;
     const currentProduct = products.find(product => product.key === productKey);
-    const { categoryId: category, name, rowPrice, fullPrice } = currentProduct;
+    const { categoryId, name, rowPrice, fullPrice } = currentProduct;
     this.setState({
-      category,
+      categoryId,
       name,
       rowPrice,
       fullPrice
@@ -28,9 +28,9 @@ class EditProductModal extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { category, name, rowPrice, fullPrice } = this.state;
+    const { categoryId, name, rowPrice, fullPrice } = this.state;
     const { productKey: key, editProduct, hideModal } = this.props;
-    const product = { key, category, name, rowPrice, fullPrice };
+    const product = { key, categoryId, name, rowPrice, fullPrice };
     editProduct(product);
     hideModal();
   };
@@ -39,7 +39,7 @@ class EditProductModal extends Component {
 
   render() {
     const { visible, showModal, hideModal, categories } = this.props;
-    const { category, name, rowPrice, fullPrice } = this.state;
+    const { categoryId, name, rowPrice, fullPrice } = this.state;
     const { handleChange, handleSubmit } = this;
 
     return (
@@ -56,9 +56,9 @@ class EditProductModal extends Component {
           <Form onSubmit={handleSubmit}>
             <Form.Item>
               <select
-                name="category"
+                name="categoryId"
                 placeholder="Выберите категорию"
-                defaultValue={category}
+                defaultValue={categoryId}
                 onChange={handleChange}
                 required
                 style={{ width: "100%", lineHeight: "32px" }}
