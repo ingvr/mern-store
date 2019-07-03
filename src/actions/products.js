@@ -58,9 +58,28 @@ export const productsFilter = categorytId => {
   };
 };
 
-export const productsResetCategory = category => {
+export const productsResetCategory = categoryKey => {
+  return dispatch => {
+    const apiUrl = `/api/v1/product/category-reset/${categoryKey}`;
+
+    return Axios.put(apiUrl)
+      .then(response => {
+        dispatch(productsResetCategorySuccess(response.data.data));
+      })
+      .catch(error => {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+        throw error;
+      });
+  };
+};
+
+export const productsResetCategorySuccess = payload => {
   return {
-    type: "PRODUCTS_RESET_CATEGORY",
-    payload: category
+    type: "PRODUCTS_RESET_CATEGORY_SUCCESS",
+    payload
   };
 };

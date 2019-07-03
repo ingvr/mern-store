@@ -80,13 +80,10 @@ const products = (state = initialState, action) => {
         filteredCategory: action.payload
       };
     }
-    case "PRODUCTS_RESET_CATEGORY": {
+    case "PRODUCTS_RESET_CATEGORY_SUCCESS": {
       return {
         ...state,
-        items: items.map(item => ({
-          ...item,
-          categoryId: item.categoryId === action.payload ? 0 : item.categoryId
-        }))
+        items: action.payload
       };
     }
     default: {

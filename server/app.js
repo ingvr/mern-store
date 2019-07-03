@@ -24,6 +24,19 @@ app.get("/api/v1/product/get/all", (req, res) => {
   });
 });
 
+app.put("/api/v1/product/category-reset/:key", (req, res) => {
+  const key = parseInt(req.params.key, 10);
+
+  return res.status(201).send({
+    success: "true",
+    message: "products categoryId reset successfully",
+    data: products.items.map(item => ({
+      ...item,
+      categoryId: item.categoryId === key ? 0 : item.categoryId
+    }))
+  });
+});
+
 app.post("/api/v1/category/add", (req, res) => {
   if (!req.body.title) {
     return res.status(400).send({

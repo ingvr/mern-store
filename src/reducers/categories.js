@@ -30,7 +30,6 @@ const categories = (state = initialState, action) => {
     }
 
     case "CATEGORY_DELETE_SUCCESS": {
-      console.log("cat delete success", action.payload);
       return {
         ...action.payload
       };
