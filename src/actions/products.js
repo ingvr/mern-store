@@ -39,11 +39,6 @@ export const productAdd = newProduct => {
         dispatch(productAddSuccess(response.data.products));
       })
       .catch(error => {
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        }
         throw error;
       });
   };
@@ -57,9 +52,22 @@ export const productAddSuccess = payload => {
 };
 
 export const productDelete = productId => {
+  return dispatch => {
+    const apiUrl = "/api/v1/product/delete";
+    return Axios.delete(`${apiUrl}/${productId}`)
+      .then(response => {
+        dispatch(productDeleteSuccess(response.data.products));
+      })
+      .catch(error => {
+        throw error;
+      });
+  };
+};
+
+export const productDeleteSuccess = payload => {
   return {
-    type: "PRODUCT_DELETE",
-    payload: productId
+    type: "PRODUCT_DELETE_SUCCESS",
+    payload
   };
 };
 
@@ -86,11 +94,6 @@ export const productsResetCategory = categoryKey => {
         dispatch(productsResetCategorySuccess(response.data.data));
       })
       .catch(error => {
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        }
         throw error;
       });
   };

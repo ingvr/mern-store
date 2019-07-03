@@ -27,14 +27,9 @@ const products = (state = initialState, action) => {
         ...action.payload
       };
     }
-    case "PRODUCT_DELETE": {
-      const idx = items.findIndex(item => item.key === action.payload);
-
-      const newArray = [...items.slice(0, idx), ...items.slice(idx + 1)];
-
+    case "PRODUCT_DELETE_SUCCESS": {
       return {
-        ...state,
-        items: newArray
+        ...action.payload
       };
     }
     case "PRODUCT_EDIT": {

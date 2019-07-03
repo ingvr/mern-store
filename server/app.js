@@ -37,6 +37,26 @@ app.put("/api/v1/product/category-reset/:key", (req, res) => {
   });
 });
 
+app.delete("/api/v1/product/delete/:key", (req, res) => {
+  const key = parseInt(req.params.key, 10);
+
+  products.items.map((product, index) => {
+    if (product.key === key) {
+      products.items.splice(index, 1);
+      return res.status(200).send({
+        success: "true",
+        message: "Product deleted successfuly",
+        products
+      });
+    }
+  });
+
+  return res.status(404).send({
+    success: "false",
+    message: "Product not found"
+  });
+});
+
 app.post("/api/v1/category/add", (req, res) => {
   if (!req.body.title) {
     return res.status(400).send({
