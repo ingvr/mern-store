@@ -1,38 +1,38 @@
 import { products } from "../db";
 
-class ProductsController {
-  _productDataValidation({ name, rowPrice, fullPrice, categoryId }) {
-    if (!name) {
-      return {
-        valid: false,
-        message: "product name is required"
-      };
-    }
-
-    if (!rowPrice) {
-      return {
-        valid: false,
-        message: "row price is required"
-      };
-    }
-
-    if (!fullPrice) {
-      return {
-        valid: false,
-        message: "full price is required"
-      };
-    }
-
-    if (!categoryId) {
-      return {
-        valid: false,
-        message: "category id is required"
-      };
-    }
-
-    return { valid: true };
+const _productDataValidation = ({ name, rowPrice, fullPrice, categoryId }) => {
+  if (!name) {
+    return {
+      valid: false,
+      message: "product name is required"
+    };
   }
 
+  if (!rowPrice) {
+    return {
+      valid: false,
+      message: "row price is required"
+    };
+  }
+
+  if (!fullPrice) {
+    return {
+      valid: false,
+      message: "full price is required"
+    };
+  }
+
+  if (!categoryId) {
+    return {
+      valid: false,
+      message: "category id is required"
+    };
+  }
+
+  return { valid: true };
+};
+
+class ProductsController {
   getAllProducts(req, res) {
     res.status(200).send({
       success: "true",

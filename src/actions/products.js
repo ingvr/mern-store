@@ -1,5 +1,7 @@
 import Axios from "axios";
 
+import { PRODUCT_API_URL } from "../constants";
+
 export const productsRequested = payload => {
   return {
     type: "PRODUCTS_REQUESTED",
@@ -18,7 +20,7 @@ export const productsReceived = payload => {
 export const fetchProducts = payload => {
   return dispatch => {
     dispatch(productsRequested(payload));
-    const apiUrl = "/api/v1/product/get/all";
+    const apiUrl = `${PRODUCT_API_URL}/get/all`;
 
     return Axios.get(apiUrl)
       .then(response => {
@@ -32,7 +34,7 @@ export const fetchProducts = payload => {
 
 export const productAdd = newProduct => {
   return dispatch => {
-    const apiUrl = "/api/v1/product/add";
+    const apiUrl = `${PRODUCT_API_URL}/add`;
     return Axios.post(apiUrl, newProduct)
       .then(response => {
         dispatch(productAddSuccess(response.data.products));
@@ -52,7 +54,7 @@ export const productAddSuccess = payload => {
 
 export const productDelete = productId => {
   return dispatch => {
-    const apiUrl = "/api/v1/product/delete";
+    const apiUrl = `${PRODUCT_API_URL}/delete`;
     return Axios.delete(`${apiUrl}/${productId}`)
       .then(response => {
         dispatch(productDeleteSuccess(response.data.products));
@@ -72,7 +74,7 @@ export const productDeleteSuccess = payload => {
 
 export const productEdit = product => {
   return dispatch => {
-    const apiUrl = "/api/v1/product/update";
+    const apiUrl = `${PRODUCT_API_URL}/update`;
     return Axios.put(apiUrl, product)
       .then(response => {
         dispatch(productEditSuccess(response.data.products));
@@ -104,7 +106,7 @@ export const productsFilter = categorytId => {
 
 export const productsResetCategory = categoryKey => {
   return dispatch => {
-    const apiUrl = `/api/v1/product/category-reset/${categoryKey}`;
+    const apiUrl = `${PRODUCT_API_URL}/category-reset/${categoryKey}`;
 
     return Axios.put(apiUrl)
       .then(response => {

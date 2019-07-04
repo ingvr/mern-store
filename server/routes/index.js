@@ -3,26 +3,31 @@ import { categories, products } from "../db";
 
 import { categoryController, productController } from "../controllers";
 
+import { CATEGORY_API_URL, PRODUCT_API_URL } from "../config";
+
 const router = express.Router();
 
-router.get("/api/v1/category/get/all", categoryController.getAllCategories);
-router.get("/api/v1/category/get/:id", categoryController.getCategory);
-router.post("/api/v1/category/add", categoryController.createCategory);
+router.get(`${CATEGORY_API_URL}/get/all`, categoryController.getAllCategories);
+router.get(`${CATEGORY_API_URL}/get/:id`, categoryController.getCategory);
+router.post(`${CATEGORY_API_URL}/add`, categoryController.createCategory);
 router.delete(
-  "/api/v1/category/delete/:key",
+  `${CATEGORY_API_URL}/delete/:key`,
   categoryController.deleteCategory
 );
 
-router.get("/api/v1/product/get/all", productController.getAllProducts);
+router.get(`${PRODUCT_API_URL}/get/all`, productController.getAllProducts);
 
-router.post("/api/v1/product/add", productController.createProduct);
+router.post(`${PRODUCT_API_URL}/add`, productController.createProduct);
 
-router.delete("/api/v1/product/delete/:key", productController.deleteProduct);
+router.delete(
+  `${PRODUCT_API_URL}/delete/:key`,
+  productController.deleteProduct
+);
 
-router.put("/api/v1/product/update", productController.updateProduct);
+router.put(`${PRODUCT_API_URL}/update`, productController.updateProduct);
 
 router.put(
-  "/api/v1/product/category-reset/:key",
+  `${PRODUCT_API_URL}/category-reset/:key`,
   productController.resetCategoryProduct
 );
 

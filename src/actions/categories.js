@@ -1,5 +1,7 @@
 import Axios from "axios";
 
+import { CATEGORY_API_URL } from "../constants";
+
 export const categoriesRequested = payload => {
   return {
     type: "CATEGORIES_REQUESTED",
@@ -19,7 +21,7 @@ export const fetchCategories = payload => {
   return dispatch => {
     dispatch(categoriesRequested(payload));
 
-    const apiUrl = "/api/v1/category/get/all";
+    const apiUrl = `${CATEGORY_API_URL}/get/all`;
     return Axios.get(apiUrl)
       .then(response => {
         dispatch(categoriesReceived(response.data.data));
@@ -32,7 +34,7 @@ export const fetchCategories = payload => {
 
 export const categoryAdd = title => {
   return dispatch => {
-    const apiUrl = "/api/v1/category/add";
+    const apiUrl = `${CATEGORY_API_URL}/add`;
     return Axios.post(apiUrl, { title })
       .then(response => {
         dispatch(categoryAddSuccess(response.data.categories));
@@ -52,7 +54,7 @@ export const categoryAddSuccess = payload => {
 
 export const categoryDelete = categorytId => {
   return dispatch => {
-    const apiUrl = "/api/v1/category/delete";
+    const apiUrl = `${CATEGORY_API_URL}/delete`;
     return Axios.delete(`${apiUrl}/${categorytId}`)
       .then(response => {
         dispatch(categoryDeleteSuccess(response.data.categories));
