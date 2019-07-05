@@ -63,9 +63,9 @@ class EditProductModal extends Component {
                 required
                 style={{ width: "100%", lineHeight: "32px" }}
               >
-                {categories.map(item => (
-                  <option key={item.key} value={item.key}>
-                    {item.title}
+                {categories.map(({ key, title }) => (
+                  <option key={key} value={key}>
+                    {title}
                   </option>
                 ))}
               </select>

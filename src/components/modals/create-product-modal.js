@@ -31,6 +31,7 @@ class CreateProductModal extends Component {
   render() {
     const { visible, showModal, hideModal, categories } = this.props;
     const { categoryId, name, rowPrice, fullPrice } = this.state;
+    const { handleChange, handleSubmit } = this;
 
     return (
       <>
@@ -48,19 +49,19 @@ class CreateProductModal extends Component {
           onCancel={hideModal}
           footer={[]}
         >
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={handleSubmit}>
             <Form.Item>
               <select
                 name="category"
                 placeholder="Выберите категорию"
                 value={categoryId}
-                onChange={this.handleChange}
+                onChange={handleChange}
                 required
                 style={{ width: "100%", lineHeight: "32px" }}
               >
-                {categories.map(category => (
-                  <option key={category.key} value={category.key}>
-                    {category.title}
+                {categories.map(({ key, title }) => (
+                  <option key={key} value={key}>
+                    {title}
                   </option>
                 ))}
               </select>
@@ -71,7 +72,7 @@ class CreateProductModal extends Component {
                 prefix={<Icon type="font-colors" />}
                 placeholder="Название"
                 value={name}
-                onChange={this.handleChange}
+                onChange={handleChange}
                 required
               />
             </Form.Item>
@@ -81,7 +82,7 @@ class CreateProductModal extends Component {
                 prefix={<Icon type="dollar" />}
                 placeholder="Закупочная цена"
                 value={rowPrice}
-                onChange={this.handleChange}
+                onChange={handleChange}
                 required
               />
             </Form.Item>
@@ -91,7 +92,7 @@ class CreateProductModal extends Component {
                 prefix={<Icon type="dollar" />}
                 placeholder="Цена"
                 value={fullPrice}
-                onChange={this.handleChange}
+                onChange={handleChange}
                 required
               />
             </Form.Item>

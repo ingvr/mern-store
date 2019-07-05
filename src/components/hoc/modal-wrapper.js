@@ -17,9 +17,10 @@ const ModalWrapper = WrappedModal => {
     };
 
     render() {
+      const { visible } = this.state;
       return (
         <WrappedModal
-          visible={this.state.visible}
+          visible={visible}
           showModal={this.showModal}
           hideModal={this.hideModal}
           {...this.props}

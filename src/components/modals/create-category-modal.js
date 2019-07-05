@@ -21,6 +21,8 @@ class CreateCategoryModal extends Component {
 
   render() {
     const { visible, showModal, hideModal } = this.props;
+    const { handleSubmit, handleChange } = this;
+    const { category } = this.state;
     return (
       <>
         <Button onClick={showModal}>
@@ -33,14 +35,14 @@ class CreateCategoryModal extends Component {
           onCancel={hideModal}
           footer={[]}
         >
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={handleSubmit}>
             <Form.Item>
               <Input
                 name="category"
                 prefix={<Icon type="unordered-list" />}
                 placeholder="Категория"
-                value={this.state.category}
-                onChange={this.handleChange}
+                value={category}
+                onChange={handleChange}
                 required
               />
             </Form.Item>

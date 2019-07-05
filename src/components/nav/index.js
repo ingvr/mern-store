@@ -39,16 +39,13 @@ class Nav extends Component {
           className="nav__menu"
         >
           {isLoading && <Spinner />}
-          {categories.map(category => (
-            <Menu.Item
-              key={category.key}
-              onClick={() => filterProducts(category.key)}
-            >
+          {categories.map(({ key, title }) => (
+            <Menu.Item key={category.key} onClick={() => filterProducts(key)}>
               <Popconfirm
                 title="Вы уверены, что хотите удалить эту категорию?"
                 onConfirm={() => {
-                  deleteCategory(category.key);
-                  resetProductsCategory(category.key);
+                  deleteCategory(key);
+                  resetProductsCategory(key);
                 }}
                 onCancel={() => {
                   return false;
@@ -60,7 +57,7 @@ class Nav extends Component {
                   <Icon type="close" style={{ margin: "0px" }} />
                 </Button>
               </Popconfirm>
-              {category.title}
+              {title}
             </Menu.Item>
           ))}
           <Menu.Item key="0" onClick={() => filterProducts(0)}>

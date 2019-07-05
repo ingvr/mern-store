@@ -15,7 +15,7 @@ class ProductList extends Component {
   }
 
   render() {
-    const { products, filteredCategory, isLoading } = this.props;
+    const { products, filteredCategory, isLoading, deleteProduct } = this.props;
     const visibleProducts = products.filter(
       product =>
         filteredCategory === product.categoryId ||
@@ -29,14 +29,14 @@ class ProductList extends Component {
         <Column title="Цена" key="fullPrice" dataIndex="fullPrice" />
         <Column
           key="action"
-          render={product => (
+          render={({ key }) => (
             <span>
-              <EditProductModal productKey={product.key} />
+              <EditProductModal productKey={key} />
               <Divider type="vertical" />
               <Popconfirm
                 title="Вы уверены, что хотите удалить этот товар?"
                 onConfirm={() => {
-                  this.props.deleteProduct(product.key);
+                  deleteProduct(key);
                 }}
                 onCancel={() => {
                   return false;
