@@ -1,5 +1,7 @@
 import { categories } from "../db";
 
+const Category = require("../models/category");
+
 class CategoriesController {
   getAllCategories(req, res) {
     return res.status(200).send({

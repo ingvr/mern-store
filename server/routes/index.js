@@ -1,5 +1,4 @@
 import express from "express";
-import { categories, products } from "../db";
 
 import { categoryController, productController } from "../controllers";
 
