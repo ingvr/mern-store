@@ -1,6 +1,5 @@
 const initialState = {
   items: [],
-  nextCategoryId: 0,
   isLoading: false
 };
 
@@ -16,9 +15,13 @@ const categories = (state = initialState, action) => {
     }
 
     case "CATEGORIES_RECEIVED": {
+      const items = action.payload.map(({ title, _id }) => ({
+        title,
+        key: _id,
+        active: false
+      }));
       return {
-        ...state,
-        ...action.payload,
+        items,
         isLoading: false
       };
     }
