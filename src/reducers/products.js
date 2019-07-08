@@ -1,6 +1,5 @@
 const initialState = {
   items: [],
-  nextProductId: 0,
   filteredCategory: "ALL_CATEGORIES",
   isLoading: false
 };
@@ -18,7 +17,10 @@ const products = (state = initialState, action) => {
     case "PRODUCTS_RECEIVED": {
       return {
         ...state,
-        ...action.payload,
+        items: action.payload.map(item => ({
+          ...item,
+          key: item._id
+        })),
         isLoading: false
       };
     }
