@@ -1,5 +1,7 @@
 import { products } from "../db";
 
+const Product = require("../models/product");
+
 const _productDataValidation = ({ name, rowPrice, fullPrice, categoryId }) => {
   if (!name) {
     return {
@@ -32,12 +34,27 @@ const _productDataValidation = ({ name, rowPrice, fullPrice, categoryId }) => {
   return { valid: true };
 };
 
+const getAllProductsFromDB = () => {
+  return Product.find().exec();
+};
+
 class ProductsController {
   getAllProducts(req, res) {
-    res.status(200).send({
-      success: "true",
-      message: "products retrieved successfully",
-      data: products
+    getAllProductsFromDB().then(data => {
+      res
+        .status(200)
+        .send({
+          success: "true",
+          message: "products retrieved successfully",
+          data
+        })
+        .catch(err => {
+          res.status(RESPONSE_CODES.NOT_FOUND).send({
+            success: "false",
+            message: "error in getting products",
+            errors: err
+          });
+        });
     });
   }
 

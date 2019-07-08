@@ -10,7 +10,7 @@ class CategoriesController {
   getAllCategories(req, res) {
     getAllCategoriesFromDB()
       .then(data => {
-        return res.status(200).send({
+        res.status(200).send({
           success: "true",
           message: "categories retrieved successfully",
           data
