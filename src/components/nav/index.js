@@ -40,7 +40,7 @@ class Nav extends Component {
         >
           {isLoading && <Spinner />}
           {categories.map(({ key, title }) => (
-            <Menu.Item key={category.key} onClick={() => filterProducts(key)}>
+            <Menu.Item key={key} onClick={() => filterProducts(key)}>
               <Popconfirm
                 title="Вы уверены, что хотите удалить эту категорию?"
                 onConfirm={() => {
