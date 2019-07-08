@@ -2,13 +2,27 @@ import { categories } from "../db";
 
 const Category = require("../models/category");
 
+const getAllCategoriesFromDB = () => {
+  return Category.find().exec();
+};
+
 class CategoriesController {
   getAllCategories(req, res) {
-    return res.status(200).send({
-      success: "true",
-      message: "categories retrieved successfully",
-      data: categories
-    });
+    getAllCategoriesFromDB()
+      .then(data => {
+        return res.status(200).send({
+          success: "true",
+          message: "categories retrieved successfully",
+          data
+        });
+      })
+      .catch(err => {
+        res.status(RESPONSE_CODES.NOT_FOUND).send({
+          success: "false",
+          message: "error in getting categories",
+          errors: err
+        });
+      });
   }
 
   getCategory(req, res) {
