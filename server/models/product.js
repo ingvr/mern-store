@@ -9,6 +9,7 @@ autoIncrement.initialize(connection);
 
 const ProductSchema = new Schema(
   {
+    _id: {type: Number, required: true},
     name: {type: String, required: true, max: 100},
     rowPrice: {type: Number, required: true},
     fullPrice: {type: Number, required: true},
@@ -17,5 +18,10 @@ const ProductSchema = new Schema(
   {collection: 'products'},
 );
 
-ProductSchema.plugin(autoIncrement.plugin, 'Product');
+ProductSchema.plugin(autoIncrement.plugin, {
+  model: 'Product',
+  field: '_id',
+  startAt: 1,
+});
+
 module.exports = mongoose.model('Product', ProductSchema);

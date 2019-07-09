@@ -1,54 +1,55 @@
 const initialState = {
   items: [],
-  filteredCategory: "ALL_CATEGORIES",
-  isLoading: false
+  filteredCategory: 'ALL_CATEGORIES',
+  isLoading: false,
 };
 
 const products = (state = initialState, action) => {
-  const { items } = state;
+  const {items} = state;
 
   switch (action.type) {
-    case "PRODUCTS_REQUESTED": {
+    case 'PRODUCTS_REQUESTED': {
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       };
     }
-    case "PRODUCTS_RECEIVED": {
+    case 'PRODUCTS_RECEIVED': {
       return {
         ...state,
         items: action.payload.map(item => ({
           ...item,
-          key: item._id
+          key: item._id,
         })),
-        isLoading: false
+        isLoading: false,
       };
     }
-    case "PRODUCT_ADD_SUCCESS": {
-      return {
-        ...action.payload
-      };
-    }
-    case "PRODUCT_DELETE_SUCCESS": {
-      return {
-        ...action.payload
-      };
-    }
-    case "PRODUCT_EDIT_SUCCESS": {
-      return {
-        ...action.payload
-      };
-    }
-    case "PRODUCTS_FILTER": {
+    case 'PRODUCT_ADD_SUCCESS': {
       return {
         ...state,
-        filteredCategory: action.payload
+        items: action.payload,
       };
     }
-    case "PRODUCTS_RESET_CATEGORY_SUCCESS": {
+    case 'PRODUCT_DELETE_SUCCESS': {
+      return {
+        ...action.payload,
+      };
+    }
+    case 'PRODUCT_EDIT_SUCCESS': {
+      return {
+        ...action.payload,
+      };
+    }
+    case 'PRODUCTS_FILTER': {
       return {
         ...state,
-        items: action.payload
+        filteredCategory: action.payload,
+      };
+    }
+    case 'PRODUCTS_RESET_CATEGORY_SUCCESS': {
+      return {
+        ...state,
+        items: action.payload,
       };
     }
     default: {

@@ -3,6 +3,6 @@ export function handleChange(e) {
   const value = target.value;
   const name = target.name;
   this.setState({
-    [name]: value
+    [name]: value,
   });
 }

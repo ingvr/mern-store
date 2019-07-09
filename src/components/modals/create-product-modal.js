@@ -1,26 +1,26 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Modal, Form, Input, Icon, Button } from "antd";
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {Modal, Form, Input, Icon, Button} from 'antd';
 
-import { productAdd } from "../../actions";
-import { ModalWrapper } from "../hoc";
-import { handleChange } from "./utils";
+import {productAdd} from '../../actions';
+import {ModalWrapper} from '../hoc';
+import {handleChange} from './utils';
 
 class CreateProductModal extends Component {
   initialState = {
-    categoryId: "1",
-    name: "",
-    rowPrice: "",
-    fullPrice: ""
+    categoryId: '5d2309641c9d4400006c0d13',
+    name: '',
+    rowPrice: '',
+    fullPrice: '',
   };
 
   state = this.initialState;
 
   handleSubmit = e => {
     e.preventDefault();
-    const { categoryId, name, rowPrice, fullPrice } = this.state;
-    const { createProduct, hideModal } = this.props;
-    const product = { categoryId, name, rowPrice, fullPrice };
+    const {categoryId, name, rowPrice, fullPrice} = this.state;
+    const {createProduct, hideModal} = this.props;
+    const product = {categoryId, name, rowPrice, fullPrice};
     createProduct(product);
     this.setState(this.initialState);
     hideModal();
@@ -29,17 +29,16 @@ class CreateProductModal extends Component {
   handleChange = e => handleChange.call(this, e);
 
   render() {
-    const { visible, showModal, hideModal, categories } = this.props;
-    const { categoryId, name, rowPrice, fullPrice } = this.state;
-    const { handleChange, handleSubmit } = this;
+    const {visible, showModal, hideModal, categories} = this.props;
+    const {categoryId, name, rowPrice, fullPrice} = this.state;
+    const {handleChange, handleSubmit} = this;
 
     return (
       <>
         <Button
           type="primary"
           onClick={showModal}
-          style={{ marginRight: "10px" }}
-        >
+          style={{marginRight: '10px'}}>
           <Icon type="plus-circle" />
           Добавить товар
         </Button>
@@ -47,19 +46,17 @@ class CreateProductModal extends Component {
           title="Добавить товар"
           visible={visible}
           onCancel={hideModal}
-          footer={[]}
-        >
+          footer={[]}>
           <Form onSubmit={handleSubmit}>
             <Form.Item>
               <select
-                name="category"
+                name="categoryId"
                 placeholder="Выберите категорию"
                 value={categoryId}
                 onChange={handleChange}
                 required
-                style={{ width: "100%", lineHeight: "32px" }}
-              >
-                {categories.map(({ key, title }) => (
+                style={{width: '100%', lineHeight: '32px'}}>
+                {categories.map(({key, title}) => (
                   <option key={key} value={key}>
                     {title}
                   </option>
@@ -96,7 +93,7 @@ class CreateProductModal extends Component {
                 required
               />
             </Form.Item>
-            <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
+            <Button type="primary" htmlType="submit" style={{width: '100%'}}>
               Добавить
             </Button>
           </Form>
@@ -108,17 +105,17 @@ class CreateProductModal extends Component {
 
 const mapStateToProps = state => {
   return {
-    categories: state.categories.items
+    categories: state.categories.items,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    createProduct: product => dispatch(productAdd(product))
+    createProduct: product => dispatch(productAdd(product)),
   };
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ModalWrapper(CreateProductModal));
