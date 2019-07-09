@@ -33,7 +33,8 @@ const products = (state = initialState, action) => {
     }
     case 'PRODUCT_EDIT_SUCCESS': {
       return {
-        ...action.payload,
+        ...state,
+        items: action.payload,
       };
     }
     case 'PRODUCTS_FILTER': {

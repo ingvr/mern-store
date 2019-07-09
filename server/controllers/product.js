@@ -128,17 +128,6 @@ class ProductsController {
   }
 
   updateProduct(req, res) {
-    const {key, name, rowPrice, fullPrice, categoryId} = req.body;
-    let productFound;
-    let productIndex;
-
-    products.items.map((product, index) => {
-      if (product.key === key) {
-        productFound = product;
-        productIndex = index;
-      }
-    });
-
     if (_productDataValidation(req.body).valid === false) {
       return res.status(400).send({
         success: 'false',
@@ -146,21 +135,33 @@ class ProductsController {
       });
     }
 
-    const updatedProduct = {
-      key: productFound.key,
-      name,
-      rowPrice,
-      fullPrice,
-      categoryId: parseInt(categoryId, 10),
-    };
-
-    products.items.splice(productIndex, 1, updatedProduct);
-
-    return res.status(201).send({
-      success: 'true',
-      message: 'product update successfully',
-      products,
-    });
+    Product.findByIdAndUpdate(
+      req.body._id,
+      {$set: req.body},
+      (err, product) => {
+        if (err) {
+          return res.status(400).send({
+            success: 'false',
+            message: 'product id not found',
+          });
+        }
+        getAllProductsFromDB()
+          .then(products => {
+            return res.status(201).send({
+              success: 'true',
+              message: 'product update successfuly',
+              products,
+            });
+          })
+          .catch(err => {
+            res.status(404).send({
+              success: 'false',
+              message: 'error in getting products',
+              errors: err,
+            });
+          });
+      },
+    );
   }
 
   resetCategoryProduct(req, res) {
