@@ -35,7 +35,8 @@ const categories = (state = initialState, action) => {
 
     case 'CATEGORY_DELETE_SUCCESS': {
       return {
-        ...action.payload,
+        ...state,
+        items: action.payload,
       };
     }
 

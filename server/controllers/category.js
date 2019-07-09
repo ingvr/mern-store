@@ -1,5 +1,3 @@
-import {categories} from '../db';
-
 const Category = require('../models/category');
 
 const getAllCategoriesFromDB = () => {
@@ -82,22 +80,29 @@ class CategoriesController {
     });
   }
 
-  deleteCategory(req, res) {
-    const key = parseInt(req.params.key, 10);
-
-    categories.items.map((category, index) => {
-      if (category.key === key) {
-        categories.items.splice(index, 1);
-        return res.status(200).send({
-          success: 'true',
-          message: 'Category deleted successfuly',
-          categories,
+  deleteCategory({params: {key}}, res) {
+    Category.findByIdAndRemove(key, err => {
+      if (err) {
+        return res.status(404).send({
+          success: 'false',
+          message: 'Category id not found',
         });
       }
-      return res.status(404).send({
-        success: 'false',
-        message: 'Category id not found',
-      });
+      getAllCategoriesFromDB()
+        .then(categories => {
+          return res.status(201).send({
+            success: 'true',
+            message: 'Category deleted successfuly',
+            categories,
+          });
+        })
+        .catch(err => {
+          res.status(404).send({
+            success: 'false',
+            message: 'error in getting categories',
+            errors: err,
+          });
+        });
     });
   }
 }
