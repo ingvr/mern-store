@@ -101,23 +101,29 @@ class ProductsController {
     });
   }
 
-  deleteProduct(req, res) {
-    const key = parseInt(req.params.key, 10);
-
-    products.items.map((product, index) => {
-      if (product.key === key) {
-        products.items.splice(index, 1);
-        return res.status(200).send({
-          success: 'true',
-          message: 'Product deleted successfuly',
-          products,
+  deleteProduct({params: {key}}, res) {
+    Product.findByIdAndRemove(key, err => {
+      if (err) {
+        return res.status(404).send({
+          success: 'false',
+          message: 'Product id not found',
         });
       }
-    });
-
-    return res.status(404).send({
-      success: 'false',
-      message: 'Product not found',
+      getAllProductsFromDB()
+        .then(products => {
+          return res.status(201).send({
+            success: 'true',
+            message: 'Product deleted successfuly',
+            products,
+          });
+        })
+        .catch(err => {
+          res.status(404).send({
+            success: 'false',
+            message: 'error in getting products',
+            errors: err,
+          });
+        });
     });
   }
 

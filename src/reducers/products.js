@@ -27,7 +27,8 @@ const products = (state = initialState, action) => {
     }
     case 'PRODUCT_DELETE_SUCCESS': {
       return {
-        ...action.payload,
+        ...state,
+        items: action.payload,
       };
     }
     case 'PRODUCT_EDIT_SUCCESS': {
