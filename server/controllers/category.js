@@ -94,11 +94,10 @@ class CategoriesController {
           categories,
         });
       }
-    });
-
-    return res.status(404).send({
-      success: 'false',
-      message: 'Category not found',
+      return res.status(404).send({
+        success: 'false',
+        message: 'Category id not found',
+      });
     });
   }
 }
