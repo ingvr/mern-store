@@ -1,71 +1,68 @@
-import { categories } from "../db";
+import {categories} from '../db';
 
-const Category = require("../models/category");
-
-const getAllCategoriesFromDB = () => {
-  return Category.find().exec();
-};
+const Category = require('../models/category');
 
 class CategoriesController {
   getAllCategories(req, res) {
-    getAllCategoriesFromDB()
+    Category.find()
       .then(data => {
         res.status(200).send({
-          success: "true",
-          message: "categories retrieved successfully",
-          data
+          success: 'true',
+          message: 'categories retrieved successfully',
+          data,
         });
       })
       .catch(err => {
-        res.status(RESPONSE_CODES.NOT_FOUND).send({
-          success: "false",
-          message: "error in getting categories",
-          errors: err
+        res.status(404).send({
+          success: 'false',
+          message: 'error in getting categories',
+          errors: err,
         });
       });
   }
 
   getCategory(req, res) {
-    const id = parseInt(req.params.id, 10);
+    const id = req.params.id;
 
-    categories.items.map(category => {
-      if (category.key === id) {
+    Category.findById(id)
+      .then(data => {
         return res.status(200).send({
-          success: "true",
-          message: "category by id retrieved successfully",
-          category
+          success: 'true',
+          message: 'category by id retrieved successfully',
+          category: data,
         });
-      }
-    });
-    return res.status(404).send({
-      success: "false",
-      message: "category id does not exist"
-    });
+      })
+      .catch(err => {
+        return res.status(404).send({
+          success: 'false',
+          message: 'category id does not exist',
+        });
+      });
   }
 
   createCategory(req, res) {
     if (!req.body.title) {
       return res.status(400).send({
-        success: "false",
-        message: "title is required"
+        success: 'false',
+        message: 'title is required',
       });
     }
 
-    const { nextCategoryId } = categories;
+    const {nextCategoryId} = categories;
 
     const newCategory = {
       key: nextCategoryId,
       title: req.body.title,
-      active: false
+      active: false,
     };
 
     categories.items.push(newCategory);
-    categories["nextCategoryId"] = nextCategoryId + 1;
+    categories['nextCategoryId'] = nextCategoryId + 1;
 
     return res.status(201).send({
-      success: "true",
-      message: "category added successfully",
-      categories
+      success: 'true',
+      message: 'category added successfully',
+      categories,
     });
   }
 
@@ -76,16 +73,16 @@ class CategoriesController {
       if (category.key === key) {
         categories.items.splice(index, 1);
         return res.status(200).send({
-          success: "true",
-          message: "Category deleted successfuly",
-          categories
+          success: 'true',
+          message: 'Category deleted successfuly',
+          categories,
         });
       }
     });
 
     return res.status(404).send({
-      success: "false",
-      message: "Category not found"
+      success: 'false',
+      message: 'Category not found',
     });
   }
 }
