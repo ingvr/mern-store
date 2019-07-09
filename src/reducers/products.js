@@ -5,8 +5,6 @@ const initialState = {
 };
 
 const products = (state = initialState, action) => {
-  const {items} = state;
-
   switch (action.type) {
     case 'PRODUCTS_REQUESTED': {
       return {
@@ -17,10 +15,7 @@ const products = (state = initialState, action) => {
     case 'PRODUCTS_RECEIVED': {
       return {
         ...state,
-        items: action.payload.map(item => ({
-          ...item,
-          key: item._id,
-        })),
+        items: action.payload,
         isLoading: false,
       };
     }

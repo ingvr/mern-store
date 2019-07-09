@@ -17,7 +17,7 @@ const categories = (state = initialState, action) => {
     case 'CATEGORIES_RECEIVED': {
       const items = action.payload.map(({title, _id}) => ({
         title,
-        key: _id,
+        _id,
         active: false,
       }));
       return {

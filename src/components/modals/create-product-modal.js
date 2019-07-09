@@ -56,8 +56,8 @@ class CreateProductModal extends Component {
                 onChange={handleChange}
                 required
                 style={{width: '100%', lineHeight: '32px'}}>
-                {categories.map(({key, title}) => (
-                  <option key={key} value={key}>
+                {categories.map(({_id, title}) => (
+                  <option key={_id} value={_id}>
                     {title}
                   </option>
                 ))}
