@@ -2,9 +2,13 @@ import {categories} from '../db';
 
 const Category = require('../models/category');
 
+const getAllCategoriesFromDB = () => {
+  return Category.find();
+};
+
 class CategoriesController {
   getAllCategories(req, res) {
-    Category.find()
+    getAllCategoriesFromDB()
       .then(data => {
         res.status(200).send({
           success: 'true',
@@ -40,29 +44,41 @@ class CategoriesController {
       });
   }
 
-  createCategory(req, res) {
-    if (!req.body.title) {
+  createCategory({body: {title}}, res) {
+    if (!title) {
       return res.status(400).send({
         success: 'false',
         message: 'title is required',
       });
     }
 
-    const {nextCategoryId} = categories;
+    const category = new Category({
+      title,
+    });
 
-    const newCategory = {
-      key: nextCategoryId,
-      title: req.body.title,
-      active: false,
-    };
-
-    categories.items.push(newCategory);
-    categories['nextCategoryId'] = nextCategoryId + 1;
-
-    return res.status(201).send({
-      success: 'true',
-      message: 'category added successfully',
-      categories,
+    category.save(err => {
+      if (err) {
+        return res.status(400).send({
+          success: 'false',
+          message: 'error saving category',
+          error: err,
+        });
+      }
+      getAllCategoriesFromDB()
+        .then(categories => {
+          return res.status(201).send({
+            success: 'true',
+            message: 'category added successfully',
+            categories,
+          });
+        })
+        .catch(err => {
+          res.status(404).send({
+            success: 'false',
+            message: 'error in getting categories',
+            errors: err,
+          });
+        });
     });
   }
 
