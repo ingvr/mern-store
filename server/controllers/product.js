@@ -165,16 +165,35 @@ class ProductsController {
   }
 
   resetCategoryProduct(req, res) {
-    const key = parseInt(req.params.key, 10);
+    const key = req.params.key;
 
-    return res.status(201).send({
-      success: 'true',
-      message: 'products categoryId reset successfully',
-      data: products.items.map(item => ({
-        ...item,
-        categoryId: item.categoryId === key ? 0 : item.categoryId,
-      })),
-    });
+    Product.updateMany(
+      {categoryId: key},
+      {$set: {categoryId: 0}},
+      (err, doc) => {
+        if (err) {
+          return res.status(400).send({
+            success: 'false',
+            message: 'product id not found',
+          });
+        }
+        getAllProductsFromDB()
+          .then(products => {
+            return res.status(201).send({
+              success: 'true',
+              message: 'products categoryId reset successfully',
+              products,
+            });
+          })
+          .catch(err => {
+            res.status(404).send({
+              success: 'false',
+              message: 'error in getting products',
+              errors: err,
+            });
+          });
+      },
+    );
   }
 }
 

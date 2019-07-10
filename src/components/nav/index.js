@@ -55,7 +55,7 @@ class Nav extends Component {
                   <Icon type="close" style={{margin: '0px'}} />
                 </Button>
               </Popconfirm>
-              {title} - {_id}
+              {title}
             </Menu.Item>
           ))}
           <Menu.Item key="0" onClick={() => filterProducts(0)}>
