@@ -25,9 +25,4 @@ router.delete(
 
 router.put(`${PRODUCT_API_URL}/update`, productController.updateProduct);
 
-router.put(
-  `${PRODUCT_API_URL}/category-reset/:key`,
-  productController.resetCategoryProduct
-);
-
 export default router;

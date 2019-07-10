@@ -1,38 +1,38 @@
-const Product = require('../models/product');
+export const Product = require("../models/product");
 
-const _productDataValidation = ({name, rowPrice, fullPrice, categoryId}) => {
+const _productDataValidation = ({ name, rowPrice, fullPrice, categoryId }) => {
   if (!name) {
     return {
       valid: false,
-      message: 'product name is required',
+      message: "product name is required"
     };
   }
 
   if (!rowPrice) {
     return {
       valid: false,
-      message: 'row price is required',
+      message: "row price is required"
     };
   }
 
   if (!fullPrice) {
     return {
       valid: false,
-      message: 'full price is required',
+      message: "full price is required"
     };
   }
 
   if (!categoryId) {
     return {
       valid: false,
-      message: 'category id is required',
+      message: "category id is required"
     };
   }
 
-  return {valid: true};
+  return { valid: true };
 };
 
-const getAllProductsFromDB = () => {
+export const getAllProductsFromDB = () => {
   return Product.find().exec();
 };
 
@@ -42,27 +42,27 @@ class ProductsController {
       res
         .status(200)
         .send({
-          success: 'true',
-          message: 'products retrieved successfully',
-          data,
+          success: "true",
+          message: "products retrieved successfully",
+          data
         })
         .catch(err => {
           res.status(RESPONSE_CODES.NOT_FOUND).send({
-            success: 'false',
-            message: 'error in getting products',
-            errors: err,
+            success: "false",
+            message: "error in getting products",
+            errors: err
           });
         });
     });
   }
 
   createProduct(req, res) {
-    const {name, rowPrice, fullPrice, categoryId} = req.body;
+    const { name, rowPrice, fullPrice, categoryId } = req.body;
 
     if (_productDataValidation(req.body).valid === false) {
       return res.status(400).send({
-        success: 'false',
-        message: _productDataValidation(req.body).message,
+        success: "false",
+        message: _productDataValidation(req.body).message
       });
     }
 
@@ -70,56 +70,56 @@ class ProductsController {
       name,
       rowPrice,
       fullPrice,
-      categoryId,
+      categoryId
     });
 
     product.save(err => {
       if (err) {
         return res.status(400).send({
-          success: 'false',
-          message: 'error saving product',
-          error: err,
+          success: "false",
+          message: "error saving product",
+          error: err
         });
       }
       getAllProductsFromDB()
         .then(products => {
           return res.status(201).send({
-            success: 'true',
-            message: 'product added successfully',
-            products,
+            success: "true",
+            message: "product added successfully",
+            products
           });
         })
         .catch(err => {
           res.status(404).send({
-            success: 'false',
-            message: 'error in getting products',
-            errors: err,
+            success: "false",
+            message: "error in getting products",
+            errors: err
           });
         });
     });
   }
 
-  deleteProduct({params: {key}}, res) {
+  deleteProduct({ params: { key } }, res) {
     Product.findByIdAndRemove(key, err => {
       if (err) {
         return res.status(404).send({
-          success: 'false',
-          message: 'Product id not found',
+          success: "false",
+          message: "Product id not found"
         });
       }
       getAllProductsFromDB()
         .then(products => {
           return res.status(201).send({
-            success: 'true',
-            message: 'Product deleted successfuly',
-            products,
+            success: "true",
+            message: "Product deleted successfuly",
+            products
           });
         })
         .catch(err => {
           res.status(404).send({
-            success: 'false',
-            message: 'error in getting products',
-            errors: err,
+            success: "false",
+            message: "error in getting products",
+            errors: err
           });
         });
     });
@@ -128,69 +128,37 @@ class ProductsController {
   updateProduct(req, res) {
     if (_productDataValidation(req.body).valid === false) {
       return res.status(400).send({
-        success: 'false',
-        message: _productDataValidation(req.body).message,
+        success: "false",
+        message: _productDataValidation(req.body).message
       });
     }
 
     Product.findByIdAndUpdate(
       req.body._id,
-      {$set: req.body},
+      { $set: req.body },
       (err, product) => {
         if (err) {
           return res.status(400).send({
-            success: 'false',
-            message: 'product id not found',
+            success: "false",
+            message: "product id not found"
           });
         }
         getAllProductsFromDB()
           .then(products => {
             return res.status(201).send({
-              success: 'true',
-              message: 'product update successfuly',
-              products,
+              success: "true",
+              message: "product update successfuly",
+              products
             });
           })
           .catch(err => {
             res.status(404).send({
-              success: 'false',
-              message: 'error in getting products',
-              errors: err,
+              success: "false",
+              message: "error in getting products",
+              errors: err
             });
           });
-      },
-    );
-  }
-
-  resetCategoryProduct(req, res) {
-    const key = req.params.key;
-
-    Product.updateMany(
-      {categoryId: key},
-      {$set: {categoryId: 0}},
-      (err, doc) => {
-        if (err) {
-          return res.status(400).send({
-            success: 'false',
-            message: 'product id not found',
-          });
-        }
-        getAllProductsFromDB()
-          .then(products => {
-            return res.status(201).send({
-              success: 'true',
-              message: 'products categoryId reset successfully',
-              products,
-            });
-          })
-          .catch(err => {
-            res.status(404).send({
-              success: 'false',
-              message: 'error in getting products',
-              errors: err,
-            });
-          });
-      },
+      }
     );
   }
 }

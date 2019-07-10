@@ -1,19 +1,19 @@
-import Axios from 'axios';
+import Axios from "axios";
 
-import {PRODUCT_API_URL} from '../constants';
+import { PRODUCT_API_URL } from "../constants";
 
 export const productsRequested = payload => {
   return {
-    type: 'PRODUCTS_REQUESTED',
-    payload,
+    type: "PRODUCTS_REQUESTED",
+    payload
   };
 };
 
 export const productsReceived = payload => {
   return {
-    type: 'PRODUCTS_RECEIVED',
+    type: "PRODUCTS_RECEIVED",
     payload,
-    receivedAt: Date.now(),
+    receivedAt: Date.now()
   };
 };
 
@@ -47,8 +47,8 @@ export const productAdd = newProduct => {
 
 export const productAddSuccess = payload => {
   return {
-    type: 'PRODUCT_ADD_SUCCESS',
-    payload,
+    type: "PRODUCT_ADD_SUCCESS",
+    payload
   };
 };
 
@@ -67,8 +67,8 @@ export const productDelete = productId => {
 
 export const productDeleteSuccess = payload => {
   return {
-    type: 'PRODUCT_DELETE_SUCCESS',
-    payload,
+    type: "PRODUCT_DELETE_SUCCESS",
+    payload
   };
 };
 
@@ -92,35 +92,21 @@ export const productEdit = product => {
 
 export const productEditSuccess = payload => {
   return {
-    type: 'PRODUCT_EDIT_SUCCESS',
-    payload,
+    type: "PRODUCT_EDIT_SUCCESS",
+    payload
   };
 };
 
 export const productsFilter = categorytId => {
   return {
-    type: 'PRODUCTS_FILTER',
-    payload: `${categorytId}`,
+    type: "PRODUCTS_FILTER",
+    payload: `${categorytId}`
   };
 };
 
-export const productsResetCategory = categoryKey => {
-  return dispatch => {
-    const apiUrl = `${PRODUCT_API_URL}/category-reset/${categoryKey}`;
-
-    return Axios.put(apiUrl)
-      .then(response => {
-        dispatch(productsResetCategorySuccess(response.data.products));
-      })
-      .catch(error => {
-        throw error;
-      });
-  };
-};
-
-export const productsResetCategorySuccess = payload => {
+export const productsResetCategory = payload => {
   return {
-    type: 'PRODUCTS_RESET_CATEGORY_SUCCESS',
-    payload,
+    type: "PRODUCTS_RESET_CATEGORY",
+    payload
   };
 };
