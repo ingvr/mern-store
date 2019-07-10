@@ -1,5 +1,3 @@
-import {products} from '../db';
-
 const Product = require('../models/product');
 
 const _productDataValidation = ({name, rowPrice, fullPrice, categoryId}) => {
