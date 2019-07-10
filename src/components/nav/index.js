@@ -19,7 +19,6 @@ class Nav extends Component {
   render() {
     const {
       deleteCategory,
-      resetProductsCategory,
       filterProducts,
       categories,
       isLoading

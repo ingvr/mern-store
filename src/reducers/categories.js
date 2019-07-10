@@ -1,42 +1,40 @@
 const initialState = {
   items: [],
-  isLoading: false,
+  isLoading: false
 };
 
 const categories = (state = initialState, action) => {
-  const {items} = state;
-
   switch (action.type) {
-    case 'CATEGORIES_REQUESTED': {
+    case "CATEGORIES_REQUESTED": {
       return {
         ...state,
-        isLoading: true,
+        isLoading: true
       };
     }
 
-    case 'CATEGORIES_RECEIVED': {
-      const items = action.payload.map(({title, _id}) => ({
+    case "CATEGORIES_RECEIVED": {
+      const items = action.payload.map(({ title, _id }) => ({
         title,
         _id,
-        active: false,
+        active: false
       }));
       return {
         items,
-        isLoading: false,
+        isLoading: false
       };
     }
 
-    case 'CATEGORY_ADD_SUCCESS': {
+    case "CATEGORY_ADD_SUCCESS": {
       return {
         ...state,
-        items: action.payload,
+        items: action.payload
       };
     }
 
-    case 'CATEGORY_DELETE_SUCCESS': {
+    case "CATEGORY_DELETE_SUCCESS": {
       return {
         ...state,
-        items: action.payload,
+        items: action.payload
       };
     }
 
