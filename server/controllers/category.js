@@ -1,6 +1,6 @@
-import {Product, getAllProductsFromDB} from './product.js';
+import { Product, getAllProductsFromDB } from "./product.js";
 
-const Category = require('../models/category');
+const Category = require("../models/category");
 
 const getAllCategoriesFromDB = () => {
   return Category.find();
@@ -11,16 +11,16 @@ class CategoriesController {
     getAllCategoriesFromDB()
       .then(data => {
         res.status(200).send({
-          success: 'true',
-          message: 'categories retrieved successfully',
-          data,
+          success: "true",
+          message: "categories retrieved successfully",
+          data
         });
       })
       .catch(err => {
         res.status(404).send({
-          success: 'false',
-          message: 'Getting categories failed',
-          errors: err,
+          success: "false",
+          message: "Getting categories failed",
+          errors: err
         });
       });
   }
@@ -31,69 +31,69 @@ class CategoriesController {
     Category.findById(id)
       .then(data => {
         return res.status(200).send({
-          success: 'true',
-          message: 'category by id retrieved successfully',
-          category: data,
+          success: "true",
+          message: "category by id retrieved successfully",
+          category: data
         });
       })
       .catch(err => {
         return res.status(404).send({
-          success: 'false',
-          message: 'category id does not exist',
+          success: "false",
+          message: "category id does not exist"
         });
       });
   }
 
-  createCategory({body: {title}}, res) {
+  createCategory({ body: { title } }, res) {
     if (!title) {
       return res.status(400).send({
-        success: 'false',
-        message: 'title is required',
+        success: "false",
+        message: "title is required"
       });
     }
 
     const category = new Category({
-      title,
+      title
     });
 
     category.save(err => {
       if (err) {
         return res.status(400).send({
-          success: 'false',
-          message: 'Category create failed',
-          error: err,
+          success: "false",
+          message: "Category create failed",
+          error: err
         });
       }
       getAllCategoriesFromDB()
         .then(categories => {
           return res.status(201).send({
-            success: 'true',
-            message: 'category added successfully',
-            categories,
+            success: "true",
+            message: "category added successfully",
+            categories
           });
         })
         .catch(err => {
           res.status(404).send({
-            success: 'false',
-            message: 'error in getting categories',
-            errors: err,
+            success: "false",
+            message: "error in getting categories",
+            errors: err
           });
         });
     });
   }
 
-  deleteCategory({params: {key}}, res) {
+  deleteCategory({ params: { key } }, res) {
     let data = {
       categories: [],
-      products: [],
+      products: []
     };
-    Product.updateMany({categoryId: key}, {$set: {categoryId: '0'}})
+    Product.updateMany({ categoryId: key }, { $set: { categoryId: "0" } })
       .then(getAllProductsFromDB)
       .then(products => {
         data.products = products;
         return products;
       })
-      .then(Category.findByIdAndRemove(key))
+      .then(products => Category.findByIdAndRemove(key))
       .then(getAllCategoriesFromDB)
       .then(categories => {
         data.categories = categories;
@@ -101,15 +101,15 @@ class CategoriesController {
       })
       .then(data => {
         return res.status(201).send({
-          success: 'true',
-          message: 'Category delete and reset products categoryId failed',
-          data,
+          success: "true",
+          message: "Category delete and reset products categoryId success",
+          data
         });
       })
       .catch(err => {
         return res.status(400).send({
-          success: 'false',
-          message: 'Category delete and reset products categoryId failed',
+          success: "false",
+          message: "Category delete and reset products categoryId failed"
         });
       });
   }
