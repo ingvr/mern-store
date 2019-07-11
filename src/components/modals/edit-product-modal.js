@@ -1,36 +1,44 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Modal, Form, Input, Icon, Button} from 'antd';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Modal, Form, Input, Icon, Button, notification } from "antd";
 
-import {productEdit} from '../../actions';
-import {ModalWrapper} from '../hoc';
-import {handleChange} from './utils';
+import { productEdit } from "../../actions";
+import { ModalWrapper } from "../hoc";
+import { handleChange, validatePrice } from "./utils";
 
 class EditProductModal extends Component {
   state = {
-    categoryId: '1',
-    name: '',
-    rowPrice: '',
-    fullPrice: '',
+    categoryId: "1",
+    name: "",
+    rowPrice: "",
+    fullPrice: ""
   };
 
   componentDidMount() {
-    const {products, productKey} = this.props;
+    const { products, productKey } = this.props;
     const currentProduct = products.find(product => product._id === productKey);
-    const {categoryId, name, rowPrice, fullPrice} = currentProduct;
+    const { categoryId, name, rowPrice, fullPrice } = currentProduct;
     this.setState({
       categoryId,
       name,
       rowPrice,
-      fullPrice,
+      fullPrice
     });
   }
 
   handleSubmit = e => {
     e.preventDefault();
-    const {categoryId, name, rowPrice, fullPrice} = this.state;
-    const {productKey: _id, editProduct, hideModal} = this.props;
-    const product = {_id, categoryId, name, rowPrice, fullPrice};
+    const { categoryId, name, rowPrice, fullPrice } = this.state;
+    if (!validatePrice({ rowPrice, fullPrice })) {
+      notification.open({
+        message: "Ошибка изменения товара",
+        description: "Цена должна быть целым положительным числом",
+        icon: <Icon type="exclamation-circle" style={{ color: "#CE0014" }} />
+      });
+      return false;
+    }
+    const { productKey: _id, editProduct, hideModal } = this.props;
+    const product = { _id, categoryId, name, rowPrice, fullPrice };
     editProduct(product);
     hideModal();
   };
@@ -38,9 +46,9 @@ class EditProductModal extends Component {
   handleChange = e => handleChange.call(this, e);
 
   render() {
-    const {visible, showModal, hideModal, categories} = this.props;
-    const {categoryId, name, rowPrice, fullPrice} = this.state;
-    const {handleChange, handleSubmit} = this;
+    const { visible, showModal, hideModal, categories } = this.props;
+    const { categoryId, name, rowPrice, fullPrice } = this.state;
+    const { handleChange, handleSubmit } = this;
 
     return (
       <>
@@ -51,7 +59,8 @@ class EditProductModal extends Component {
           title="Изменить товар"
           visible={visible}
           onCancel={hideModal}
-          footer={[]}>
+          footer={[]}
+        >
           <Form onSubmit={handleSubmit}>
             <Form.Item>
               <select
@@ -60,8 +69,9 @@ class EditProductModal extends Component {
                 defaultValue={categoryId}
                 onChange={handleChange}
                 required
-                style={{width: '100%', lineHeight: '32px'}}>
-                {categories.map(({_id, title}) => (
+                style={{ width: "100%", lineHeight: "32px" }}
+              >
+                {categories.map(({ _id, title }) => (
                   <option key={_id} value={_id}>
                     {title}
                   </option>
@@ -98,7 +108,7 @@ class EditProductModal extends Component {
                 required
               />
             </Form.Item>
-            <Button type="primary" htmlType="submit" style={{width: '100%'}}>
+            <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
               Изменить
             </Button>
           </Form>
@@ -111,17 +121,17 @@ class EditProductModal extends Component {
 const mapStateToProps = state => {
   return {
     categories: state.categories.items,
-    products: state.products.items,
+    products: state.products.items
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    editProduct: product => dispatch(productEdit(product)),
+    editProduct: product => dispatch(productEdit(product))
   };
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(ModalWrapper(EditProductModal));
