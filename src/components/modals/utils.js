@@ -7,11 +7,9 @@ export function handleChange(e) {
   });
 }
 
-export function validatePrice(values) {
-  let status = true;
-  Object.keys(values).map((key, index) => {
-    const regEx = /^[0-9.,]*$/;
-    if (!regEx.test(values[key]) || values[key] < 1) status = false;
+export function validatePrice(...values) {
+  const status = values.some(value => {
+    return typeof value != "number" || value < 0;
   });
-  return status;
+  return !status;
 }

@@ -29,7 +29,7 @@ class EditProductModal extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { categoryId, name, rowPrice, fullPrice } = this.state;
-    if (!validatePrice({ rowPrice, fullPrice })) {
+    if (!validatePrice(rowPrice, fullPrice)) {
       notification.open({
         message: "Ошибка изменения товара",
         description: "Цена должна быть целым положительным числом",
