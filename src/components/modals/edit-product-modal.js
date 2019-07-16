@@ -14,7 +14,7 @@ export class EditProductModal extends Component {
     fullPrice: ""
   };
 
-  componentDidMount() {
+  updateState() {
     const { products, productKey } = this.props;
     const currentProduct = products.find(product => product._id === productKey);
     const { categoryId, name, rowPrice, fullPrice } = currentProduct;
@@ -24,6 +24,16 @@ export class EditProductModal extends Component {
       rowPrice,
       fullPrice
     });
+  }
+
+  componentDidMount() {
+    this.updateState();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props != prevProps) {
+      this.updateState();
+    }
   }
 
   handleSubmit = e => {

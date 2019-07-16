@@ -48,4 +48,14 @@ describe("EditProductModal component", () => {
     const currentProduct = products.find(product => product._id === productKey);
     expect(enzymeWrapper.state().name).toBe(currentProduct.name);
   });
+
+  it("should update state when get new props", () => {
+    const newProductKey = 2;
+    enzymeWrapper.setProps({ productKey: newProductKey });
+    const { products } = props;
+    const currentProduct = products.find(
+      product => product._id === newProductKey
+    );
+    expect(enzymeWrapper.state().name).toBe(currentProduct.name);
+  });
 });
