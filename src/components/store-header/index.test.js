@@ -1,6 +1,5 @@
 import React from "react";
-import Enzyme, { shallow } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import { shallow } from "../../enzyme";
 
 import { Layout } from "antd";
 
@@ -8,8 +7,6 @@ import StoreHeader from "./index";
 import { CreateCategoryModal, CreateProductModal } from "../modals";
 
 const { Header } = Layout;
-
-Enzyme.configure({ adapter: new Adapter() });
 
 const setup = () => {
   const enzymeWrapper = shallow(<StoreHeader />);
