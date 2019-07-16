@@ -11,7 +11,7 @@ import "./index.scss";
 
 const { Sider } = Layout;
 
-class Nav extends Component {
+export class Nav extends Component {
   componentDidMount() {
     this.props.loadCategories();
   }
