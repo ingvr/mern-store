@@ -6,7 +6,7 @@ import { productEdit } from "../../actions";
 import { ModalWrapper } from "../hoc";
 import { handleChange, validatePrice } from "./utils";
 
-class EditProductModal extends Component {
+export class EditProductModal extends Component {
   state = {
     categoryId: "1",
     name: "",
