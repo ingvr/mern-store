@@ -1,21 +1,27 @@
-import express from 'express';
-import bodyParser from 'body-parser';
+import express from "express";
+import path from "path";
+import bodyParser from "body-parser";
 
-import {DATABASE_URI} from './config';
+import { DATABASE_URI } from "./config";
 
-import router from './routes';
+import router from "./routes";
 
 const app = express(),
-  mongoose = require('mongoose');
+  mongoose = require("mongoose");
+
+app.use(express.static(path.join(__dirname, "../build")));
+app.get("/", function(req, res) {
+  res.sendFile(path.join(__dirname, "../build", "index.html"));
+});
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(router);
 
 mongoose.connect(DATABASE_URI);
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 const PORT = 5000;
 
