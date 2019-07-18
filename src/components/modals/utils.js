@@ -9,7 +9,7 @@ export function handleChange(e) {
 
 export function validatePrice(...values) {
   const status = values.some(value => {
-    return typeof value != "number" || value < 0;
+    return isNaN(value) || value < 0;
   });
   return !status;
 }
