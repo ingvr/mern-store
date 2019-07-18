@@ -13,7 +13,6 @@ import {
   productAdd,
   productDelete,
   productEdit,
-  productsFilter,
   productsResetCategory
 } from "./products";
 
@@ -29,6 +28,5 @@ export {
   productAdd,
   productDelete,
   productEdit,
-  productsFilter,
   productsResetCategory
 };

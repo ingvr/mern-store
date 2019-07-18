@@ -15,7 +15,10 @@ router.delete(
 );
 
 router.get(`${PRODUCT_API_URL}/get/all`, productController.getAllProducts);
-
+router.get(
+  `${PRODUCT_API_URL}/get/by-category/:categoryId`,
+  productController.getProductsByCategory
+);
 router.post(`${PRODUCT_API_URL}/add`, productController.createProduct);
 
 router.delete(

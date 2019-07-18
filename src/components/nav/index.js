@@ -5,7 +5,7 @@ import { Layout, Menu, Icon, Button, Popconfirm } from "antd";
 
 import Spinner from "../spinner";
 
-import { fetchCategories, categoryDelete, productsFilter } from "../../actions";
+import { fetchCategories, categoryDelete, fetchProducts } from "../../actions";
 
 import "./index.scss";
 
@@ -26,12 +26,7 @@ export class Nav extends Component {
 
     return (
       <Sider width={200} className="nav">
-        <Menu
-          mode="inline"
-          defaultSelectedKeys={["ALL_CATEGORIES"]}
-          defaultOpenKeys={["sub1"]}
-          className="nav__menu"
-        >
+        <Menu mode="inline" defaultSelectedKeys={["-1"]} className="nav__menu">
           {isLoading && <Spinner />}
           {categories.map(({ _id, title }) => (
             <Menu.Item key={_id} onClick={() => filterProducts(_id)}>
@@ -77,7 +72,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     deleteCategory: category => dispatch(categoryDelete(category)),
-    filterProducts: category => dispatch(productsFilter(category)),
+    filterProducts: category => dispatch(fetchProducts(category)),
     loadCategories: () => dispatch(fetchCategories())
   };
 };

@@ -56,6 +56,26 @@ class ProductsController {
     });
   }
 
+  getProductsByCategory({ params: { categoryId } }, res) {
+    const filter = categoryId === "ALL_CATEGORIES" ? {} : { categoryId };
+
+    Product.find(filter)
+      .then(data => {
+        res.status(200).send({
+          success: "true",
+          message: "products by category retrived successfully",
+          data
+        });
+      })
+      .catch(error => {
+        res.status(RESPONSE_CODES.NOT_FOUND).send({
+          success: "false",
+          message: "error in getting products by category",
+          error
+        });
+      });
+  }
+
   createProduct(req, res) {
     const { name, rowPrice, fullPrice, categoryId } = req.body;
 

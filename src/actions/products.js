@@ -1,33 +1,37 @@
-import Axios from 'axios';
+import Axios from "axios";
 
-import {PRODUCT_API_URL} from '../constants';
+import { PRODUCT_API_URL } from "../constants";
 
 export const productsRequested = payload => {
   return {
-    type: 'PRODUCTS_REQUESTED',
-    payload,
+    type: "PRODUCTS_REQUESTED",
+    payload
   };
 };
 
 export const productsReceived = payload => {
   return {
-    type: 'PRODUCTS_RECEIVED',
+    type: "PRODUCTS_RECEIVED",
     payload,
-    receivedAt: Date.now(),
+    receivedAt: Date.now()
   };
 };
 
-export const fetchProducts = payload => {
+export const fetchProducts = (categoryId = "ALL_CATEGORIES") => {
   return dispatch => {
-    dispatch(productsRequested(payload));
-    const apiUrl = `${PRODUCT_API_URL}/get/all`;
-
+    dispatch(productsRequested(categoryId));
+    const apiUrl = `${PRODUCT_API_URL}/get/by-category/${categoryId}`;
     return Axios.get(apiUrl)
       .then(response => {
         dispatch(productsReceived(response.data.data));
       })
       .catch(error => {
-        console.log('Fetch products failed: ', error);
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+        console.log("Product filter dispatch failed: ", error);
       });
   };
 };
@@ -40,15 +44,15 @@ export const productAdd = newProduct => {
         dispatch(productAddSuccess(response.data.products));
       })
       .catch(error => {
-        console.log('Product add dispatch failed: ', error);
+        console.log("Product add dispatch failed: ", error);
       });
   };
 };
 
 export const productAddSuccess = payload => {
   return {
-    type: 'PRODUCT_ADD_SUCCESS',
-    payload,
+    type: "PRODUCT_ADD_SUCCESS",
+    payload
   };
 };
 
@@ -60,15 +64,15 @@ export const productDelete = productId => {
         dispatch(productDeleteSuccess(response.data.products));
       })
       .catch(error => {
-        console.log('Product delete dispatch failed: ', error);
+        console.log("Product delete dispatch failed: ", error);
       });
   };
 };
 
 export const productDeleteSuccess = payload => {
   return {
-    type: 'PRODUCT_DELETE_SUCCESS',
-    payload,
+    type: "PRODUCT_DELETE_SUCCESS",
+    payload
   };
 };
 
@@ -85,28 +89,21 @@ export const productEdit = product => {
           console.log(error.response.status);
           console.log(error.response.headers);
         }
-        console.log('Product edit dispatch failed: ', error);
+        console.log("Product edit dispatch failed: ", error);
       });
   };
 };
 
 export const productEditSuccess = payload => {
   return {
-    type: 'PRODUCT_EDIT_SUCCESS',
-    payload,
-  };
-};
-
-export const productsFilter = categorytId => {
-  return {
-    type: 'PRODUCTS_FILTER',
-    payload: `${categorytId}`,
+    type: "PRODUCT_EDIT_SUCCESS",
+    payload
   };
 };
 
 export const productsResetCategory = payload => {
   return {
-    type: 'PRODUCTS_RESET_CATEGORY',
-    payload,
+    type: "PRODUCTS_RESET_CATEGORY",
+    payload
   };
 };

@@ -31,7 +31,7 @@ export class EditProductModal extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props != prevProps) {
+    if (this.props !== prevProps) {
       this.updateState();
     }
   }

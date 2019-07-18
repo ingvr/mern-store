@@ -1,6 +1,5 @@
 const initialState = {
   items: [],
-  filteredCategory: "ALL_CATEGORIES",
   isLoading: false
 };
 
@@ -35,12 +34,6 @@ const products = (state = initialState, action) => {
       return {
         ...state,
         items: action.payload
-      };
-    }
-    case "PRODUCTS_FILTER": {
-      return {
-        ...state,
-        filteredCategory: action.payload
       };
     }
     case "PRODUCTS_RESET_CATEGORY": {

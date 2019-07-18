@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import {Table, Divider, Button, Popconfirm} from 'antd';
+import { Table, Divider, Button, Popconfirm } from "antd";
 
-import {fetchProducts, productDelete} from '../../actions';
+import { fetchProducts, productDelete } from "../../actions";
 
-import {EditProductModal} from '../modals';
+import { EditProductModal } from "../modals";
 
-const {Column} = Table;
+const { Column } = Table;
 
 class ProductList extends Component {
   componentDidMount() {
@@ -15,21 +15,16 @@ class ProductList extends Component {
   }
 
   render() {
-    const {products, filteredCategory, isLoading, deleteProduct} = this.props;
-    const visibleProducts = products.filter(
-      product =>
-        filteredCategory === product.categoryId ||
-        filteredCategory === 'ALL_CATEGORIES',
-    );
+    const { products, isLoading, deleteProduct } = this.props;
     return (
-      <Table dataSource={visibleProducts} loading={isLoading}>
+      <Table dataSource={products} loading={isLoading}>
         <Column title="ID" key="_id" dataIndex="_id" />
         <Column title="Название товара" key="name" dataIndex="name" />
         <Column title="Цена закуп" key="rowPrice" dataIndex="rowPrice" />
         <Column title="Цена" key="fullPrice" dataIndex="fullPrice" />
         <Column
           key="action"
-          render={({_id}) => (
+          render={({ _id }) => (
             <span>
               <EditProductModal productKey={_id} />
               <Divider type="vertical" />
@@ -42,7 +37,8 @@ class ProductList extends Component {
                   return false;
                 }}
                 okText="Да"
-                cancelText="Нет">
+                cancelText="Нет"
+              >
                 <Button type="danger" icon="delete">
                   Удалить
                 </Button>
@@ -58,19 +54,18 @@ class ProductList extends Component {
 const mapStateToProps = state => {
   return {
     products: state.products.items,
-    isLoading: state.products.isLoading,
-    filteredCategory: state.products.filteredCategory,
+    isLoading: state.products.isLoading
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     deleteProduct: product => dispatch(productDelete(product)),
-    loadProducts: () => dispatch(fetchProducts()),
+    loadProducts: () => dispatch(fetchProducts())
   };
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(ProductList);
