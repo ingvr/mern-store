@@ -17,6 +17,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "server": "cd server && node_modules/.bin/nodemon app.js --exec babel-node --",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
