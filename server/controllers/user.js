@@ -78,6 +78,26 @@ class UsersController {
       });
     });
   }
+
+  info(req, res) {
+    const token = req.headers.authorization;
+    const decoded = jwt.verify(token, keys.secretOrKey);
+    User.findOne({ _id: decoded.id })
+      .then(user => {
+        return res.status(200).send({
+          success: "true",
+          message: "user data retrieved successfully",
+          user
+        });
+      })
+      .catch(error => {
+        return res.status(500).send({
+          success: "false",
+          message: "Getting user info failed",
+          error
+        });
+      });
+  }
 }
 
 const userController = new UsersController();

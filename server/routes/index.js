@@ -37,5 +37,6 @@ router.put(`${PRODUCT_API_URL}/update`, productController.updateProduct);
 // users
 router.post(`${USER_API_URL}/register`, userController.register);
 router.post(`${USER_API_URL}/login`, userController.login);
+router.get(`${USER_API_URL}/info`, userController.info);
 
 export default router;
