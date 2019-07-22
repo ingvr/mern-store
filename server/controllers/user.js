@@ -79,9 +79,9 @@ class UsersController {
     });
   }
 
-  info(req, res) {
-    const token = req.headers.authorization;
-    const decoded = jwt.verify(token, keys.secretOrKey);
+  info({ headers: { authorization } }, res) {
+    const token = authorization.slice(" ");
+    const decoded = jwt.verify(token[1], keys.secretOrKey);
     User.findOne({ _id: decoded.id })
       .then(user => {
         return res.status(200).send({
