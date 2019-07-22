@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 import bodyParser from "body-parser";
+import passport from "passport";
 
 import { DATABASE_URI } from "./config";
 
@@ -17,6 +18,9 @@ app.get("/", function(req, res) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(router);
+
+app.use(passport.initialize());
+require("./config/passport")(passport);
 
 mongoose.connect(DATABASE_URI);
 mongoose.Promise = global.Promise;
