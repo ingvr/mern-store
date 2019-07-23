@@ -1,14 +1,20 @@
 .authorization {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 15% 0;
+  width: 100%;
+  height: 100vh;
+  margin-bottom: -90px; //disable sticked footer
+  padding-top: 23%;
+  padding-bottom: 0 !important;
+  background: url("./authorization.jpg") no-repeat center center;
+  background-size: cover;
 }
 
 .authorization__form {
   display: inline-block;
-  width: 46%;
-  margin: 0 2% !important;
-  padding: 30px 30px 40px !important;
+  background: white;
+  width: 84%;
+  max-width: 500px;
+  margin: 0 0 0 8% !important;
+  padding: 30px 30px 15px !important;
   border: 1px solid #aaa;
   border-radius: 10px;
   -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.3);
@@ -19,4 +25,19 @@
 .authorization__header {
   margin-top: 0;
   margin-bottom: 20px;
+}
+
+.authorization__copyright {
+  border-top: 1px solid lightgray;
+  margin-top: 30px;
+  margin-bottom: 0;
+  padding-top: 15px;
+  padding-bottom: 0;
+  color: gray;
+  text-align: center;
+}
+
+.authorization__githubLink {
+  margin-top: 15px;
+  font-size: 0.9rem;
 }

@@ -31,7 +31,10 @@ export const userLogin = userInfo => {
         dispatch(userLoginSuccess(response.data.token));
       })
       .catch(error => {
-        dispatch(userLoginFailed(error.response.data.errorMessage));
+        const errorMessage = error.response.data.errorMessage
+          ? error.response.data.errorMessage
+          : "Ошибка получения данных с сервера";
+        dispatch(userLoginFailed(errorMessage));
       });
   };
 };

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Form, Icon, Input, Button, notification } from "antd";
-import StoreFooter from "../store-footer";
 
 import { userLogin, userLoginResetError } from "../../actions";
 
@@ -80,9 +79,20 @@ class Authorization extends Component {
             <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
               Войти
             </Button>
+            <p className="authorization__copyright">
+              © Copyright 2322 by Igor Leontev
+              <br />
+              <a
+                href="https://github.com/nzmi/test-store"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="authorization__githubLink"
+              >
+                <Icon type="github" /> GitHub
+              </a>
+            </p>
           </Form>
         </div>
-        <StoreFooter />
       </>
     );
   }
