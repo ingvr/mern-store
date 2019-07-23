@@ -3,26 +3,41 @@ import { connect } from "react-redux";
 
 import { userGetInfo } from "../../actions";
 
-import Store from "../store";
-import Authorization from "../authorization";
-
 import "antd/dist/antd.css";
 
+import Store from "../store";
+import Authorization from "../authorization";
+import Spinner from "../spinner";
+
 export class App extends Component {
+  state = {
+    isLoading: true
+  };
+
   componentDidMount() {
     const token = localStorage.getItem("token");
     const { getUser } = this.props;
     if (token) {
       const userToken = token.split(" ");
-      getUser(userToken[1]);
+      getUser(userToken[1]).then(() => {
+        this.setState({
+          isLoading: false
+        });
+      });
+    } else {
+      this.setState({
+        isLoading: false
+      });
     }
   }
 
   render() {
     const { isLoggedIn } = this.props;
-    return (
-      <div className="app">{isLoggedIn ? <Store /> : <Authorization />}</div>
-    );
+    const { isLoading } = this.state;
+
+    const Content = isLoggedIn ? <Store /> : <Authorization />;
+
+    return <div className="app">{isLoading ? <Spinner /> : Content}</div>;
   }
 }
 

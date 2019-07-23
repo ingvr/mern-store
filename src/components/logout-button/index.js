@@ -20,7 +20,12 @@ class LogoutButton extends Component {
         okText="Да"
         cancelText="Нет"
       >
-        <Button style={{ marginLeft: "15px" }} icon="edit">
+        <Button
+          style={{ marginLeft: "30px" }}
+          type="danger"
+          shape="round"
+          icon="logout"
+        >
           Выйти
         </Button>
       </Popconfirm>

@@ -1,6 +1,6 @@
 const initialState = {
   loginError: false,
-  isLoggedIn: false
+  isLoggedIn: undefined
 };
 
 const users = (state = initialState, action) => {

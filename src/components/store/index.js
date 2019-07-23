@@ -17,8 +17,8 @@ const Store = () => {
       <StoreHeader />
       <Layout>
         <Nav />
-        <Layout className="app__layout">
-          <Content className="app__content">
+        <Layout className="store">
+          <Content className="store__content">
             <ProductList />
           </Content>
         </Layout>
