@@ -1,8 +1,7 @@
 import React from "react";
-import { connect } from "react-redux";
 
 import { Layout, Row, Col, Icon } from "antd";
-import { CreateCategoryModal, CreateProductModal, LoginModal } from "../modals";
+import { CreateCategoryModal, CreateProductModal } from "../modals";
 import LogoutButton from "../logout-button";
 
 import "./index.scss";

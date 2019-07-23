@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { userLogout } from "../../actions";
 
-import { Icon, Button, Popconfirm } from "antd";
+import { Button, Popconfirm } from "antd";
 
 class LogoutButton extends Component {
   render() {
