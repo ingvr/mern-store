@@ -1,6 +1,6 @@
 import { Product, getAllProductsFromDB } from "./product.js";
 
-const Category = require("../models/category");
+import Category from "../models/category";
 
 const getAllCategoriesFromDB = () => {
   return Category.find();

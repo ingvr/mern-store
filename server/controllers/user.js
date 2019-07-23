@@ -1,12 +1,12 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const keys = require("../config/keys");
-const passport = require("passport");
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import keys from "../config/keys";
+import passport from "passport";
 
-const validateRegisterInput = require("../validation/register");
-const validateLoginInput = require("../validation/login");
+import validateRegisterInput from "../validation/register";
+import validateLoginInput from "../validation/login";
 
-const User = require("../models/user");
+import User from "../models/user";
 
 class UsersController {
   register({ body: { name, email, password, password2 } }, res) {
@@ -47,36 +47,40 @@ class UsersController {
 
     const { email, password } = req.body;
 
-    User.findOne({ email }).then(user => {
-      if (!user) {
-        return res.status(404).json({ errorMessage: "Email не найден" });
-      }
-      bcrypt.compare(password, user.password).then(isMatch => {
-        if (isMatch) {
-          const payload = {
-            id: user.id,
-            name: user.name
-          };
-          jwt.sign(
-            payload,
-            keys.secretOrKey,
-            {
-              expiresIn: 31556926
-            },
-            (err, token) => {
-              res.json({
-                success: true,
-                token: "Bearer " + token
-              });
-            }
-          );
-        } else {
-          return res
-            .status(400)
-            .json({ errorMessage: "Пароль введен не верно" });
+    User.findOne({ email })
+      .then(user => {
+        if (!user) {
+          return res.status(404).json({ errorMessage: "Email не найден" });
         }
+        bcrypt.compare(password, user.password).then(isMatch => {
+          if (isMatch) {
+            const payload = {
+              id: user.id,
+              name: user.name
+            };
+            jwt.sign(
+              payload,
+              keys.secretOrKey,
+              {
+                expiresIn: 31556926
+              },
+              (err, token) => {
+                res.json({
+                  success: true,
+                  token: "Bearer " + token
+                });
+              }
+            );
+          } else {
+            return res
+              .status(400)
+              .json({ errorMessage: "Пароль введен не верно" });
+          }
+        });
+      })
+      .catch(error => {
+        return res.status(404).json({ errorMessage: "Нет ответа от сервера" });
       });
-    });
   }
 
   info(req, res) {

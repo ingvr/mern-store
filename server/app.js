@@ -2,13 +2,13 @@ import express from "express";
 import path from "path";
 import bodyParser from "body-parser";
 import passport from "passport";
+import mongoose from "mongoose";
 
 import { DATABASE_URI } from "./config";
 
 import router from "./routes";
 
-const app = express(),
-  mongoose = require("mongoose");
+const app = express();
 
 app.use(express.static(path.join(__dirname, "../build")));
 app.get("/", function(req, res) {
