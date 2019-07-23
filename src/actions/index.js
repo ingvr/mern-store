@@ -20,7 +20,8 @@ import {
   userGetInfo,
   userLogin,
   userLoginSuccess,
-  userLoginResetError
+  userLoginResetError,
+  userLogout
 } from "./users";
 
 export {
@@ -39,5 +40,6 @@ export {
   userGetInfo,
   userLogin,
   userLoginSuccess,
-  userLoginResetError
+  userLoginResetError,
+  userLogout
 };

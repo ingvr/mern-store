@@ -23,6 +23,12 @@ const users = (state = initialState, action) => {
         loginError: false
       };
     }
+    case "USER_LOGOUT": {
+      return {
+        ...state,
+        isLoggedIn: false
+      };
+    }
     default: {
       return state;
     }

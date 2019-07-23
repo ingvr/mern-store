@@ -56,3 +56,10 @@ export const userLoginResetError = () => {
     type: "USER_LOGIN_RESET_ERROR"
   };
 };
+
+export const userLogout = () => {
+  localStorage.setItem("token", undefined);
+  return {
+    type: "USER_LOGOUT"
+  };
+};
