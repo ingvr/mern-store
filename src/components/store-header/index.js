@@ -18,7 +18,6 @@ const StoreHeader = () => {
         <Col span={20} style={{ textAlign: "right" }}>
           <CreateProductModal />
           <CreateCategoryModal />
-          <LoginModal />
         </Col>
       </Row>
     </Header>

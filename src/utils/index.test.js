@@ -1,4 +1,4 @@
-import { validatePrice, validateEmail } from "./utils";
+import { validatePrice, validateEmail } from "./index";
 
 describe("validatePrice function test", () => {
   it("return true if all prices are positive integers", () => {

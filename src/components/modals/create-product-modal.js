@@ -4,7 +4,7 @@ import { Modal, Form, Input, Icon, Button, notification } from "antd";
 
 import { productAdd } from "../../actions";
 import { ModalWrapper } from "../hoc";
-import { handleChange, validatePrice } from "./utils";
+import { handleChange, validatePrice } from "../../utils";
 
 class CreateProductModal extends Component {
   initialState = {

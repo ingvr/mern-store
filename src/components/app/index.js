@@ -1,32 +1,44 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import { Layout } from "antd";
+import { userGetInfo } from "../../actions";
+
+import Store from "../store";
+import Authorization from "../authorization";
+
 import "antd/dist/antd.css";
 
-import StoreHeader from "../store-header";
-import Nav from "../nav";
-import ProductList from "../product-list";
-import StoreFooter from "../store-footer";
+export class App extends Component {
+  componentDidMount() {
+    const token = localStorage.getItem("token");
+    const { getUser } = this.props;
+    if (token) {
+      const userToken = token.split(" ");
+      getUser(userToken[1]);
+    }
+  }
 
-import "./index.scss";
+  render() {
+    const { isLoggedIn } = this.props;
+    return (
+      <div className="app">{isLoggedIn ? <Store /> : <Authorization />}</div>
+    );
+  }
+}
 
-const { Content } = Layout;
-
-const App = () => {
-  return (
-    <div className="app">
-      <StoreHeader />
-      <Layout>
-        <Nav />
-        <Layout className="app__layout">
-          <Content className="app__content">
-            <ProductList />
-          </Content>
-        </Layout>
-      </Layout>
-      <StoreFooter />
-    </div>
-  );
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: state.users.isLoggedIn
+  };
 };
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    getUser: token => dispatch(userGetInfo(token))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

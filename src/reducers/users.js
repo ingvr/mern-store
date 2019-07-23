@@ -1,9 +1,6 @@
 const initialState = {
-  userInfo: {
-    name: false,
-    email: false
-  },
-  loginError: false
+  loginError: false,
+  isLoggedIn: false
 };
 
 const users = (state = initialState, action) => {
@@ -11,7 +8,7 @@ const users = (state = initialState, action) => {
     case "USER_GET_INFO_SUCCESS": {
       return {
         ...state,
-        userInfo: action.payload
+        isLoggedIn: true
       };
     }
     case "USER_LOGIN_FAILED": {

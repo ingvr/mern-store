@@ -4,7 +4,7 @@ import { Modal, Form, Input, Icon, Button } from "antd";
 
 import { categoryAdd } from "../../actions";
 import { ModalWrapper } from "../hoc";
-import { handleChange } from "./utils";
+import { handleChange } from "../../utils";
 
 class CreateCategoryModal extends Component {
   state = { category: "" };

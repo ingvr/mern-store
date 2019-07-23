@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Modal, Form, Input, Icon, Button, notification } from "antd";
+import { Form, Icon, Input, Button, notification } from "antd";
+import StoreFooter from "../store-footer";
 
 import { userLogin, userLoginResetError } from "../../actions";
-import { ModalWrapper } from "../hoc";
+
 import { handleChange, validateEmail } from "../../utils";
 
-class LoginModal extends Component {
+import "./index.scss";
+
+class Authorization extends Component {
   state = {
-    name: false,
     email: "",
     password: ""
   };
@@ -27,10 +29,12 @@ class LoginModal extends Component {
     }
   }
 
+  handleChange = e => handleChange.call(this, e);
+
   handleSubmit = e => {
     e.preventDefault();
-    const { hideModal, login, userInfo } = this.props;
     const { email, password } = this.state;
+    const { login } = this.props;
 
     if (!validateEmail(email)) {
       notification.open({
@@ -44,26 +48,15 @@ class LoginModal extends Component {
     login({ email, password });
   };
 
-  handleChange = e => handleChange.call(this, e);
-
   render() {
-    const { visible, showModal, hideModal } = this.props;
-    const { handleSubmit, handleChange } = this;
     const { email, password } = this.state;
-    let render;
+    const { handleSubmit, handleChange } = this;
+
     return (
       <>
-        <Button onClick={showModal} style={{ marginLeft: "10px" }} type="link">
-          <Icon type="export" />
-          Войти
-        </Button>
-        <Modal
-          title="Войти на сайт"
-          visible={visible}
-          onCancel={hideModal}
-          footer={[]}
-        >
-          <Form onSubmit={handleSubmit}>
+        <div className="authorization">
+          <Form onSubmit={handleSubmit} className="authorization__form">
+            <h2 className="authorization__header">Вход</h2>
             <Form.Item>
               <Input
                 name="email"
@@ -88,7 +81,8 @@ class LoginModal extends Component {
               Войти
             </Button>
           </Form>
-        </Modal>
+        </div>
+        <StoreFooter />
       </>
     );
   }
@@ -96,7 +90,6 @@ class LoginModal extends Component {
 
 const mapStateToProps = state => {
   return {
-    userInfo: state.users.userInfo,
     loginError: state.users.loginError
   };
 };
@@ -111,4 +104,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ModalWrapper(LoginModal));
+)(Authorization);
