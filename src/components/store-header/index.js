@@ -2,7 +2,7 @@ import React from "react";
 
 import { Layout, Row, Col, Icon } from "antd";
 
-import { CreateCategoryModal, CreateProductModal } from "../modals";
+import { CreateCategoryModal, CreateProductModal, LoginModal } from "../modals";
 
 import "./index.scss";
 
@@ -18,6 +18,7 @@ const StoreHeader = () => {
         <Col span={20} style={{ textAlign: "right" }}>
           <CreateProductModal />
           <CreateCategoryModal />
+          <LoginModal />
         </Col>
       </Row>
     </Header>

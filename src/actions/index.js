@@ -16,6 +16,13 @@ import {
   productsResetCategory
 } from "./products";
 
+import {
+  userGetInfo,
+  userLogin,
+  userLoginSuccess,
+  userLoginResetError
+} from "./users";
+
 export {
   categoriesRequested,
   categoriesReceived,
@@ -28,5 +35,9 @@ export {
   productAdd,
   productDelete,
   productEdit,
-  productsResetCategory
+  productsResetCategory,
+  userGetInfo,
+  userLogin,
+  userLoginSuccess,
+  userLoginResetError
 };

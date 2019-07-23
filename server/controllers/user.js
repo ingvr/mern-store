@@ -49,7 +49,7 @@ class UsersController {
 
     User.findOne({ email }).then(user => {
       if (!user) {
-        return res.status(404).json({ emailnotfound: "Email not found" });
+        return res.status(404).json({ errorMessage: "Email не найден" });
       }
       bcrypt.compare(password, user.password).then(isMatch => {
         if (isMatch) {
@@ -73,15 +73,15 @@ class UsersController {
         } else {
           return res
             .status(400)
-            .json({ passwordincorrect: "Password incorrect" });
+            .json({ errorMessage: "Пароль введен не верно" });
         }
       });
     });
   }
 
-  info({ headers: { authorization } }, res) {
-    const token = authorization.slice(" ");
-    const decoded = jwt.verify(token[1], keys.secretOrKey);
+  info(req, res) {
+    const { token } = req.body;
+    const decoded = jwt.verify(token, keys.secretOrKey);
     User.findOne({ _id: decoded.id })
       .then(user => {
         return res.status(200).send({
