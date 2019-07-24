@@ -2,6 +2,29 @@ import Axios from "axios";
 
 import { USER_API_URL } from "../constants";
 
+Axios.interceptors.request.use(
+  config => {
+    if (
+      config.url === `${USER_API_URL}/login` ||
+      config.url === `${USER_API_URL}/register` ||
+      config.url === `${USER_API_URL}/info`
+    ) {
+      return config;
+    }
+
+    const token = localStorage.getItem("token");
+    if (token) {
+      const userToken = token.split(" ");
+      config.headers.Authorization = userToken;
+    }
+
+    return config;
+  },
+  error => {
+    return Promise.reject(error);
+  }
+);
+
 export const userGetInfo = token => {
   return dispatch => {
     const apiUrl = `${USER_API_URL}/info`;
