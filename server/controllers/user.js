@@ -3,22 +3,17 @@ import jwt from "jsonwebtoken";
 import keys from "../config/keys";
 import passport from "passport";
 
-import validateRegisterInput from "../validation/register";
-import validateLoginInput from "../validation/login";
-
 import User from "../models/user";
 
 class UsersController {
   register({ body: { name, email, password, password2 } }, res) {
-    const { errors, isValid } = validateRegisterInput({
-      name,
-      email,
-      password,
-      password2
-    });
-    if (!isValid) {
-      return res.status(400).json(errors);
+    if (!name || !email || !password || password !== password2) {
+      res.status(400).json({
+        success: "false",
+        message: "registration data validation failed"
+      });
     }
+
     User.findOne({ email }).then(user => {
       if (user) {
         return res.status(400).json({ email: "Email already exists" });
@@ -39,13 +34,14 @@ class UsersController {
   }
 
   login(req, res) {
-    const { errors, isValid } = validateLoginInput(req.body);
-
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
-
     const { email, password } = req.body;
+
+    if (!email || !password) {
+      res.status(400).json({
+        success: "false",
+        message: "login data validation failed"
+      });
+    }
 
     User.findOne({ email })
       .then(user => {
@@ -88,10 +84,11 @@ class UsersController {
     const decoded = jwt.verify(token, keys.secretOrKey);
     User.findOne({ _id: decoded.id })
       .then(user => {
+        const { name, email } = user;
         return res.status(200).send({
           success: "true",
           message: "user data retrieved successfully",
-          user
+          user: { name, email }
         });
       })
       .catch(error => {
