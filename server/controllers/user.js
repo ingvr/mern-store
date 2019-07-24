@@ -6,6 +6,26 @@ import passport from "passport";
 import User from "../models/user";
 
 class UsersController {
+  checkToken(req, res, next) {
+    let token = req.headers["x-access-token"] || req.headers["authorization"];
+    if (token.startsWith("Bearer ")) {
+      token = token.slice(7, token.length);
+    }
+    const decoded = jwt.verify(token, keys.secretOrKey);
+    User.findOne({ _id: decoded.id })
+      .then(() => {
+        req.decoded = decoded;
+        next();
+      })
+      .catch(error => {
+        return res.status(500).send({
+          success: "false",
+          message: "Token is not valid",
+          error
+        });
+      });
+  }
+
   register({ body: { name, email, password, password2 } }, res) {
     if (!name || !email || !password || password !== password2) {
       res.status(400).json({

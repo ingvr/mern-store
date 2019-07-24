@@ -4,11 +4,13 @@ import { USER_API_URL } from "../constants";
 
 Axios.interceptors.request.use(
   config => {
-    if (
-      config.url === `${USER_API_URL}/login` ||
-      config.url === `${USER_API_URL}/register` ||
-      config.url === `${USER_API_URL}/info`
-    ) {
+    const publicURLs = [
+      `${USER_API_URL}/login`,
+      `${USER_API_URL}/register`,
+      `${USER_API_URL}/info`
+    ];
+
+    if (publicURLs.some(url => url === config.url)) {
       return config;
     }
 
@@ -17,7 +19,6 @@ Axios.interceptors.request.use(
       const userToken = token.split(" ");
       config.headers.Authorization = userToken;
     }
-
     return config;
   },
   error => {
