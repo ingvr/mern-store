@@ -1,6 +1,9 @@
 language: node_js
-services:
-  - docker
+node_js:
+  - "stable"
+cache:
+  directories:
+    - node_modules
 script:
-  - docker build -t ingvr/test-store .
-  - docker run -p 5000:5000 -it -d ingvr/test-store
+  - npm test
+  - npm run build
