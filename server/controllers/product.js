@@ -1,4 +1,4 @@
-export const Product = require("../models/product");
+import Product from "../models/product";
 
 const _productDataValidation = ({ name, rowPrice, fullPrice, categoryId }) => {
   if (!name) {

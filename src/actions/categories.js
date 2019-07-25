@@ -63,6 +63,11 @@ export const categoryDelete = categorytId => {
       })
       .catch(error => {
         console.log("Category delete dispatch failed: ", error);
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
       });
   };
 };

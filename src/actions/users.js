@@ -15,9 +15,9 @@ Axios.interceptors.request.use(
     }
 
     const token = localStorage.getItem("token");
+
     if (token) {
-      const userToken = token.split(" ");
-      config.headers.Authorization = userToken;
+      config.headers.Authorization = token;
     }
     return config;
   },

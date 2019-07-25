@@ -11,27 +11,48 @@ import { CATEGORY_API_URL, PRODUCT_API_URL, USER_API_URL } from "../config";
 const router = express.Router();
 
 // categories
-router.get(`${CATEGORY_API_URL}/get/all`, categoryController.getAllCategories);
-router.get(`${CATEGORY_API_URL}/get/:id`, categoryController.getCategory);
-router.post(`${CATEGORY_API_URL}/add`, categoryController.createCategory);
+router.get(
+  `${CATEGORY_API_URL}/get/all`,
+  userController.checkToken,
+  categoryController.getAllCategories
+);
+router.get(
+  `${CATEGORY_API_URL}/get/:id`,
+  userController.checkToken,
+  categoryController.getCategory
+);
+router.post(
+  `${CATEGORY_API_URL}/add`,
+  userController.checkToken,
+  categoryController.createCategory
+);
 router.delete(
   `${CATEGORY_API_URL}/delete/:key`,
+  userController.checkToken,
   categoryController.deleteCategory
 );
 
 // products
-router.get(`${PRODUCT_API_URL}/get/all`, productController.getAllProducts);
+router.get(
+  `${PRODUCT_API_URL}/get/all`,
+  userController.checkToken,
+  productController.getAllProducts
+);
 router.get(
   `${PRODUCT_API_URL}/get/by-category/:categoryId`,
+  userController.checkToken,
   productController.getProductsByCategory
 );
-router.post(`${PRODUCT_API_URL}/add`, productController.createProduct);
-
+router.post(
+  `${PRODUCT_API_URL}/add`,
+  userController.checkToken,
+  productController.createProduct
+);
 router.delete(
   `${PRODUCT_API_URL}/delete/:key`,
+  userController.checkToken,
   productController.deleteProduct
 );
-
 router.put(`${PRODUCT_API_URL}/update`, productController.updateProduct);
 
 // users
