@@ -1,5 +1,6 @@
 {
   "name": "test-store",
+  "homepage": "https://mern-test-store.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:5000",
