@@ -1,9 +1,6 @@
 language: node_js
 services:
   - docker
-before_install:
+script:
   - docker build -t ingvr/test-store .
   - docker run -p 5000:5000 -it -d ingvr/test-store
-script:
-  - npm test
-  - npm run build
