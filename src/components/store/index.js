@@ -3,7 +3,7 @@ import React from "react";
 import { Layout } from "antd";
 
 import StoreHeader from "../store-header";
-import Nav from "../nav";
+import Nav from "../../containers/nav";
 import ProductList from "../product-list";
 import StoreFooter from "../store-footer";
 

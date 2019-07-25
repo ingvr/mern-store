@@ -1,11 +1,7 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-
 import { Layout, Menu, Icon, Button, Popconfirm } from "antd";
 
 import Spinner from "../spinner";
-
-import { fetchCategories, categoryDelete, fetchProducts } from "../../actions";
 
 import "./index.scss";
 
@@ -62,22 +58,4 @@ export class Nav extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    categories: state.categories.items,
-    isLoading: state.categories.isLoading
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    deleteCategory: category => dispatch(categoryDelete(category)),
-    filterProducts: category => dispatch(fetchProducts(category)),
-    loadCategories: () => dispatch(fetchCategories())
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Nav);
+export default Nav;

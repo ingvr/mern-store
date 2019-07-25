@@ -1,15 +1,12 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-
-import { userGetInfo } from "../../actions";
 
 import "antd/dist/antd.css";
 
 import Store from "../store";
-import Authorization from "../authorization";
+import Authorization from "../../containers/authorization";
 import Spinner from "../spinner";
 
-export class App extends Component {
+class App extends Component {
   state = {
     isLoading: true
   };
@@ -41,19 +38,4 @@ export class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    isLoggedIn: state.users.isLoggedIn
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    getUser: token => dispatch(userGetInfo(token))
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default App;

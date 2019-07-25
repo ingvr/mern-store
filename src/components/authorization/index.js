@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Form, Icon, Input, Button, notification } from "antd";
-
-import { userLogin, userLoginResetError } from "../../actions";
 
 import { handleChange, validateEmail } from "../../utils";
 
@@ -98,20 +95,4 @@ class Authorization extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    loginError: state.users.loginError
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    login: userInfo => dispatch(userLogin(userInfo)),
-    resetLoginError: () => dispatch(userLoginResetError())
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Authorization);
+export default Authorization;
