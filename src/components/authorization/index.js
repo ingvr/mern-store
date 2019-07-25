@@ -60,7 +60,7 @@ class Authorization extends Component {
               <Input
                 name="email"
                 prefix={<Icon type="mail" />}
-                placeholder="Электронная почта"
+                placeholder="Электронная почта (admin@teststore.com)"
                 value={email}
                 onChange={handleChange}
                 required
@@ -70,7 +70,7 @@ class Authorization extends Component {
               <Input.Password
                 name="password"
                 prefix={<Icon type="lock" />}
-                placeholder="Пароль"
+                placeholder="Пароль (admin)"
                 value={password}
                 onChange={handleChange}
                 required
