@@ -8,8 +8,7 @@ const mapStateToProps = state => {
   return {
     products: state.products.items,
     isLoading: state.products.isLoading,
-    currentPage: state.products.currentPage,
-    filteredProducts: state.products.filteredProducts
+    currentPage: state.products.currentPage
   };
 };
 

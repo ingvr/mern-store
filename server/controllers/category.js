@@ -89,11 +89,6 @@ class CategoriesController {
       products: []
     };
     Product.updateMany({ categoryId: key }, { $set: { categoryId: "0" } })
-      .then(getAllProductsFromDB)
-      .then(products => {
-        data.products = products;
-        return products;
-      })
       .then(products => Category.findByIdAndRemove(key))
       .then(getAllCategoriesFromDB)
       .then(categories => {

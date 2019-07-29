@@ -17,17 +17,21 @@ export const productsReceived = payload => {
   };
 };
 
-export const fetchProducts = ({
-  categoryId = "ALL_CATEGORIES",
-  page = 1
-} = {}) => {
-  return dispatch => {
+export const fetchProducts = ({ categoryId = null, page = null } = {}) => {
+  return (dispatch, getState) => {
+    if (!categoryId) categoryId = getState().products.filteredProducts;
+    if (!page) page = getState().products.currentPage;
     dispatch(productsRequested({ categoryId, page }));
     const apiUrl = `${PRODUCT_API_URL}/get/by-category/${categoryId}/${page}`;
     return Axios.get(apiUrl)
       .then(({ data: { products, pages } }) => {
         dispatch(
-          productsReceived({ products, pages, filteredProducts: categoryId })
+          productsReceived({
+            products,
+            pages,
+            filteredProducts: categoryId,
+            page
+          })
         );
       })
       .catch(error => {
@@ -46,7 +50,8 @@ export const productAdd = newProduct => {
     const apiUrl = `${PRODUCT_API_URL}/add`;
     return Axios.post(apiUrl, newProduct)
       .then(response => {
-        dispatch(productAddSuccess(response.data.products));
+        dispatch(productAddSuccess());
+        dispatch(fetchProducts());
       })
       .catch(error => {
         console.log("Product add dispatch failed: ", error);
@@ -54,10 +59,9 @@ export const productAdd = newProduct => {
   };
 };
 
-export const productAddSuccess = payload => {
+export const productAddSuccess = () => {
   return {
-    type: "PRODUCT_ADD_SUCCESS",
-    payload
+    type: "PRODUCT_ADD_SUCCESS"
   };
 };
 
@@ -66,7 +70,8 @@ export const productDelete = productId => {
     const apiUrl = `${PRODUCT_API_URL}/delete`;
     return Axios.delete(`${apiUrl}/${productId}`)
       .then(response => {
-        dispatch(productDeleteSuccess(response.data.products));
+        dispatch(productDeleteSuccess());
+        dispatch(fetchProducts());
       })
       .catch(error => {
         console.log("Product delete dispatch failed: ", error);
@@ -74,10 +79,9 @@ export const productDelete = productId => {
   };
 };
 
-export const productDeleteSuccess = payload => {
+export const productDeleteSuccess = () => {
   return {
-    type: "PRODUCT_DELETE_SUCCESS",
-    payload
+    type: "PRODUCT_DELETE_SUCCESS"
   };
 };
 
@@ -86,7 +90,8 @@ export const productEdit = product => {
     const apiUrl = `${PRODUCT_API_URL}/update`;
     return Axios.put(apiUrl, product)
       .then(response => {
-        dispatch(productEditSuccess(response.data.products));
+        dispatch(productEditSuccess());
+        dispatch(fetchProducts());
       })
       .catch(error => {
         if (error.response) {
@@ -99,17 +104,15 @@ export const productEdit = product => {
   };
 };
 
-export const productEditSuccess = payload => {
+export const productEditSuccess = () => {
   return {
-    type: "PRODUCT_EDIT_SUCCESS",
-    payload
+    type: "PRODUCT_EDIT_SUCCESS"
   };
 };
 
-export const productsResetCategory = payload => {
+export const productsResetCategory = () => {
   return {
-    type: "PRODUCTS_RESET_CATEGORY",
-    payload
+    type: "PRODUCTS_RESET_CATEGORY"
   };
 };
 

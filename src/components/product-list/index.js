@@ -14,7 +14,10 @@ class ProductList extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.currentPage !== prevProps.currentPage) {
+    if (
+      this.props.currentPage !== prevProps.currentPage ||
+      this.props.items !== prevProps.items
+    ) {
       const { currentPage: page, loadProducts, filteredProducts } = this.props;
       loadProducts({ page, categoryId: filteredProducts });
     }

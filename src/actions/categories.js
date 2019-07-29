@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 import { CATEGORY_API_URL } from "../constants";
-import { productsResetCategory } from "./index";
+import { productsResetCategory, fetchProducts } from "./index";
 
 export const categoriesRequested = payload => {
   return {
@@ -60,6 +60,7 @@ export const categoryDelete = categorytId => {
       .then(({ data: { data: { categories, products } } }) => {
         dispatch(categoryDeleteSuccess(categories));
         dispatch(productsResetCategory(products));
+        dispatch(fetchProducts());
       })
       .catch(error => {
         console.log("Category delete dispatch failed: ", error);

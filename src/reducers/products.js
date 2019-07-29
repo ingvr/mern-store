@@ -15,38 +15,20 @@ const products = (state = initialState, action) => {
       };
     }
     case "PRODUCTS_RECEIVED": {
-      const { products, pages, filteredProducts } = action.payload;
+      const { products, pages, filteredProducts, page } = action.payload;
       return {
         ...state,
         items: products,
+        currentPage: page,
         pages,
         filteredProducts,
         isLoading: false
       };
     }
-    case "PRODUCT_ADD_SUCCESS": {
-      return {
-        ...state,
-        items: action.payload
-      };
-    }
-    case "PRODUCT_DELETE_SUCCESS": {
-      return {
-        ...state,
-        items: action.payload
-      };
-    }
-    case "PRODUCT_EDIT_SUCCESS": {
-      return {
-        ...state,
-        items: action.payload
-      };
-    }
     case "PRODUCTS_RESET_CATEGORY": {
       return {
         ...state,
-        items: action.payload,
-        filteredCategory: "0"
+        filteredProducts: "0"
       };
     }
     case "PRODUCTS_CHANGE_PAGE": {

@@ -38,25 +38,6 @@ export const getAllProductsFromDB = () => {
 };
 
 class ProductsController {
-  getAllProducts(req, res) {
-    getAllProductsFromDB().then(data => {
-      res
-        .status(200)
-        .send({
-          success: "true",
-          message: "products retrieved successfully",
-          data
-        })
-        .catch(err => {
-          res.status(RESPONSE_CODES.NOT_FOUND).send({
-            success: "false",
-            message: "error in getting products",
-            errors: err
-          });
-        });
-    });
-  }
-
   getProductsByCategory({ params: { categoryId, page } }, res) {
     const filter = categoryId === "ALL_CATEGORIES" ? {} : { categoryId };
     const limit = parseInt(PRODUCTS_PER_PAGE);
@@ -111,21 +92,11 @@ class ProductsController {
           error: err
         });
       }
-      getAllProductsFromDB()
-        .then(products => {
-          return res.status(201).send({
-            success: "true",
-            message: "product added successfully",
-            products
-          });
-        })
-        .catch(err => {
-          res.status(404).send({
-            success: "false",
-            message: "error in getting products",
-            errors: err
-          });
-        });
+
+      return res.status(201).send({
+        success: "true",
+        message: "product added successfully"
+      });
     });
   }
 
@@ -137,21 +108,10 @@ class ProductsController {
           message: "Product id not found"
         });
       }
-      getAllProductsFromDB()
-        .then(products => {
-          return res.status(201).send({
-            success: "true",
-            message: "Product deleted successfuly",
-            products
-          });
-        })
-        .catch(err => {
-          res.status(404).send({
-            success: "false",
-            message: "error in getting products",
-            errors: err
-          });
-        });
+      return res.status(201).send({
+        success: "true",
+        message: "Product deleted successfuly"
+      });
     });
   }
 
@@ -173,21 +133,10 @@ class ProductsController {
             message: "product id not found"
           });
         }
-        getAllProductsFromDB()
-          .then(products => {
-            return res.status(201).send({
-              success: "true",
-              message: "product update successfuly",
-              products
-            });
-          })
-          .catch(err => {
-            res.status(404).send({
-              success: "false",
-              message: "error in getting products",
-              errors: err
-            });
-          });
+        return res.status(201).send({
+          success: "true",
+          message: "product update successfuly"
+        });
       }
     );
   }
