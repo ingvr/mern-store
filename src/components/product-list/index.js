@@ -9,13 +9,14 @@ const { Column } = Table;
 
 class ProductList extends Component {
   componentDidMount() {
-    this.props.loadProducts();
+    const { loadProducts, filteredProducts } = this.props;
+    loadProducts({ filteredProducts });
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.currentPage !== prevProps.currentPage) {
-      const { currentPage: page, loadProducts } = this.props;
-      loadProducts({ page });
+      const { currentPage: page, loadProducts, filteredProducts } = this.props;
+      loadProducts({ page, categoryId: filteredProducts });
     }
   }
 

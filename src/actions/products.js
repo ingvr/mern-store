@@ -26,7 +26,9 @@ export const fetchProducts = ({
     const apiUrl = `${PRODUCT_API_URL}/get/by-category/${categoryId}/${page}`;
     return Axios.get(apiUrl)
       .then(({ data: { products, pages } }) => {
-        dispatch(productsReceived({ products, pages }));
+        dispatch(
+          productsReceived({ products, pages, filteredProducts: categoryId })
+        );
       })
       .catch(error => {
         if (error.response) {

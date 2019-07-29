@@ -63,7 +63,7 @@ class ProductsController {
     const skip = limit * (page - 1);
     let pages = 1;
 
-    Product.count()
+    Product.count(filter)
       .then(length => {
         pages = Math.ceil(length / limit);
       })
