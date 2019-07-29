@@ -1,4 +1,5 @@
 import Product from "../models/product";
+import { PRODUCTS_PER_PAGE } from "../config";
 
 const _productDataValidation = ({ name, rowPrice, fullPrice, categoryId }) => {
   if (!name) {
@@ -56,15 +57,24 @@ class ProductsController {
     });
   }
 
-  getProductsByCategory({ params: { categoryId } }, res) {
+  getProductsByCategory({ params: { categoryId, page } }, res) {
     const filter = categoryId === "ALL_CATEGORIES" ? {} : { categoryId };
+    const limit = parseInt(PRODUCTS_PER_PAGE);
+    const skip = limit * (page - 1);
+    let pages = 1;
 
-    Product.find(filter)
-      .then(data => {
-        res.status(200).send({
-          success: "true",
-          message: "products by category retrived successfully",
-          data
+    Product.count()
+      .then(length => {
+        pages = Math.ceil(length / limit);
+      })
+      .then(() => {
+        Product.find(filter, null, { limit, skip }).then(products => {
+          res.status(200).send({
+            success: "true",
+            message: "products by category retrived successfully",
+            products,
+            pages
+          });
         });
       })
       .catch(error => {

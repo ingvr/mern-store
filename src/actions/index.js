@@ -13,7 +13,8 @@ import {
   productAdd,
   productDelete,
   productEdit,
-  productsResetCategory
+  productsResetCategory,
+  productsChangePage
 } from "./products";
 
 import {
@@ -37,6 +38,7 @@ export {
   productDelete,
   productEdit,
   productsResetCategory,
+  productsChangePage,
   userGetInfo,
   userLogin,
   userLoginSuccess,

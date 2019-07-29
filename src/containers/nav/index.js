@@ -14,7 +14,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     deleteCategory: category => dispatch(categoryDelete(category)),
-    filterProducts: category => dispatch(fetchProducts(category)),
+    filterProducts: category =>
+      dispatch(fetchProducts({ categoryId: category })),
     loadCategories: () => dispatch(fetchCategories())
   };
 };

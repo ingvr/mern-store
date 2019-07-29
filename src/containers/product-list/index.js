@@ -7,14 +7,15 @@ import ProductList from "../../components/product-list";
 const mapStateToProps = state => {
   return {
     products: state.products.items,
-    isLoading: state.products.isLoading
+    isLoading: state.products.isLoading,
+    currentPage: state.products.currentPage
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     deleteProduct: product => dispatch(productDelete(product)),
-    loadProducts: () => dispatch(fetchProducts())
+    loadProducts: payload => dispatch(fetchProducts(payload))
   };
 };
 

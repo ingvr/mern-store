@@ -17,13 +17,16 @@ export const productsReceived = payload => {
   };
 };
 
-export const fetchProducts = (categoryId = "ALL_CATEGORIES") => {
+export const fetchProducts = ({
+  categoryId = "ALL_CATEGORIES",
+  page = 1
+} = {}) => {
   return dispatch => {
-    dispatch(productsRequested(categoryId));
-    const apiUrl = `${PRODUCT_API_URL}/get/by-category/${categoryId}`;
+    dispatch(productsRequested({ categoryId, page }));
+    const apiUrl = `${PRODUCT_API_URL}/get/by-category/${categoryId}/${page}`;
     return Axios.get(apiUrl)
-      .then(response => {
-        dispatch(productsReceived(response.data.data));
+      .then(({ data: { products, pages } }) => {
+        dispatch(productsReceived({ products, pages }));
       })
       .catch(error => {
         if (error.response) {
@@ -104,6 +107,13 @@ export const productEditSuccess = payload => {
 export const productsResetCategory = payload => {
   return {
     type: "PRODUCTS_RESET_CATEGORY",
+    payload
+  };
+};
+
+export const productsChangePage = payload => {
+  return {
+    type: "PRODUCTS_CHANGE_PAGE",
     payload
   };
 };

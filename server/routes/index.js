@@ -39,7 +39,7 @@ router.get(
   productController.getAllProducts
 );
 router.get(
-  `${PRODUCT_API_URL}/get/by-category/:categoryId`,
+  `${PRODUCT_API_URL}/get/by-category/:categoryId/:page`,
   userController.checkToken,
   productController.getProductsByCategory
 );
