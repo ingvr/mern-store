@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Radio, Icon } from "antd";
+import { Radio } from "antd";
 
 import "./index.scss";
 
@@ -11,12 +11,30 @@ export default class Pager extends Component {
   render() {
     const { pages, currentPage } = this.props;
 
+    if (pages === 1) return false;
+
     const items = [];
+
+    if (currentPage > 1) {
+      items.push(
+        <Radio.Button key="0" value={currentPage - 1}>
+          &lsaquo;
+        </Radio.Button>
+      );
+    }
 
     for (let i = 1; i <= pages; i++) {
       items.push(
         <Radio.Button key={i} value={i}>
           {i}
+        </Radio.Button>
+      );
+    }
+
+    if (currentPage < pages) {
+      items.push(
+        <Radio.Button key={pages + 1} value={currentPage + 1}>
+          &rsaquo;
         </Radio.Button>
       );
     }

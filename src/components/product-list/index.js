@@ -21,11 +21,16 @@ class ProductList extends Component {
   }
 
   render() {
-    const { products, isLoading, deleteProduct, currentPage } = this.props;
+    const { products, isLoading, deleteProduct } = this.props;
 
     return (
       <>
-        <Table dataSource={products} loading={isLoading} pagination={false}>
+        <Table
+          dataSource={products}
+          loading={isLoading}
+          pagination={false}
+          rowKey={product => product._id}
+        >
           <Column title="ID" key="_id" dataIndex="_id" />
           <Column title="Название товара" key="name" dataIndex="name" />
           <Column title="Цена закуп" key="rowPrice" dataIndex="rowPrice" />
