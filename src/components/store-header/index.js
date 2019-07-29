@@ -1,8 +1,11 @@
 import React from "react";
 
 import { Layout, Row, Col, Icon } from "antd";
-import { CreateCategoryModal, CreateProductModal } from "../modals";
-import LogoutButton from "../logout-button";
+import {
+  CreateCategoryModal,
+  CreateProductModal
+} from "../../containers/modals";
+import LogoutButton from "../../containers/logout-button";
 
 import "./index.scss";
 

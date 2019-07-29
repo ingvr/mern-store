@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-
-import { userLogout } from "../../actions";
 
 import { Button, Popconfirm } from "antd";
 
@@ -32,13 +29,5 @@ class LogoutButton extends Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => {
-  return {
-    logout: () => dispatch(userLogout())
-  };
-};
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(LogoutButton);
+export default LogoutButton;

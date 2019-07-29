@@ -4,7 +4,10 @@ import { shallow } from "../../enzyme";
 import { Layout } from "antd";
 
 import StoreHeader from "./index";
-import { CreateCategoryModal, CreateProductModal } from "../modals";
+import {
+  CreateCategoryModal,
+  CreateProductModal
+} from "../../containers/modals";
 
 const { Header } = Layout;
 

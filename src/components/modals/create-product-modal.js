@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Modal, Form, Input, Icon, Button, notification } from "antd";
 
-import { productAdd } from "../../actions";
 import { ModalWrapper } from "../hoc";
 import { handleChange, validatePrice } from "../../utils";
 
@@ -116,19 +114,4 @@ class CreateProductModal extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    categories: state.categories.items
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    createProduct: product => dispatch(productAdd(product))
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ModalWrapper(CreateProductModal));
+export default ModalWrapper(CreateProductModal);

@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 
 import { Table, Divider, Button, Popconfirm } from "antd";
 
-import { fetchProducts, productDelete } from "../../actions";
-
-import { EditProductModal } from "../modals";
+import { EditProductModal } from "../../containers/modals";
 
 const { Column } = Table;
 
@@ -51,21 +48,4 @@ class ProductList extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    products: state.products.items,
-    isLoading: state.products.isLoading
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    deleteProduct: product => dispatch(productDelete(product)),
-    loadProducts: () => dispatch(fetchProducts())
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductList);
+export default ProductList;

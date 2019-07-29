@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Modal, Form, Input, Icon, Button } from "antd";
 
-import { categoryAdd } from "../../actions";
 import { ModalWrapper } from "../hoc";
 import { handleChange } from "../../utils";
 
@@ -56,13 +54,4 @@ class CreateCategoryModal extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    createCategory: category => dispatch(categoryAdd(category))
-  };
-};
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(ModalWrapper(CreateCategoryModal));
+export default ModalWrapper(CreateCategoryModal);
