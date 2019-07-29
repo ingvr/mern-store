@@ -1,6 +1,7 @@
 const initialState = {
   loginError: false,
-  isLoggedIn: undefined
+  isLoggedIn: undefined,
+  serverAvailable: true
 };
 
 const users = (state = initialState, action) => {
@@ -9,6 +10,12 @@ const users = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true
+      };
+    }
+    case "USER_GET_INFO_FAILED": {
+      return {
+        ...state,
+        serverAvailable: false
       };
     }
     case "USER_LOGIN_FAILED": {

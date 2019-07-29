@@ -6,7 +6,8 @@ import App from "../../components/app";
 
 const mapStateToProps = state => {
   return {
-    isLoggedIn: state.users.isLoggedIn
+    isLoggedIn: state.users.isLoggedIn,
+    serverAvailable: state.users.serverAvailable
   };
 };
 

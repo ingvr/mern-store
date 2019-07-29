@@ -5,12 +5,13 @@ import "./index.scss";
 const ErrorIndicator = () => {
   return (
     <div className="error-indicator">
-      <h2>Ошибка загрузки данных</h2>
       <img
-        src="https://media.giphy.com/media/mq5y2jHRCAqMo/giphy.gif"
+        src="https://media.giphy.com/media/TqiwHbFBaZ4ti/giphy.gif"
         alt="Ошибка!"
         className="error-indicator__image"
       />
+      <h2>Ошибка загрузки данных</h2>
+      <p>Попробуйте зайти позже</p>
     </div>
   );
 };

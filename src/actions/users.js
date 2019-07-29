@@ -36,6 +36,7 @@ export const userGetInfo = token => {
       })
       .catch(error => {
         console.log("Error getting user info: ", error);
+        dispatch(userGetInfoFailed());
       });
   };
 };
@@ -44,6 +45,12 @@ export const userGetInfoSuccess = payload => {
   return {
     type: "USER_GET_INFO_SUCCESS",
     payload
+  };
+};
+
+export const userGetInfoFailed = () => {
+  return {
+    type: "USER_GET_INFO_FAILED"
   };
 };
 
