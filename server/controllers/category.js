@@ -1,5 +1,3 @@
-import { getAllProductsFromDB } from "./product.js";
-
 import Category from "../models/category";
 import Product from "../models/product";
 

@@ -33,10 +33,6 @@ const _productDataValidation = ({ name, rowPrice, fullPrice, categoryId }) => {
   return { valid: true };
 };
 
-export const getAllProductsFromDB = () => {
-  return Product.find().exec();
-};
-
 class ProductsController {
   getProductsByCategory({ params: { categoryId, page } }, res) {
     const filter = categoryId === "ALL_CATEGORIES" ? {} : { categoryId };

@@ -1,11 +1,6 @@
 import { connect } from "react-redux";
 
-import {
-  fetchCategories,
-  categoryDelete,
-  fetchProducts,
-  productsChangePage
-} from "../../actions";
+import { fetchCategories, categoryDelete, fetchProducts } from "../../actions";
 
 import Nav from "../../components/nav";
 
