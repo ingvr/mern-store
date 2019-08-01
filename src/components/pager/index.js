@@ -11,7 +11,9 @@ export default class Pager extends Component {
   render() {
     const { pages, currentPage } = this.props;
 
-    if (pages === 1) return false;
+    if (pages === 1) {
+      return false;
+    }
 
     const items = [];
 
