@@ -13,7 +13,7 @@ const setup = () => {
       { _id: "foo", title: "Категория 1" },
       { _id: "bar", title: "Категория 2" }
     ],
-    loadCategories: function() {
+    loadCategories() {
       return this.categories;
     }
   };

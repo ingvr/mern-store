@@ -35,7 +35,9 @@ class App extends Component {
 
     let Content = <ErrorIndicator />;
 
-    if (serverAvailable) Content = isLoggedIn ? <Store /> : <Authorization />;
+    if (serverAvailable) {
+      Content = isLoggedIn ? <Store /> : <Authorization />;
+    }
 
     return <div className="app">{isLoading ? <Spinner /> : Content}</div>;
   }

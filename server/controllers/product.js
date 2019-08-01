@@ -36,7 +36,7 @@ const _productDataValidation = ({ name, rowPrice, fullPrice, categoryId }) => {
 class ProductsController {
   getProductsByCategory({ params: { categoryId, page } }, res) {
     const filter = categoryId === "ALL_CATEGORIES" ? {} : { categoryId };
-    const limit = parseInt(PRODUCTS_PER_PAGE);
+    const limit = parseInt(PRODUCTS_PER_PAGE, 10);
     const skip = limit * (page - 1);
     let pages = 1;
 

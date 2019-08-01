@@ -54,6 +54,21 @@ export const userGetInfo = token => {
   };
 };
 
+export const userLoginSuccess = token => {
+  localStorage.setItem("token", token);
+  return dispatch => {
+    const userToken = token.split(" ");
+    dispatch(userGetInfo(userToken[1]));
+  };
+};
+
+export const userLoginFailed = payload => {
+  return {
+    type: "USER_LOGIN_FAILED",
+    payload
+  };
+};
+
 export const userLogin = userInfo => {
   return dispatch => {
     const apiUrl = `${USER_API_URL}/login`;
@@ -67,21 +82,6 @@ export const userLogin = userInfo => {
           : "Ошибка получения данных с сервера";
         dispatch(userLoginFailed(errorMessage));
       });
-  };
-};
-
-export const userLoginSuccess = token => {
-  localStorage.setItem("token", token);
-  return dispatch => {
-    const userToken = token.split(" ");
-    dispatch(userGetInfo(userToken[1]));
-  };
-};
-
-export const userLoginFailed = payload => {
-  return {
-    type: "USER_LOGIN_FAILED",
-    payload
   };
 };
 

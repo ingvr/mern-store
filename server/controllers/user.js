@@ -61,7 +61,7 @@ class UsersController {
             newUser
               .save()
               .then(user => res.json(user))
-              .catch(err => console.log(err));
+              .catch(err => console.log("Error saving user", err));
           });
         });
       }

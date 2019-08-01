@@ -1,6 +1,6 @@
 const initialState = {
   loginError: false,
-  isLoggedIn: undefined,
+  isLoggedIn: null,
   serverAvailable: true
 };
 

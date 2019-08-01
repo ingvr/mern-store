@@ -63,6 +63,12 @@ export const productAdd = newProduct => {
   };
 };
 
+export const productDeleteSuccess = () => {
+  return {
+    type: "PRODUCT_DELETE_SUCCESS"
+  };
+};
+
 export const productDelete = productId => {
   return dispatch => {
     const apiUrl = `${PRODUCT_API_URL}/delete`;
@@ -77,9 +83,9 @@ export const productDelete = productId => {
   };
 };
 
-export const productDeleteSuccess = () => {
+export const productEditSuccess = () => {
   return {
-    type: "PRODUCT_DELETE_SUCCESS"
+    type: "PRODUCT_EDIT_SUCCESS"
   };
 };
 
@@ -94,12 +100,6 @@ export const productEdit = product => {
       .catch(error => {
         console.log("Product edit dispatch failed: ", error);
       });
-  };
-};
-
-export const productEditSuccess = () => {
-  return {
-    type: "PRODUCT_EDIT_SUCCESS"
   };
 };
 

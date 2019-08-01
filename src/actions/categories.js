@@ -33,6 +33,13 @@ export const fetchCategories = payload => {
   };
 };
 
+export const categoryAddSuccess = payload => {
+  return {
+    type: "CATEGORY_ADD_SUCCESS",
+    payload
+  };
+};
+
 export const categoryAdd = title => {
   return dispatch => {
     const apiUrl = `${CATEGORY_API_URL}/add`;
@@ -46,9 +53,9 @@ export const categoryAdd = title => {
   };
 };
 
-export const categoryAddSuccess = payload => {
+export const categoryDeleteSuccess = payload => {
   return {
-    type: "CATEGORY_ADD_SUCCESS",
+    type: "CATEGORY_DELETE_SUCCESS",
     payload
   };
 };
@@ -64,18 +71,6 @@ export const categoryDelete = categorytId => {
       })
       .catch(error => {
         console.log("Category delete dispatch failed: ", error);
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        }
       });
-  };
-};
-
-export const categoryDeleteSuccess = payload => {
-  return {
-    type: "CATEGORY_DELETE_SUCCESS",
-    payload
   };
 };
