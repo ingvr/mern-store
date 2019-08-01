@@ -19,8 +19,11 @@ export const productsReceived = payload => {
 
 export const fetchProducts = ({ categoryId = null, page = null } = {}) => {
   return (dispatch, getState) => {
-    if (!categoryId) categoryId = getState().products.filteredProducts;
-    if (!page) page = getState().products.currentPage;
+    categoryId = !categoryId
+      ? getState().products.filteredProducts
+      : categoryId;
+    page = !page ? getState().products.currentPage : page;
+
     dispatch(productsRequested({ categoryId, page }));
     const apiUrl = `${PRODUCT_API_URL}/get/by-category/${categoryId}/${page}`;
     return Axios.get(apiUrl)
@@ -35,13 +38,14 @@ export const fetchProducts = ({ categoryId = null, page = null } = {}) => {
         );
       })
       .catch(error => {
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        }
         console.log("Product filter dispatch failed: ", error);
       });
+  };
+};
+
+export const productAddSuccess = () => {
+  return {
+    type: "PRODUCT_ADD_SUCCESS"
   };
 };
 
@@ -56,12 +60,6 @@ export const productAdd = newProduct => {
       .catch(error => {
         console.log("Product add dispatch failed: ", error);
       });
-  };
-};
-
-export const productAddSuccess = () => {
-  return {
-    type: "PRODUCT_ADD_SUCCESS"
   };
 };
 
@@ -94,11 +92,6 @@ export const productEdit = product => {
         dispatch(fetchProducts());
       })
       .catch(error => {
-        if (error.response) {
-          console.log(error.response.data);
-          console.log(error.response.status);
-          console.log(error.response.headers);
-        }
         console.log("Product edit dispatch failed: ", error);
       });
   };

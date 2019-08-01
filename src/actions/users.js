@@ -26,6 +26,19 @@ Axios.interceptors.request.use(
   }
 );
 
+export const userGetInfoSuccess = payload => {
+  return {
+    type: "USER_GET_INFO_SUCCESS",
+    payload
+  };
+};
+
+export const userGetInfoFailed = () => {
+  return {
+    type: "USER_GET_INFO_FAILED"
+  };
+};
+
 export const userGetInfo = token => {
   return dispatch => {
     const apiUrl = `${USER_API_URL}/info`;
@@ -38,19 +51,6 @@ export const userGetInfo = token => {
         console.log("Error getting user info: ", error);
         dispatch(userGetInfoFailed());
       });
-  };
-};
-
-export const userGetInfoSuccess = payload => {
-  return {
-    type: "USER_GET_INFO_SUCCESS",
-    payload
-  };
-};
-
-export const userGetInfoFailed = () => {
-  return {
-    type: "USER_GET_INFO_FAILED"
   };
 };
 

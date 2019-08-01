@@ -34,7 +34,8 @@ class UsersController {
       });
   }
 
-  register({ body: { name, email, password, password2 } }, res) {
+  register(req, res) {
+    const { name, email, password, password2 } = req.body;
     if (!name || !email || !password || password !== password2) {
       res.status(400).json({
         success: "false",
@@ -49,7 +50,13 @@ class UsersController {
         const newUser = new User({ name, email, password });
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
+            if (err) {
+              return res.status(400).json({
+                success: "false",
+                message: "bcrypt hash password failed",
+                err
+              });
+            }
             newUser.password = hash;
             newUser
               .save()

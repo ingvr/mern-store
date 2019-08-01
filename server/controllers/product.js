@@ -55,7 +55,7 @@ class ProductsController {
         });
       })
       .catch(error => {
-        res.status(RESPONSE_CODES.NOT_FOUND).send({
+        res.status(404).send({
           success: "false",
           message: "error in getting products by category",
           error
