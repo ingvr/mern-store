@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 
 dotenv.config({
-  path: __dirname + "/./../../.env"
+  path: __dirname + "/./../client/.env"
 });
 
 export const CATEGORY_API_URL = process.env.REACT_APP_CATEGORY_API_URL;
