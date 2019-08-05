@@ -11,5 +11,3 @@ script:
 after_success:
   - cd ..
   - npm install
-deploy:
-  script: npm start
