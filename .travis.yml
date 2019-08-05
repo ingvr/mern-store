@@ -8,6 +8,3 @@ before_install: cd client
 script:
   - npm test
   - npm run build
-after_success:
-  - cd ..
-  - npm install
