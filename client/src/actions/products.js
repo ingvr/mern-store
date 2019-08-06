@@ -50,12 +50,19 @@ export const productAddSuccess = () => {
 };
 
 export const productAdd = newProduct => {
-  return dispatch => {
+  return (dispatch, getState) => {
     const apiUrl = `${PRODUCT_API_URL}/add`;
     return Axios.post(apiUrl, newProduct)
       .then(response => {
-        dispatch(productAddSuccess());
-        dispatch(fetchProducts());
+        dispatch(productAddSuccess(newProduct));
+
+        const currentCategory = getState().products.filteredProducts;
+        if (
+          currentCategory === newProduct.categoryId ||
+          currentCategory === "ALL_CATEGORIES"
+        ) {
+          dispatch(fetchProducts());
+        }
       })
       .catch(error => {
         console.log("Product add dispatch failed: ", error);
