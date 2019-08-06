@@ -9,7 +9,7 @@ const { Footer } = Layout;
 const StoreFooter = () => {
   return (
     <Footer className="footer">
-      &copy; Copyright 2322 by Igor Leontev
+      &copy; Copyright 2019 by Igor Leontev
       <br />
       <a
         href="https://github.com/nzmi/test-store"

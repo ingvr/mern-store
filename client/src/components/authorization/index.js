@@ -77,7 +77,7 @@ class Authorization extends Component {
               Войти
             </Button>
             <p className="authorization__copyright">
-              © Copyright 2322 by Igor Leontev
+              © Copyright 2019 by Igor Leontev
               <br />
               <a
                 href="https://github.com/nzmi/test-store"

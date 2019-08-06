@@ -5,7 +5,7 @@
 Features:
 
 - MongoDB + Express.js + React(+Redux) + Node.js Product Store
-- RESTFull API
+- RESTfull API
 - Authorization with token
 - Unit and components Tests
 
