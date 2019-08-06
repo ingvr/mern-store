@@ -9,9 +9,9 @@ export default class Pager extends Component {
   };
 
   render() {
-    const { pages, currentPage } = this.props;
+    const { totalPages, currentPage } = this.props;
 
-    if (pages === 1) {
+    if (totalPages === 1) {
       return false;
     }
 
@@ -25,7 +25,7 @@ export default class Pager extends Component {
       );
     }
 
-    for (let i = 1; i <= pages; i++) {
+    for (let i = 1; i <= totalPages; i++) {
       items.push(
         <Radio.Button key={i} value={i}>
           {i}
@@ -33,9 +33,9 @@ export default class Pager extends Component {
       );
     }
 
-    if (currentPage < pages) {
+    if (currentPage < totalPages) {
       items.push(
-        <Radio.Button key={pages + 1} value={currentPage + 1}>
+        <Radio.Button key={totalPages + 1} value={currentPage + 1}>
           &rsaquo;
         </Radio.Button>
       );

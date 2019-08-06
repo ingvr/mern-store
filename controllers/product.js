@@ -34,15 +34,15 @@ const _productDataValidation = ({ name, rowPrice, fullPrice, categoryId }) => {
 };
 
 class ProductsController {
-  getProductsByCategory({ params: { categoryId, page } }, res) {
+  getProductsByCategory({ params: { categoryId, currentPage } }, res) {
     const filter = categoryId === "ALL_CATEGORIES" ? {} : { categoryId };
     const limit = parseInt(PRODUCTS_PER_PAGE, 10);
-    const skip = limit * (page - 1);
-    let pages = 1;
+    const skip = limit * (currentPage - 1);
+    let totalPages = 1;
 
     Product.count(filter)
       .then(length => {
-        pages = Math.ceil(length / limit);
+        totalPages = Math.ceil(length / limit);
       })
       .then(() => {
         Product.find(filter, null, { limit, skip }).then(products => {
@@ -50,7 +50,7 @@ class ProductsController {
             success: "true",
             message: "products by category retrived successfully",
             products,
-            pages
+            totalPages
           });
         });
       })

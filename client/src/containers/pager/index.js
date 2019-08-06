@@ -6,14 +6,14 @@ import Pager from "../../components/pager";
 
 const mapStateToProps = state => {
   return {
-    pages: state.products.pages,
+    totalPages: state.products.totalPages,
     currentPage: state.products.currentPage
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    changePage: page => dispatch(productsChangePage(page))
+    changePage: currentPage => dispatch(productsChangePage(currentPage))
   };
 };
 

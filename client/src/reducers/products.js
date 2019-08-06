@@ -1,8 +1,8 @@
 const initialState = {
   items: [],
   isLoading: false,
-  pages: 1,
   currentPage: 1,
+  totalPages: 1,
   filteredProducts: "ALL_CATEGORIES"
 };
 
@@ -15,12 +15,17 @@ const products = (state = initialState, action) => {
       };
     }
     case "PRODUCTS_RECEIVED": {
-      const { products, pages, filteredProducts, page } = action.payload;
+      const {
+        products,
+        currentPage,
+        totalPages,
+        filteredProducts
+      } = action.payload;
       return {
         ...state,
         items: products,
-        currentPage: page,
-        pages,
+        currentPage,
+        totalPages,
         filteredProducts,
         isLoading: false
       };

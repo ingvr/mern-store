@@ -34,7 +34,7 @@ router.delete(
 
 // products
 router.get(
-  `${PRODUCT_API_URL}/get/by-category/:categoryId/:page`,
+  `${PRODUCT_API_URL}/get/by-category/:categoryId/:currentPage`,
   userController.checkToken,
   productController.getProductsByCategory
 );

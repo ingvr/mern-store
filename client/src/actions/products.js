@@ -17,23 +17,26 @@ export const productsReceived = payload => {
   };
 };
 
-export const fetchProducts = ({ categoryId = null, page = null } = {}) => {
+export const fetchProducts = ({
+  categoryId = null,
+  currentPage = null
+} = {}) => {
   return (dispatch, getState) => {
     categoryId = !categoryId
       ? getState().products.filteredProducts
       : categoryId;
-    page = !page ? getState().products.currentPage : page;
+    currentPage = !currentPage ? getState().products.currentPage : currentPage;
 
-    dispatch(productsRequested({ categoryId, page }));
-    const apiUrl = `${PRODUCT_API_URL}/get/by-category/${categoryId}/${page}`;
+    dispatch(productsRequested({ categoryId, currentPage }));
+    const apiUrl = `${PRODUCT_API_URL}/get/by-category/${categoryId}/${currentPage}`;
     return Axios.get(apiUrl)
-      .then(({ data: { products, pages } }) => {
+      .then(({ data: { products, totalPages } }) => {
         dispatch(
           productsReceived({
             products,
-            pages,
-            filteredProducts: categoryId,
-            page
+            currentPage,
+            totalPages,
+            filteredProducts: categoryId
           })
         );
       })
