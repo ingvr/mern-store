@@ -42,7 +42,9 @@ cd ..
 ```
 
 5. Add .env file
+
    .env should be in ./client folder
+   
    use ./cilent/.env_demo for example
 
 6. Run in dev mode:
