@@ -1,35 +1,24 @@
 {
-  "name": "server",
-  "homepage": "mern-test-store.herokuapp.com",
+  "name": "mern-store",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "client: redux+react, server: mongoose+express+node.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./app.js --exec babel-node",
-    "build-react": "cd ./client && npm install && npm run build && cd ../",
-    "start": "babel-node ./app.js"
+    "test": "cd client && npm test",
+    "dev": "concurrently \"cd server && npm start\" \"cd client && npm start\"",
+    "start": "concurrently \"cd client && npm run build\" \"cd server && npm start\""
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ingvr/mern-store.git"
+  },
+  "author": "Igor Leontev (github.com/ingvr)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ingvr/mern-store/issues"
+  },
+  "homepage": "https://github.com/ingvr/mern-store#readme",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "core-js": "^3.1.4",
-    "dotenv": "^8.0.0",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.6.3",
-    "mongoose-auto-increment": "^5.0.1",
-    "passport": "^0.4.0",
-    "passport-jwt": "^4.0.0"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.5",
-    "@babel/node": "^7.4.5",
-    "@babel/plugin-proposal-class-properties": "^7.4.4",
-    "@babel/preset-env": "^7.4.5",
-    "nodemon": "^1.19.1"
+    "concurrently": "^4.1.2"
   }
 }
