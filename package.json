@@ -6,7 +6,8 @@
   "scripts": {
     "test": "cd client && npm test",
     "dev": "concurrently \"cd server && npm start\" \"cd client && npm start\"",
-    "start": "concurrently \"cd client && npm run build\" \"cd server && npm start\""
+    "start": "concurrently \"cd client && npm run build\" \"cd server && npm start\"",
+    "heroku": "concurrently \"cd client && npm run build\" \"cd server && npm run heroku\""
   },
   "repository": {
     "type": "git",
