@@ -18,26 +18,26 @@ Features:
 
 1. Clone repo and change directory to project:
 
-```
+```bash
 git clone https://github.com/ingvr/mern-store.git
 cd mern-store
 ```
 
 2. Install node packages on client:
 
-```
+```bash
 cd client && npm install
 ```
 
 3. Install node packages on server:
 
-```
+```bash
 cd ../server && npm install
 ```
 
 4. Back to project directory:
 
-```
+```bash
 cd ..
 ```
 
@@ -47,7 +47,7 @@ cd ..
 
 6. Run in dev mode:
 
-```
+```bash
 npm run dev
 ```
 
@@ -55,6 +55,6 @@ or
 
 Run client build and production-ready mode:
 
-```
+```bash
 npm start
 ```
