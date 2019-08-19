@@ -13,3 +13,48 @@ Features:
 - Categories List with create and delete actions
 - Filter by category by server request
 - Pagination by server request
+
+## How to run locally
+
+1. Clone repo and change directory to project:
+
+```
+git clone https://github.com/ingvr/mern-store.git
+cd mern-store
+```
+
+2. Install node packages on client:
+
+```
+cd client && npm install
+```
+
+3. Install node packages on server:
+
+```
+cd ../server && npm install
+```
+
+4. Back to project directory:
+
+```
+cd ..
+```
+
+5. Add .env file
+   .env should be in ./client folder
+   use ./cilent/.env_demo for example
+
+6. Run in dev mode:
+
+```
+npm run dev
+```
+
+or
+
+Run client build and production-ready mode:
+
+```
+npm start
+```
